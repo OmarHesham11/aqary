@@ -1,10 +1,10 @@
-import React from 'react'
+// import React from 'react'
 import NavBar from './NavBar';
 import '../style.css'
 import main from '../../assets/main.png'
 import about from '../../assets/about.jpg'
 import home from '../../assets/home-1.jpg'
-import Footer from './footer';
+import Footer from './Footer';
 import Cart from '../../components/Cart'
 function Home() {
     return (

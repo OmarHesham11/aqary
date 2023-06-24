@@ -1,5 +1,3 @@
-import React from 'react'
-
 import '../style.css'
 
 function NavBar() {
@@ -17,13 +15,10 @@ function NavBar() {
                                 <a className="nav-link active" aria-current="page" href="#">Home</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link active" aria-current="page" href="#">sell</a>
+                                <a className="nav-link active" aria-current="page" href="#">Apartment</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link active" aria-current="page" href="#">Buy</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link active" aria-current="page" href="#">Rent</a>
+                                <a className="nav-link active" aria-current="page" href="#">Villa</a>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link active" aria-current="page" href="#">Login</a>
