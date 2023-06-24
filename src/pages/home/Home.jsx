@@ -5,6 +5,7 @@ import main from '../../assets/main.png'
 import about from '../../assets/about.jpg'
 import home from '../../assets/home-1.jpg'
 import Footer from './footer';
+import Cart from '../../components/Cart'
 function Home() {
     return (
         <>
@@ -67,7 +68,9 @@ function Home() {
                                 <h2>Get Started with HouseHuntur</h2>
                                 <p>subscribe and find super attractive price quotes  <br /> from us,find your residence soon
                                 </p>
-                                <a className="btn btn-warning" href="#">subscribe</a>
+                                <div className='payment'>
+                                    < Cart />
+                                </div>
                             </div>
                         </div>
 
