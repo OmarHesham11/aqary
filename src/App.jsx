@@ -1,9 +1,10 @@
 import './App.css'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './pages/home/home.jsx'
-function App() {
 
+import Cart from "./components/Cart";
 
+export default function App() {
   return (
     <>
       <BrowserRouter>
@@ -11,8 +12,12 @@ function App() {
           <Route path="/" element={<Home />} />
         </Routes>
       </BrowserRouter>
+      < Cart />
     </>
   )
 }
 
-export default App
+
+
+
+
