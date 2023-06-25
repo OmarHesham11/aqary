@@ -1,42 +1,36 @@
+import { NavLink } from 'react-router-dom';
 import '../style.css'
 
 function NavBar() {
     return (
         <>
+
             <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top vh-150">
                 <div className="container">
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-                        <a className="navbar-brand" href="#"><span className="text-warning">House</span>Hunters</a>
+                        <NavLink className="navbar-brand" to="/"><span className="text-warning">House</span>Hunters</NavLink>
                         <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                             <li className="nav-item">
-                                <a className="nav-link active" aria-current="page" href="#">Home</a>
+                                <NavLink className="nav-link" activeClassName="active" to="/" exact>Home</NavLink>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link active" aria-current="page" href="#">Apartment</a>
+                                <NavLink className="nav-link" activeClassName="active" to="/property">Property</NavLink>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link active" aria-current="page" href="#">Villa</a>
+                                <NavLink className="nav-link" activeClassName="active" to="#">Login</NavLink>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link active" aria-current="page" href="#">Login</a>
+                                <NavLink className="nav-link" activeClassName="active" to="#">Register</NavLink>
                             </li>
-                            <li className="nav-item">
-                                <a className="nav-link active" aria-current="page" href="#">Register</a>
-                            </li>
-
-
                         </ul>
-
                     </div>
                 </div>
             </nav>
 
-
         </>
-
     )
 }
 
