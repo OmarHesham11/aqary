@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import HouseIcon from '@mui/icons-material/House';
-import { Avatar, Card, CardContent, Stack, SvgIcon, Typography } from '@mui/material';
+import { Avatar, Card, CardContent, Stack, Typography } from '@mui/material';
 
 export const NumberOfProperties = (props) => {
   const { value, sx } = props;
