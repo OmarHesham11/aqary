@@ -1,9 +1,8 @@
 import './App.css'
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import Home from './pages/home/home.jsx'
-
-import Cart from "./components/Cart";
 import Admin from './pages/Admin';
+import Dashboard from './pages/admin/dashboard';
 
 export default function App() {
   return (
@@ -11,7 +10,10 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route path="/admin" element={<Admin />}>
+            <Route index={true} element={<Dashboard />} />
+            <Route path="hello" element={<h1>Hello world</h1>} />
+          </Route>
         </Routes>
       </BrowserRouter>
 

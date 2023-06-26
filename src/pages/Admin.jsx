@@ -1,10 +1,10 @@
-import StatisticsBar from "../components/admin/StatisticsBar";
+import { Outlet } from "react-router-dom";
 import Wrapper from "../components/admin/Wrapper";
 
 const Admin  = () => {
   return (
     <Wrapper>
-      <StatisticsBar />
+      <Outlet />
     </Wrapper>
   );
   };
