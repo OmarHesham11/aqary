@@ -21,7 +21,7 @@ export const OverviewBudget = (props) => {
               color="text.secondary"
               variant="overline"
             >
-              Total earn
+              Total earn this month
             </Typography>
             <Typography variant="h4">
               {value}
