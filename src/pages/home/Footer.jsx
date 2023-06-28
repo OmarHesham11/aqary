@@ -1,5 +1,6 @@
-import React from 'react'
-import './footer.css'
+import './footer.css';
+
+
 function Footer() {
     return (
         <>
@@ -14,7 +15,6 @@ function Footer() {
                                         <h4>House<span className='text-warning'>Hunters</span></h4>
                                     </div>
 
-
                                     <ul className="social">
                                         <li><a href="#"><i className="fab fa-facebook-f"></i></a></li>
                                         <li><a href="#"><i className="fab fa-twitter"></i></a></li>
@@ -22,6 +22,7 @@ function Footer() {
                                     </ul>
                                 </div>
                             </div>
+
                             <div className="col-lg-4 col-md-6 col-sm-12">
                                 <div className="widget widget_link">
                                     <div className="widget_title">
@@ -33,6 +34,7 @@ function Footer() {
                                     </ul>
                                 </div>
                             </div>
+
                             <div className="col-lg-4 col-md-6 col-sm-12">
                                 <div className="widget widget_contact">
                                     <div className="widget_title">
@@ -45,9 +47,9 @@ function Footer() {
                                             </div>
                                             <div className="info">
                                                 <p><a href="tel:+919246147999">1800-121-3637</a></p>
-
                                             </div>
                                         </div>
+
                                         <div className="single_info">
                                             <div className="icon">
                                                 <i className="fas fa-envelope"></i>
@@ -56,6 +58,7 @@ function Footer() {
                                                 <p><a href="mailto:info@deneb.com">info@deneb.com</a></p>
                                             </div>
                                         </div>
+
                                         <div className="single_info">
                                             <div className="icon">
                                                 <i className="fas fa-map-marker-alt"></i>
@@ -70,7 +73,8 @@ function Footer() {
                         </div>
                     </div>
                 </div>
-                <div className="copyright_area">
+
+                <div className="copyright_area rounded-3">
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-12">
@@ -81,6 +85,7 @@ function Footer() {
                         </div>
                     </div>
                 </div>
+
             </footer>
         </>
     )

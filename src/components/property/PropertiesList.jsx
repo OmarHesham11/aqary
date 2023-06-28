@@ -1,5 +1,7 @@
 import PropertyCard from "./PropertyCard";
 import Loading from "../Loading";
+import './PropertiesList.css';
+import '../../pages/style.css';
 
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -34,10 +36,10 @@ const PropertiesList = () => {
 
     return (
 
-        <Row xs={1} md={4} className="g-2 ms-2 me-2">
+        <Row xs={1} md={4} className="g-2 ms-2 margine-from-top ma me-2 mouse">
             {properties && properties.length > 0 ? (
                 properties.map((property) => (
-                    <Col key={property.id}>
+                    <Col key={property._id}>
                         <PropertyCard property={property} />
                     </Col>
                 ))
@@ -45,7 +47,6 @@ const PropertiesList = () => {
                 <div>No properties found.</div>
             )}
         </Row>
-
     );
 };
 

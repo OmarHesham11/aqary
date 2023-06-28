@@ -17,29 +17,39 @@ export const fetchProperties = createAsyncThunk( "properties/fetchProperties", a
         catch (error) {
             return rejectWithValue(error.message);
         }
-    }
-)
+});
+
+export const fetchProperty = createAsyncThunk( "properties/fetchProperty", async (propertyId, thunkAPI) => {
+        const { rejectWithValue } = thunkAPI;
+        try {
+            const response = await fetch(`http://localhost:4000/property/${propertyId}`);
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+});
 
 
 const propertiesSlice = createSlice({
     name: 'properties',
     initialState,
     reducers: {},
-    extraReducers:{
-         // fetch properties
-        [fetchProperties.pending]: (state) => {
-            state.loading = true;
-            state.error = null;
+    extraReducers:(builder) => {
+        builder
+            .addCase(fetchProperties.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(fetchProperties.fulfilled, (state, action) => {
+                state.loading = false;
+                state.properties = action.payload;
+            })
+            .addCase(fetchProperties.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            });
         },
-        [fetchProperties.fulfilled]: (state, action) => {
-            state.loading = false;
-            state.properties = action.payload;
-        },
-        [fetchProperties.rejected]: (state, action) => {
-            state.loading = false;
-            state.error = action.payload;
-        },
-    },
 });
 
 
