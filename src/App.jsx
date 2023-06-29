@@ -9,6 +9,7 @@ import Dashboard from './pages/admin/Dashboard';
 import TableOfProperties from './pages/admin/TableOfProperties';
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Main from './pages/Main';
 
 export default function App() {
   return (
@@ -16,22 +17,20 @@ export default function App() {
     <>
 
       <BrowserRouter>
-
-        <NavBar />
-
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/properties" element={<PropertiesPage />} />
-          <Route path="/property/:id" element={<PropertyDetails />} />
+          <Route path="/" element={<Main />}>
+            <Route index={true} element={<Home />} />
+            <Route path="/properties" element={<PropertiesPage />} />
+            <Route path="/property/:id" element={<PropertyDetails />} />
+          </Route>
+
+
           <Route path="/admin" element={<Admin />}>
             <Route index={true} element={<Dashboard />} />
             <Route path="properties" element={<TableOfProperties />} />
             <Route path="hello" element={<h1>Hello world</h1>} />
           </Route>
         </Routes>
-
-        <Footer />
-
       </BrowserRouter>
 
     </>

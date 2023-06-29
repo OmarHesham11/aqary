@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { Nav, Collapse } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -9,12 +9,16 @@ function Sidebar() {
     <div className="d-flex flex-column flex-shrink-0 p-3 bg-dark text-white" style={{ height: '100vh' }}>
       <Nav className="nav-pills flex-column mb-auto">
         <Nav.Item>
-          <Nav.Link href="#" className="nav-link active">
+          
+        <Nav.Link href="/" className="nav-link active">
+            Home
+          </Nav.Link>
+          <Nav.Link href="/admin" className="nav-link active">
             Dashboard
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link href="#" className="nav-link">
+          <Nav.Link href="/" className="nav-link">
             Orders
           </Nav.Link>
         </Nav.Item>
@@ -50,4 +54,4 @@ function Sidebar() {
   );
 }
 
-export default Sidebar;
+export default memo(Sidebar);

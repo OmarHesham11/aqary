@@ -3,23 +3,24 @@ import { OverviewBudget } from './cards/OverviewTotalEarn';
 import { OverviewTotalProfit } from './cards/OverviewTotalProfit';
 import { NumberOfProperties } from './cards/NumberOfProperties';
 import { OverviewCountPaidUser } from './cards/OverviewCountPaidUser';
-import { useEffect, useState } from 'react';
+import { useMemo, useState, memo } from 'react';
 import axios from 'axios';
 import Loading from '../Loading';
 
 function StatisticsBar() {
   const [loading, setLoading] = useState(true);
-  const [ {countPaidUser, totalProfits, thisMonthTotal, percentageDifference, countOfProperties} , setStatistics] = useState({countPaidUser: 0, totalProfits: 0, thisMonthTotal: 0, percentageDifference: 0, countOfProperties: 0});
+  const [statistics, setStatistics] = useState(null);
 
-  useEffect (() => {
+  const fetchStatistics = async () => {
     const BACKEND_URL = 'http://localhost:4000';
-      axios.get(`${BACKEND_URL}/backOffice/dashboard/statistics`).then((res) => {
-        console.log(res.data)
-        setStatistics(res.data);
-        setLoading(false);
-      }).catch((err) => {
-        console.error(err);
-      });
+    const res = await axios.get(`${BACKEND_URL}/backOffice/dashboard/statistics`);
+    return res.data;
+  };
+
+  useMemo(async () => {
+    const data = await fetchStatistics();
+    setStatistics(data);
+    setLoading(false);
   }, []);
 
   if (loading) return <Loading />;
@@ -31,14 +32,14 @@ function StatisticsBar() {
         <OverviewTotalProfit 
               positive
               sx={{ height: '100%' }}
-              value={`${totalProfits}$`} />
+              value={`${statistics.totalProfits}$`} />
       </Col>
       <Col>
         <OverviewBudget 
-              difference={percentageDifference}
+              difference={statistics.percentageDifference}
               positive
               sx={{ height: '100%' }}
-              value={`${thisMonthTotal}$`} />
+              value={`${statistics.thisMonthTotal}$`} />
       </Col>
     </Row>
     
@@ -46,16 +47,16 @@ function StatisticsBar() {
       <Col>
         <NumberOfProperties 
               sx={{ height: '100%' }}
-              value={`${countOfProperties}`} />
+              value={`${statistics.countOfProperties}`} />
       </Col>
       <Col>
         <OverviewCountPaidUser 
               sx={{ height: '100%' }}
-              value={countPaidUser} />
+              value={statistics.countPaidUser} />
       </Col>
     </Row>
     </>
   );
 }
 
-export default StatisticsBar;
+export default memo(StatisticsBar);
