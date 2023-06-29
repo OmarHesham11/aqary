@@ -1,17 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 import axios from 'axios';
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-  },
-});
 
 export default function TableOfProperties() {
-  const classes = useStyles();
   const [properties, setProperties] = useState([]);
 
   useEffect(() => {
@@ -38,7 +31,7 @@ export default function TableOfProperties() {
 
   return (
     <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="properties table">
+      <Table className={{minWidth: 650}} aria-label="properties table">
         <TableHead>
           <TableRow>
             <TableCell>Photo</TableCell>
