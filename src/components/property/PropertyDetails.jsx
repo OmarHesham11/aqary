@@ -9,8 +9,8 @@ import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 const PropertyDetails = () => {
 
-    // const location = useLocation();
-    // const property = location.state.property;
+    const location = useLocation();
+    const property = location.state.property;
 
     return (
         // <div className='mt-5' style={{marginTop: "50px"}}>

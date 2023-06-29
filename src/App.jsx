@@ -20,8 +20,8 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Main />}>
             <Route index={true} element={<Home />} />
-            <Route path="/properties" element={<PropertiesPage />} />
-            <Route path="/property/:id" element={<PropertyDetails />} />
+            <Route path="properties" element={<PropertiesPage />} />
+            <Route path="property/:id" element={<PropertyDetails />} />
           </Route>
 
 
