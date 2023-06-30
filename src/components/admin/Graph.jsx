@@ -1,14 +1,13 @@
-import { useEffect, useState } from 'react';
-import { Chart, Series, ValueAxis } from 'devextreme-react/chart';
+import { memo, useMemo, useState } from 'react';
+import { Chart, Series } from 'devextreme-react/chart';
 import Loading from '../Loading';
 import axios from 'axios';
 
-export default function Graph(props) {
+function Graph() {
   const [loading, setLoading] = useState(true);
-  const [ details , setDetails] = useState({});
   const [ data, setData ] = useState();
 
-  useEffect (() => {
+  useMemo (() => {
     const BACKEND_URL = 'http://localhost:4000';
       axios.get(`${BACKEND_URL}/backOffice/dashboard/main-graph`).then((res) => {
         setData(res.data);
@@ -42,3 +41,5 @@ export default function Graph(props) {
       </Chart>
     );
 }
+
+export default memo(Graph);
