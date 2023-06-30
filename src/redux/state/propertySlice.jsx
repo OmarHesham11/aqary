@@ -4,7 +4,8 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 const initialState = {
     properties: [],
     loading: false,
-    error: null
+    error: null,
+    searchResults: [],
 };
 
 export const fetchProperties = createAsyncThunk( "properties/fetchProperties", async (currentPage, thunkAPI) => {
@@ -30,6 +31,17 @@ export const fetchProperty = createAsyncThunk( "properties/fetchProperty", async
         }
 });
 
+export const searchProperties = createAsyncThunk( "properties/searchProperties", async (searchQuery, thunkAPI) => {
+    const { rejectWithValue } = thunkAPI;
+    try {
+        const response = await fetch(`http://localhost:4000/property/search/${searchQuery}`);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        return rejectWithValue(error.message);
+    }
+});
+
 
 const propertiesSlice = createSlice({
     name: 'properties',
@@ -46,6 +58,18 @@ const propertiesSlice = createSlice({
                 state.properties = action.payload;
             })
             .addCase(fetchProperties.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+            .addCase(searchProperties.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(searchProperties.fulfilled, (state, action) => {
+                state.loading = false;
+                state.searchResults = action.payload;
+            })
+            .addCase(searchProperties.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             });

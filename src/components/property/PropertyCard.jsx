@@ -52,7 +52,7 @@ const PropertyCard = ({ property }) => {
                 <Card.Text>
                     <FontAwesomeIcon icon={faPhone} /> : {property.contractPhone}
                 </Card.Text>
-                <Button variant="primary" onClick={handleButtonClick}>Details</Button>
+                <Button variant="secondary" onClick={handleButtonClick}>Details</Button>
             
             </Card.Body>
         

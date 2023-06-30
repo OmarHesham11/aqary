@@ -1,6 +1,6 @@
-// import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
-import './propertyDetails.css';
+import './styles/propertyDetails.css';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import DescriptionIcon from '@mui/icons-material/Description';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
@@ -9,8 +9,8 @@ import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 const PropertyDetails = () => {
 
-    // const location = useLocation();
-    // const property = location.state.property;
+    const location = useLocation();
+    const property = location.state.property;
 
     return (
         // <div className='mt-5' style={{marginTop: "50px"}}>
