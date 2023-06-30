@@ -1,6 +1,5 @@
+/* eslint-disable no-extra-semi */
 import './App.css'
-import NavBar from './pages/home/NavBar';
-import Footer from './pages/home/Footer';
 import Home from './pages/home/Home'
 import PropertiesPage from './pages/property/propertiesPage';
 import PropertyDetails from './pages/property/propertyDetailsPage';

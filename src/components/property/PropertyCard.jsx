@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import Loading from '../Loading';
-import './PropertyCard.css';
+import './styles/PropertyCard.css';
 
 import { useNavigate } from 'react-router-dom';
 import { Card, Button } from 'react-bootstrap';
@@ -21,7 +21,7 @@ const PropertyCard = ({ property }) => {
 
     return (
 
-        <Card className="text-center rounded-4 justify-content-center m-5 mt-4"
+        <Card className="text-center rounded-4 justify-content-center m-5 mt-5"
             onMouseEnter={(e) => e.currentTarget.classList.add('hover')}
             onMouseLeave={(e) => e.currentTarget.classList.remove('hover')}
         >
@@ -52,7 +52,7 @@ const PropertyCard = ({ property }) => {
                 <Card.Text>
                     <FontAwesomeIcon icon={faPhone} /> : {property.contractPhone}
                 </Card.Text>
-                <Button variant="primary" onClick={handleButtonClick}>Details</Button>
+                <Button variant="secondary" onClick={handleButtonClick}>Details</Button>
             
             </Card.Body>
         

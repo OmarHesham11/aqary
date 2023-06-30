@@ -1,10 +1,10 @@
 import { useLocation } from 'react-router-dom';
 
-import './propertyDetails.css';
+import './styles/propertyDetails.css';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import DescriptionIcon from '@mui/icons-material/Description';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
-import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
+// import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 const PropertyDetails = () => {
@@ -63,7 +63,7 @@ const PropertyDetails = () => {
         <a href={`tel: +201123141912`} style={{ color: 'white', textDecoration: 'none' }}>Whatsapp </a>
       </button>
     </div>
-           
+
           </div>
         </div>
         
