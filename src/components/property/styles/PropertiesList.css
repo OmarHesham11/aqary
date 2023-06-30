@@ -1,0 +1,12 @@
+.margin-top-Row {
+    margin-top: 80px;
+}
+
+.text-center {
+  display: inline-block;
+}
+
+.error-container {
+  max-height: 80vh;
+  overflow: auto;
+}

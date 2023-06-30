@@ -1,3 +1,4 @@
+/* eslint-disable no-extra-semi */
 import './App.css'
 import NavBar from './pages/home/NavBar';
 import Footer from './pages/home/Footer';

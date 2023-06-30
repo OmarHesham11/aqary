@@ -7,10 +7,10 @@ const initialState = {
     error: null
 };
 
-export const fetchProperties = createAsyncThunk( "properties/fetchProperties", async (_, thunkAPI) => {
+export const fetchProperties = createAsyncThunk( "properties/fetchProperties", async (currentPage, thunkAPI) => {
         const { rejectWithValue } = thunkAPI; // to catch error and return it
         try {
-            const response = await fetch("http://localhost:4000/property/");
+            const response = await fetch(`http://localhost:4000/property/?page=${currentPage}`);
             const data = await response.json();
             return data;
         }
