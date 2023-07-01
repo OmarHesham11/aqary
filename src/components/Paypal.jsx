@@ -30,11 +30,13 @@ const createOrder = async (data, actions, userId, amount, description) => {
     return orderID;
   }
   
-  const onApprove = (data, userId, transactionData, setIsSubmitting, setSubmitSuccess) => {
-    console.log("hello from approval")
+  const onApprove = ({orderID}, userId, amount, currency, description, transactionData, setIsSubmitting, setSubmitSuccess) => {
     return axios.post("http://localhost:4000/checkout/capture-paypal-order", {
-      orderID: data.orderID,
-      userId: userId,
+      orderID,
+      userId,
+      description,
+      amount,
+      currency
     }, {
       headers: {
         "Content-Type": "application/json",
@@ -42,7 +44,7 @@ const createOrder = async (data, actions, userId, amount, description) => {
     })
     .then((response) => {
       const orderData = response.data;
-      console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+    //   console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
       const transaction = orderData.purchase_units[0].payments.captures[0];
       transactionData.current.status = transaction.status;
       transactionData.current.id = transaction.id;
@@ -91,8 +93,7 @@ const createOrder = async (data, actions, userId, amount, description) => {
                       });
                   }}
                 onApprove={(data, actions) => {
-                    console.log("hello from approval")
-                    return onApprove(data, userId, setTransactionData, setIsSubmitting, setSubmitSuccess);
+                    return onApprove(data, userId, amount, currency, description, setTransactionData, setIsSubmitting, setSubmitSuccess);
                 }}
                 onCancel={() => {
                     console.log("cancelled");
