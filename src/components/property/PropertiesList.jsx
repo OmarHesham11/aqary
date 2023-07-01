@@ -38,7 +38,7 @@ const PropertiesList = () => {
   if (error) {
     return (
       <div className="d-flex align-items-center justify-content-center vh-100 error-container">
-        <Alert variant="danger">{`Error: ${error}`}</Alert>
+        <Alert variant="danger">{ `Error: ${error}` }</Alert>
       </div>
     );
   }
@@ -47,12 +47,16 @@ const PropertiesList = () => {
   return (
     <>
 
-      <Row xs={1} md={4} className="g-2 ms-2 margin-top-Row mt-5 me-2 mouse">
+      <h1 style={ { margin: 'auto', marginTop: '90px', textTransform: 'uppercase' } } className="text-center d-block f-bold">
+        <span style={ { fontFamily: 'Cursive', fontSize: '35px' } }>Welcome to <strong className="text-warning">your home</strong></span>
+      </h1>
 
-        {currentItems.length > 0 ? (
+      <Row xs={ 1 } md={ 4 } className="g-2 ms-2 margin-top-Row mt-3 me-2 mouse">
+
+        { currentItems.length > 0 ? (
           currentItems.map((property) => (
-            <Col key={property._id}>
-              <PropertyCard property={property} />
+            <Col key={ property._id }>
+              <PropertyCard property={ property } />
             </Col>
           ))
 
@@ -60,11 +64,11 @@ const PropertiesList = () => {
 
           <NoProperties />
 
-        )}
+        ) }
 
       </Row>
 
-      <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={handlePageChange} />
+      <Pagination totalPages={ totalPages } currentPage={ currentPage } onPageChange={ handlePageChange } />
 
     </>
 
