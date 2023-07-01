@@ -1,16 +1,16 @@
-import { memo, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Chart, Series } from 'devextreme-react/chart';
 import Loading from '../Loading';
 import axios from 'axios';
 
 function Graph() {
   const [loading, setLoading] = useState(true);
-  const [ data, setData ] = useState();
+  const [ data, setData ] = useState([]);
 
   useMemo (() => {
     const BACKEND_URL = 'http://localhost:4000';
       axios.get(`${BACKEND_URL}/backOffice/dashboard/main-graph`).then((res) => {
-        setData(res.data);
+        setData(res.data.countPropertiesForEachCity);
         console.log(res.data)
         setLoading(false);
       }).catch((err) => {
@@ -18,7 +18,7 @@ function Graph() {
       });
   }, []);
 
-  if (loading) return <Loading />;
+  // if (loading) return <Loading />;
   const randomColor = () => {
     const r = Math.floor(Math.random() * 256);  
     const g = Math.floor(Math.random() * 256);
@@ -42,4 +42,4 @@ function Graph() {
     );
 }
 
-export default memo(Graph);
+export default Graph;

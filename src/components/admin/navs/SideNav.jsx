@@ -18,6 +18,7 @@ import HouseIcon from '@mui/icons-material/House';
 import GroupIcon from '@mui/icons-material/Group';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import PublicIcon from '@mui/icons-material/Public';
+import { NavLink } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -43,7 +44,7 @@ export default function SideNav() {
                 <ListItemIcon>
                   <DashboardIcon />
                 </ListItemIcon>
-                <ListItemText primary={"Dashboard"} />
+                <ListItemText primary={<NavLink to="/admin/properties">Dashboard</NavLink>} />
               </ListItemButton>
             </ListItem>
         </List>
@@ -53,7 +54,8 @@ export default function SideNav() {
                 <ListItemIcon>
                   <HouseIcon />
                 </ListItemIcon>
-                <ListItemText primary={"Properties"} />
+                <ListItemText primary={<NavLink to="/admin/properties">Properties</NavLink>} />
+                
               </ListItemButton>
             </ListItem>
         </List>
@@ -63,7 +65,7 @@ export default function SideNav() {
                 <ListItemIcon>
                   <GroupIcon />
                 </ListItemIcon>
-                <ListItemText primary={"Subscripers"} />
+                <ListItemText primary={<NavLink to="/admin/Subscriptions">Subscriptions</NavLink>} />
               </ListItemButton>
             </ListItem>
         </List>
@@ -74,7 +76,7 @@ export default function SideNav() {
                 <ListItemIcon>
                   <PublicIcon />
                 </ListItemIcon>
-                <ListItemText primary={"User Countries"} />
+                <ListItemText primary={<NavLink to="/admin/users">Users</NavLink>} />
               </ListItemButton>
             </ListItem>
         </List>
@@ -85,7 +87,7 @@ export default function SideNav() {
                 <ListItemIcon>
                   <AttachMoneyIcon />
                 </ListItemIcon>
-                <ListItemText primary={"Transactions"} />
+                <ListItemText primary={<NavLink to="/admin/properties">Transactions</NavLink>} />
               </ListItemButton>
             </ListItem>
         </List>
