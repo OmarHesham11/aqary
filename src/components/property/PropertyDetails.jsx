@@ -2,7 +2,10 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-
+import * as React from 'react';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+import Button from '@mui/material/Button';
 import "./styles/propertyDetails.css";
 import ApartmentIcon from "@mui/icons-material/Apartment";
 import DescriptionIcon from "@mui/icons-material/Description";
@@ -13,6 +16,13 @@ import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 
 
 const PropertyDetails = () => {
+  const [open, setOpen] = React.useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleOpen = () => {
+    setOpen(true);
+  };
 
   const { propertyId } = useParams();
   const [property, setProperty] = useState(null);
@@ -33,7 +43,15 @@ const PropertyDetails = () => {
   }, [propertyId]);
 
   if (!property) {
-    return <div>Loading property details...</div>;
+    return <div>
+      <Backdrop
+        sx={{ color: '#000', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open
+        
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
+    </div>;
   }
 
 
