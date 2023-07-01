@@ -1,7 +1,10 @@
 import '../style.css';
-import SearchComponent from '../../components/property/Searching';
+import Searching from '../../components/property/Searching';
 
 import { NavLink } from 'react-router-dom';
+
+
+
 
 
 function NavBar() {
@@ -19,13 +22,13 @@ function NavBar() {
                     </button>
 
                     <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-                        
+
                         <NavLink className="navbar-brand" to="/"><span className="text-warning">House</span>Hunters</NavLink>
 
-                        <SearchComponent />
-                        
+                        <Searching />
+
                         <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-                        
+
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="/">Home</NavLink>
                             </li>
@@ -38,7 +41,7 @@ function NavBar() {
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="#">Register</NavLink>
                             </li>
-                        
+
                         </ul>
 
                     </div>
