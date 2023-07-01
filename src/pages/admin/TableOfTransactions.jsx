@@ -1,63 +1,50 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from '@mui/material';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import axios from 'axios';
 
+function getDateTime(date) {
+  const options = {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+    hour12: false
+  };
 
-export default function TableOfProperties() {
-  const [properties, setProperties] = useState([]);
+  const dateTimeFormatter = new Intl.DateTimeFormat('en-US', options);
+  return dateTimeFormatter.format(new Date(date));
+}
+export default function TableOfTransactions() {
+  const [transactions, setTransactions] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:4000/property/')
+    axios.get('http://localhost:4000/transaction/')
       .then(res => {
-        console.log(res.data)
-        console.log(res.data)
-        setProperties(res.data.properties);
+        setTransactions(res.data);
       })
       .catch(error => {
         console.log(error);
       });
   }, []);
 
-  const handleDelete = (id) => {
-    axios.delete(`http://localhost:4000/property/${id}`)
-      .then(res => {
-        console.log(res.data);
-        setProperties(properties.filter(property => property.id !== id));
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
-
   return (
     <TableContainer component={Paper}>
       <Table className={{minWidth: 650}} aria-label="properties table">
         <TableHead>
           <TableRow>
-            <TableCell>Photo</TableCell>
-            <TableCell>User</TableCell>
-            <TableCell>Address</TableCell>
-            <TableCell>City</TableCell>
-            <TableCell>Title</TableCell>
-            <TableCell>Actions</TableCell>
+            <TableCell>user</TableCell>
+            <TableCell>amount</TableCell>
+            <TableCell>time</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {properties.map((property) => (
-            <TableRow key={property.id}>
-              <TableCell component="th" scope="row">
-                <Link to={`/properties/${property.id}`}>
-                  <img src={property.photo[0]} alt="property" width="100" height="100" />
-                </Link>
-              </TableCell>
-              <TableCell>{property.userId}</TableCell>
-              <TableCell>{property.address}</TableCell>
-              <TableCell>{property.city}</TableCell>
-              <TableCell>{property.title}</TableCell>
-              <TableCell>
-                <Button variant="contained" color="primary" onClick={() => handleDelete(property.id)}>Delete</Button>
-              </TableCell>
+          {transactions.map((property) => (
+            <TableRow key={property._id}>
+              <TableCell>{property.userId.name}</TableCell>
+              <TableCell>{property.amount}</TableCell>
+              <TableCell>{getDateTime(property.createdAt)}</TableCell>
             </TableRow>
           ))}
         </TableBody>

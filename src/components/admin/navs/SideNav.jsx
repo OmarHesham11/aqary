@@ -65,7 +65,7 @@ export default function SideNav() {
                 <ListItemIcon>
                   <GroupIcon />
                 </ListItemIcon>
-                <ListItemText primary={<NavLink to="/admin/Subscriptions">Subscriptions</NavLink>} />
+                <ListItemText primary={<NavLink to="/admin/subscriptions">Subscriptions</NavLink>} />
               </ListItemButton>
             </ListItem>
         </List>
@@ -87,7 +87,7 @@ export default function SideNav() {
                 <ListItemIcon>
                   <AttachMoneyIcon />
                 </ListItemIcon>
-                <ListItemText primary={<NavLink to="/admin/properties">Transactions</NavLink>} />
+                <ListItemText primary={<NavLink to="/admin/transactions">Transactions</NavLink>} />
               </ListItemButton>
             </ListItem>
         </List>

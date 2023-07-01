@@ -10,8 +10,6 @@ export default function TableOfProperties() {
   useEffect(() => {
     axios.get('http://localhost:4000/property/')
       .then(res => {
-        console.log(res.data)
-        console.log(res.data)
         setProperties(res.data.properties);
       })
       .catch(error => {
@@ -23,7 +21,7 @@ export default function TableOfProperties() {
     axios.delete(`http://localhost:4000/property/${id}`)
       .then(res => {
         console.log(res.data);
-        setProperties(properties.filter(property => property.id !== id));
+        setProperties(properties.filter(property => property._id !== id));
       })
       .catch(error => {
         console.log(error);
@@ -45,9 +43,9 @@ export default function TableOfProperties() {
         </TableHead>
         <TableBody>
           {properties.map((property) => (
-            <TableRow key={property.id}>
+            <TableRow key={property._id}>
               <TableCell component="th" scope="row">
-                <Link to={`/properties/${property.id}`}>
+                <Link to={`/property/${property._id}`}>
                   <img src={property.photo[0]} alt="property" width="100" height="100" />
                 </Link>
               </TableCell>
@@ -56,7 +54,7 @@ export default function TableOfProperties() {
               <TableCell>{property.city}</TableCell>
               <TableCell>{property.title}</TableCell>
               <TableCell>
-                <Button variant="contained" color="primary" onClick={() => handleDelete(property.id)}>Delete</Button>
+                <Button variant="contained" color="primary" onClick={() => handleDelete(property._id)}>Delete</Button>
               </TableCell>
             </TableRow>
           ))}

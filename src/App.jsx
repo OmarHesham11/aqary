@@ -9,6 +9,7 @@ import TableOfProperties from './pages/admin/TableOfProperties';
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Main from './pages/Main';
+import TableOfTransactions from './pages/admin/TableOfTransactions';
 
 export default function App() {
   return (
@@ -27,7 +28,7 @@ export default function App() {
           <Route path="/admin" element={<Admin />}>
             <Route index={true} element={<Dashboard />} />
             <Route path="properties" element={<TableOfProperties />} />
-            <Route path="hello" element={<h1>Hello world</h1>} />
+            <Route path="transactions" element={<TableOfTransactions />} />
           </Route>
         </Routes>
       </BrowserRouter>
