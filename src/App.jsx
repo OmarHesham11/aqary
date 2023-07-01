@@ -20,7 +20,7 @@ export default function App() {
           <Route path="/" element={<Main />}>
             <Route index={true} element={<Home />} />
             <Route path="/properties" element={<PropertiesPage />} />
-            <Route path="/property/:id" element={<PropertyDetails />} />
+            <Route path="/property/:propertyId" element={<PropertyDetails />} />
           </Route>
 
 

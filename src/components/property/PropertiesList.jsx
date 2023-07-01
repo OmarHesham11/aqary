@@ -48,26 +48,26 @@ const PropertiesList = () => {
     <>
 
       <Row xs={1} md={4} className="g-2 ms-2 margin-top-Row mt-5 me-2 mouse">
-    
+
         {currentItems.length > 0 ? (
           currentItems.map((property) => (
             <Col key={property._id}>
               <PropertyCard property={property} />
             </Col>
           ))
-    
+
         ) : (
-    
+
           <NoProperties />
-    
+
         )}
-    
+
       </Row>
-    
+
       <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={handlePageChange} />
-    
+
     </>
-  
+
   );
 };
 
