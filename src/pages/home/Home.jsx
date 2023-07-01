@@ -68,7 +68,7 @@ function Home() {
                                 <p>subscribe and find super attractive price quotes  <br /> from us,find your residence soon
                                 </p>
                                 <div className='payment'>
-                                    < Cart />
+                                    < Cart amount={102.23} description={"PROPERTY_MONTH"} />
                                 </div>
                             </div>
                         </div>

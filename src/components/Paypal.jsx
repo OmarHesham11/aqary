@@ -30,7 +30,7 @@ const createOrder = async (data, actions, userId, amount, description) => {
     return orderID;
   }
   
-  const onApprove = ({orderID}, userId, amount, currency, description, transactionData, setIsSubmitting, setSubmitSuccess) => {
+  const onApprove = ({orderID}, userId, amount, currency, description, setTransactionData, setIsSubmitting, setSubmitSuccess) => {
     return axios.post("http://localhost:4000/checkout/capture-paypal-order", {
       orderID,
       userId,
@@ -46,8 +46,7 @@ const createOrder = async (data, actions, userId, amount, description) => {
       const orderData = response.data;
     //   console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
       const transaction = orderData.purchase_units[0].payments.captures[0];
-      transactionData.current.status = transaction.status;
-      transactionData.current.id = transaction.id;
+      setTransactionData(orderData);
       setIsSubmitting(true);
       setSubmitSuccess(true);
     })
