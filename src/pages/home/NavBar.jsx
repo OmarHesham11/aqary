@@ -30,16 +30,16 @@ function NavBar() {
                         <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
 
                             <li className="nav-item">
-                                <NavLink className="nav-link" activeClassName="active" to="/" exact>Home</NavLink>
+                                <NavLink className="nav-link" to="/">Home</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link" activeClassName="active" to="/properties">Property</NavLink>
+                                <NavLink className="nav-link" to="/properties">Property</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link" activeClassName="active" to="#">Login</NavLink>
+                                <NavLink className="nav-link" to="#">Login</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link" activeClassName="active" to="#">Register</NavLink>
+                                <NavLink className="nav-link" to="#">Register</NavLink>
                             </li>
 
                         </ul>
