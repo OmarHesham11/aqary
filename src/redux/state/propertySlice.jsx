@@ -37,7 +37,8 @@ export const createProperty = createAsyncThunk(
     "properties/CreateProperty",
     async (formData, thunkAPI) => {
         const { rejectWithValue } = thunkAPI;
-
+        console.log(formData);
+        console.log(typeof formData);
         try {
             axios({
                 method: "post",
@@ -50,6 +51,7 @@ export const createProperty = createAsyncThunk(
             }).catch(function (response) {
                 console.log(response);
             });
+            axios.post(`http://localhost:4000/auth/property/`)
         } catch (error) {
             console.log(error);
             return rejectWithValue(error.message);
