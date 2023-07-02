@@ -4,11 +4,12 @@ import { useState, useEffect, useCallback } from 'react';
 import { fetchCities } from '../../redux/cities/citySlice';
 import { useDropzone } from 'react-dropzone';
 
-import './styles/creatProperty.css';
+import './styles/createProperty.css';
 import '../Validation';
 
 
 function PropertyCreate() {
+
 
     const dispatch = useDispatch();
 
@@ -39,19 +40,22 @@ function PropertyCreate() {
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-
         setPropertyData((prevData) => ({
             ...prevData,
             [name]: value,
         }));
+    };
 
+    const isValidImageFile = (file) => {
+        const acceptedFormats = ['image/png', 'image/jpeg', 'image/jpg'];
+        return acceptedFormats.includes(file.type);
     };
 
     const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
         setImage((currentImages) => {
             let updatedImages = [...currentImages];
             acceptedFiles.forEach((file) => {
-                if (updatedImages.length < 5) {
+                if (updatedImages.length < 5 && isValidImageFile(file)) {
                     updatedImages.push(file);
                 }
             });
@@ -242,16 +246,33 @@ function PropertyCreate() {
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="image"> <h3>image</h3> </label>
+                            <label htmlFor="image"> <h3>Image</h3> </label>
                             <div>
                                 <div {...getRootProps()}>
                                     <input {...getInputProps({ multiple: true })} />
-                                    {isDragActive ?
-                                        <p>Drop the files here...</p> :
+
+                                    {isDragActive ? (
+                                        <p>Drop the files here...</p>
+                                    ) : (
                                         <p>Drag and drop files here, or click to select files</p>
-                                    }
+                                    )}
+
                                 </div>
-                                {image.length > 0 && image.map((image, index) => (<img src={`${URL.createObjectURL(image)}`} key={index} alt="" />))}
+
+                                {image.length > 0 && (
+                                    <div>
+                                        {image.map((image, index) => (
+                                            <img src={`${URL.createObjectURL(image)}`} key={index} alt="" />
+                                        ))}
+                                    </div>
+                                )}
+
+                                {image.length > 5 && (
+                                    <p className="text-danger">You can only upload a maximum of 5 images.</p>
+                                )}
+                                {image.some((file) => !isValidImageFile(file)) && (
+                                    <p className="text-danger">Only PNG, JPEG, and JPG files are allowed.</p>
+                                )}
                             </div>
                         </div>
 
@@ -261,7 +282,6 @@ function PropertyCreate() {
                             </label>
                             <textarea name="description" id="description" className="form-control" rows="5" onChange={handleInputChange}></textarea>
                         </div>
-
                     </form>
 
                 </div>
