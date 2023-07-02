@@ -86,6 +86,8 @@ const PropertyDetails = () => {
             className="d-block w-100"
             src={src}
             alt="First slide"
+            style={{ objectFit: 'cover', maxHeight: '100%', width: '100%' }}
+
           />
           {/* <Carousel.Caption>
             <h3>First slide label</h3>
@@ -168,7 +170,7 @@ const PropertyDetails = () => {
 </div>
 
 
-<div onClick={()=>{window.scrollTo(0,0)}}  className="top-arrow" style={{borderRadius: "50%", position: "fixed", bottom: "30px", right: "30px" , backgroundColor: "black", padding: "10px", color: "white", cursor: "pointer"}}>
+<div onClick={()=>{window.scrollTo(0,0)}}  className="top-arrow">
     <ArrowUpwardIcon />
 </div>
 
