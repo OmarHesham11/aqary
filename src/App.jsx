@@ -32,7 +32,6 @@ export default function App() {
           <Route path="/admin" element={<Admin />}>
             <Route index={true} element={<Dashboard />} />
             <Route path="properties" element={<TableOfProperties />} />
-            <Route path="hello" element={<h1>Hello world</h1>} />
             <Route path="transactions" element={<TableOfTransactions />} />
 
           </Route>
