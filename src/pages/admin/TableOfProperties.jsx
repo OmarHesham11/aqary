@@ -1,4 +1,4 @@
-import { useState, useEffect, memo } from 'react';
+import { useState, useEffect, memo, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, TextField, TablePagination } from '@mui/material';
 import axios from 'axios';
@@ -28,10 +28,11 @@ function TableOfProperties() {
     getProperties();
   };
 
-  function getProperties() {
-    axios.get('http://localhost:4000/backOffice/dashboard/properties', {
-      params: { ...pagination, ...filters }
-    })
+  const getProperties = useMemo(() => {
+    return () => {
+      axios.get('http://localhost:4000/backOffice/dashboard/properties', {
+        params: { ...pagination, ...filters }
+      })
       .then(res => {
         setProperties(res.data.data);
         setPagination(prevPagination => ({ ...prevPagination, total: res.data.pagination.total, totalPages: res.data.pagination.totalPages }));
@@ -41,7 +42,8 @@ function TableOfProperties() {
         console.log(error);
         setLoading(false);
       });
-  }
+    };
+    }, [pagination, filters]);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
