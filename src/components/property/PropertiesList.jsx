@@ -38,7 +38,7 @@ const PropertiesList = () => {
   if (error) {
     return (
       <div className="d-flex align-items-center justify-content-center vh-100 error-container">
-        <Alert variant="danger">{ `Error: ${error}` }</Alert>
+        <Alert variant="danger">{ `Error: ${error} properties` }</Alert>
       </div>
     );
   }
@@ -51,7 +51,7 @@ const PropertiesList = () => {
         <span style={ { fontFamily: 'Cursive', fontSize: '35px' } }>Welcome to <strong className="text-warning">your home</strong></span>
       </h1>
 
-      <Row xs={ 1 } md={ 4 } className="g-2 ms-2 margin-top-Row mt-3 me-2 mouse">
+      <Row xs={ 1 } s={ 1 } md={ 2 } lg={ 3 } className="g-2 ms-2 margin-top-Row mt-3 me-2 mouse">
 
         { currentItems.length > 0 ? (
           currentItems.map((property) => (

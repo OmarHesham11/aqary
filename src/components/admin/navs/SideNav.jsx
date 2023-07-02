@@ -36,7 +36,17 @@ export default function SideNav() {
         variant="permanent"
         anchor="left"
       >
-        <Toolbar />
+        
+        <List>
+            <ListItem key={1} disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  <DashboardIcon />
+                </ListItemIcon>
+                <ListItemText primary={<NavLink to="/">Home</NavLink>} />
+              </ListItemButton>
+            </ListItem>
+        </List>
         <Divider />
         <List>
             <ListItem key={1} disablePadding>
@@ -44,7 +54,7 @@ export default function SideNav() {
                 <ListItemIcon>
                   <DashboardIcon />
                 </ListItemIcon>
-                <ListItemText primary={<NavLink to="/admin/properties">Dashboard</NavLink>} />
+                <ListItemText primary={<NavLink to="/admin">Dashboard</NavLink>} />
               </ListItemButton>
             </ListItem>
         </List>
