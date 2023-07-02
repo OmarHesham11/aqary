@@ -2,6 +2,7 @@ import { useState, useEffect, memo, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, TextField, TablePagination } from '@mui/material';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 
 function TableOfProperties() {
@@ -19,13 +20,13 @@ function TableOfProperties() {
 
   const handlePageChange = (event, newPage) => {
     setPagination(prevPagination => ({ ...prevPagination, page: newPage + 1 }));
-    getProperties();
+    // getProperties();
   };
 
   const handlePageSizeChange = (event) => {
     const newPageSize = parseInt(event.target.value);
     setPagination(prevPagination => ({ ...prevPagination, pageSize: newPageSize, page: 1 }));
-    getProperties();
+    // getProperties();
   };
 
   const getProperties = useMemo(() => {
@@ -34,6 +35,7 @@ function TableOfProperties() {
         params: { ...pagination, ...filters }
       })
       .then(res => {
+        console.log(res.data.data.length)
         setProperties(res.data.data);
         setPagination(prevPagination => ({ ...prevPagination, total: res.data.pagination.total, totalPages: res.data.pagination.totalPages }));
         setLoading(false);
@@ -54,12 +56,12 @@ function TableOfProperties() {
     return () => {
       clearTimeout(timeoutId);
     };
-  }, [filters]);
+  }, [filters, pagination.page, pagination.pageSize]);
 
   const handleDelete = (id) => {
     axios.delete(`http://localhost:4000/backOffice/property/${id}`)
       .then(res => {
-        console.log(res.data);
+        Swal.fire('Deleted Success', 'property deletect succusflly', 'success');
         setProperties(properties.filter(property => property._id !== id));
       })
       .catch(error => {
@@ -118,7 +120,7 @@ function TableOfProperties() {
         onChange={handleFiltersChange}
       />
       <TableContainer component={Paper}>
-        <Table className={{minWidth: 650}} aria-label="properties table">
+        <Table aria-label="properties table">
           <TableHead>
             <TableRow>
               <TableCell>Photo</TableCell>
