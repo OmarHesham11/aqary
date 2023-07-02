@@ -86,10 +86,9 @@ function PropertyCreate() {
             formData.append('paymentOption', propertyData.paymentOption);
             formData.append('subscribe', propertyData.subscribe);
 
-            Array.from(image).forEach((image) => {
-                formData.append('file', image);
+            image.forEach((ig) => {
+                formData.append('image', ig);
             });
-            formData.get('image');
             const response = await dispatch(createProperty(formData));
             // Handle the response here if needed
             console.log(response);
