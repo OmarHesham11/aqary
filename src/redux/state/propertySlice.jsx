@@ -7,33 +7,32 @@ const initialState = {
     searchResults: [],
 };
 
-export const createProperty = createAsyncThunk("properties/CreateProperty", async (formData, thunkAPI) => {
-    const { rejectWithValue } = thunkAPI;
-    console.log(formData.get('image'));
-    console.log(typeof formData);
-    try {
-        axios({
-            method: "post",
-            url: "http://localhost:4000/auth/property/",
-            data: formData,
-            headers: { "Content-Type": "multipart/form-data" },
-        }).then(function (res) {
-            const data = res.data;
-            return data;
-        }).catch(function (response) {
-            console.log(response);
-        });
-        // axios.post(`http://localhost:4000/auth/property/`, formData)
-        // .then(({data}) => {
-        //     return data;
-        // }).catch(function (response) {
-        //     console.log(response);
-        // });
-    } catch (error) {
-        console.log(error);
-        return rejectWithValue(error.message);
+export const createProperty = createAsyncThunk(
+    "properties/CreateProperty",
+    async (formData, thunkAPI) => {
+        const { rejectWithValue } = thunkAPI;
+        console.log(formData.get('image'));
+
+        try {
+            const response = await axios({
+                method: "post",
+                url: "http://localhost:4000/auth/property/",
+                data: formData,
+                headers: { "Content-Type": "multipart/form-data" },
+            });
+
+            if (response.status === 200) {
+                const data = response.data;
+                return data;
+            } else {
+                console.log(response);
+                return rejectWithValue(response.statusText);
+            }
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error.message);
+        }
     }
-}
 );
 
 export const fetchProperties = createAsyncThunk("properties/fetchProperties", async (currentPage, thunkAPI) => {
@@ -112,7 +111,7 @@ const propertiesSlice = createSlice({
             })
             .addCase(createProperty.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.payload;
+                state.error = action.error.messag;
             });
     },
 });

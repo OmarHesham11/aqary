@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect, useCallback } from 'react';
 import { fetchCities } from '../../redux/cities/citySlice';
 import './styles/creatProperty.css';
+import '../Validation';
 import { useDropzone } from 'react-dropzone';
 function PropertyCreate() {
     const dispatch = useDispatch();
@@ -11,8 +12,14 @@ function PropertyCreate() {
     const cities = useSelector((state) => state.cities.cities);
     const loading = useSelector((state) => state.cities.loading);
     const error = useSelector((state) => state.cities.error);
+
+    const err = useSelector((state) => state.properties.error);
+
+    const [formErrors, setFormErrors] = useState({});
+
     const [image, setImage] = useState([])
     const [propertyData, setPropertyData] = useState({
+        userId: '649db4ae75fc1c6db6d97554',
         address: '',
         city: '',
         title: '',
@@ -37,18 +44,26 @@ function PropertyCreate() {
 
     };
 
-    // const handleImageUpload = (e) => {
-    //     const files = e.target.files;
-    //     console.log(files);
-    //     console.log(files.length);
-    //     setImage(Array.from(files[0]))
-    //     console.log(image);
-    // };
 
+    // const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
+    //     let updatedImages = [...image];
+    //     acceptedFiles.forEach((file) => {
+    //         if (updatedImages.length < 5) {
+    //             updatedImages.push(file);
+    //         }
+    //     });
+    //     setImage(updatedImages);
+    // }, [image]);
 
     const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
-        acceptedFiles.forEach((file) => {
-            setImage((prevState) => [...prevState, file]);
+        setImage((currentImages) => {
+            let updatedImages = [...currentImages];
+            acceptedFiles.forEach((file) => {
+                if (updatedImages.length < 5) {
+                    updatedImages.push(file);
+                }
+            });
+            return updatedImages;
         });
     }, []);
 
@@ -89,16 +104,14 @@ function PropertyCreate() {
             image.forEach((ig) => {
                 formData.append('image', ig);
             });
+            console.log(formData.get('image'))
             const response = await dispatch(createProperty(formData));
-            // Handle the response here if needed
-            console.log(response);
+            console.log('submitted', response);
+            if (response.error) { setFormErrors(error) }
         } catch (error) {
-            // Handle errors here
             console.log(error);
         }
     };
-
-
 
     useEffect(() => {
         dispatch(fetchCities());
@@ -111,12 +124,18 @@ function PropertyCreate() {
         <div className="container" >
             <div className="row justify-content-center">
                 <div className="col-lg-6">
+                    <form className="property-form" onSubmit={handelSubmit} encType="multipart/form-data">
 
-                    <form className="property-form" onSubmit={handelSubmit}>
-                        <h3 className="text-center">Create Property</h3>
-                        <div className="text-center">
-                            <button type="submit" className="btn btn-primary">Submit</button>
+                        {err && <p className="text-danger">{err}</p>}
+                        <div className="row">
+                            <div className='col'>
+                                <h3 className="text-center ">Create Property</h3>
+                            </div>
+                            <div className="text-end col">
+                                <button type="submit" className="btn btn-primary">Create</button>
+                            </div>
                         </div>
+
                         <div className="form-group">
                             <label htmlFor="Title">
                                 <h3>Title</h3>
@@ -295,7 +314,7 @@ function PropertyCreate() {
                             </label>
                             <div>
                                 <div {...getRootProps()}>
-                                    <input {...getInputProps()} />
+                                    <input {...getInputProps({ multiple: true })} />
                                     {
                                         isDragActive ?
                                             <p>Drop the files here...</p> :
@@ -306,6 +325,7 @@ function PropertyCreate() {
                                     image.map((image, index) => (
                                         <img src={`${URL.createObjectURL(image)}`} key={index} alt="" />))}
                             </div>
+                            <button type="submit">Upload</button>
                         </div>
 
                         <div className="form-group">
