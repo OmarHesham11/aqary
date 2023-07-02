@@ -19,7 +19,11 @@ const Searching = () => {
     const handleSearchChange = (event) => {
         const query = event.target.value;
         setSearchQuery(query);
-        dispatch(searchProperties(query));
+        setTimeout(() => {
+            if (query.trim() !== '') {
+                dispatch(searchProperties(query));
+            }
+        }, 2000);
     };
 
     const handleResultClick = (property) => {
@@ -41,6 +45,12 @@ const Searching = () => {
         }
     };
 
+    const handleFormSubmit = (event) => {
+        event.preventDefault();
+        setSearchQuery('');
+        dispatch(searchProperties(''));
+    };
+
 
     return (
 
@@ -48,38 +58,38 @@ const Searching = () => {
 
             <div className='position-relative'>
 
-                <form className="d-flex me-4" role="search">
-                    <input type="text" placeholder="City Name" className="form-control ms-4 me-2" aria-label="Search" value={searchQuery} onChange={handleSearchChange} />
+                <form className="d-flex me-4" role="search" onSubmit={ handleFormSubmit }>
+                    <input type="text" placeholder="City Name" className="form-control ms-4 me-2" aria-label="Search" value={ searchQuery } onChange={ handleSearchChange } />
                 </form>
 
-                {searchResults.length > 0 && searchQuery.length > 0 ? (
+                { searchResults.length > 0 && searchQuery.length > 0 ? (
 
-                    <ul className="list-group position-absolute w-100 p-2 ms-2 mb-1" style={{ top: '100%', zIndex: '1', maxHeight: '200px', overflowY: 'auto' }} onScroll={handleScroll} ref={containerRef} >
+                    <ul className="list-group position-absolute w-100 p-2 ms-2 mb-1" style={ { top: '100%', zIndex: '1', maxHeight: '200px', overflowY: 'auto' } } onScroll={ handleScroll } ref={ containerRef } >
 
-                        {searchResults.map((property) => (
+                        { searchResults.map((property) => (
 
-                            <Link to={`/property/${property._id}`} className="list-group-item list-group-item-action" key={property._id} onClick={() => handleResultClick(property)} >
+                            <Link to={ `/property/${property._id}` } className="list-group-item list-group-item-action" key={ property._id } onClick={ () => handleResultClick(property) } >
 
                                 <div className="d-flex justify-content-between align-items-center">
-                                    <span className="me-3">{property.address.substring(0, 30)}...</span>
-                                    <span className="badge bg-primary text-white">Price: EGP {property.price}</span>
+                                    <span className="me-3">{ property.address.substring(0, 30) }...</span>
+                                    <span className="badge bg-primary text-white">Price: EGP { property.price }</span>
                                 </div>
 
                             </Link>
 
-                        ))}
+                        )) }
 
                     </ul>
 
-                ) : null}
+                ) : null }
 
-                {searchQuery.length > 0 && searchResults.length === 0 ? (
+                { searchQuery.length > 0 && searchResults.length === 0 ? (
 
-                    <div className="position-absolute w-100 p-2 ms-2 mb-1" style={{ top: '100%', zIndex: '1', maxHeight: '200px', overflowY: 'auto' }}>
+                    <div className="position-absolute w-100 p-2 ms-2 mb-1" style={ { top: '100%', zIndex: '1', maxHeight: '200px', overflowY: 'auto' } }>
                         <span className="list-group-item border rounded-3 text-center">Not found Property</span>
                     </div>
 
-                ) : null}
+                ) : null }
 
             </div>
 
