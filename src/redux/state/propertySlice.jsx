@@ -35,53 +35,40 @@ export const createProperty = createAsyncThunk(
     }
 );
 
-
-export const fetchProperties = createAsyncThunk(
-    "properties/fetchProperties",
-    async (currentPage, thunkAPI) => {
-        const { rejectWithValue } = thunkAPI; // to catch error and return it
-        try {
-            const response = await fetch(
-                `https://aqary-eg.onrender.com/property/?page=${currentPage}`
-            );
-            const data = await response.json();
-            return data;
-        } catch (error) {
-            return rejectWithValue(error.message);
-        }
+export const fetchProperties = createAsyncThunk("properties/fetchProperties", async (currentPage, thunkAPI) => {
+    const { rejectWithValue } = thunkAPI;
+    try {
+        const response = await fetch(`https://aqary-eg.onrender.com/property/?page=${currentPage}`);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        return rejectWithValue(error.message);
     }
+}
 );
 
-export const fetchProperty = createAsyncThunk(
-    "properties/fetchProperty",
-    async (propertyId, thunkAPI) => {
-        const { rejectWithValue } = thunkAPI;
-        try {
-            const response = await fetch(
-                `https://aqary-eg.onrender.com/property/${propertyId}`
-            );
-            const data = await response.json();
-            return data;
-        } catch (error) {
-            return rejectWithValue(error.message);
-        }
+export const fetchProperty = createAsyncThunk("properties/fetchProperty", async (propertyId, thunkAPI) => {
+    const { rejectWithValue } = thunkAPI;
+    try {
+        const response = await fetch(`https://aqary-eg.onrender.com/property/${propertyId}`);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        return rejectWithValue(error.message);
     }
+}
 );
 
-export const searchProperties = createAsyncThunk(
-    "properties/searchProperties",
-    async (searchQuery, thunkAPI) => {
-        const { rejectWithValue } = thunkAPI;
-        try {
-            const response = await fetch(
-                `https://aqary-eg.onrender.com/property/search/${searchQuery}`
-            );
-            const data = await response.json();
-            return data;
-        } catch (error) {
-            return rejectWithValue(error.message);
-        }
+export const searchProperties = createAsyncThunk("properties/searchProperties", async (searchQuery, thunkAPI) => {
+    const { rejectWithValue } = thunkAPI;
+    try {
+        const response = await fetch(`https://aqary-eg.onrender.com/property/search/${searchQuery}`);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        return rejectWithValue(error.message);
     }
+}
 );
 
 const propertiesSlice = createSlice({
