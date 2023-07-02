@@ -1,6 +1,11 @@
+import AuthForm from '../components/Auth/login';
 
-function AuthenticationPage() {
-    return 
-}
+const AuthPage = () => {
+  return (
+    <section className=''>
+        <AuthForm/>
+    </section>
+  )
+};
 
-export default AuthenticationPage;
+export default AuthPage;

@@ -36,7 +36,7 @@ function NavBar() {
                                 <NavLink className="nav-link" to="/properties">Property</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link" to="#">Login</NavLink>
+                                <NavLink className="nav-link" to="/auth ">Login</NavLink>
                             </li>
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="#">Register</NavLink>

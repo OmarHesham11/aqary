@@ -9,6 +9,7 @@ import TableOfProperties from './pages/admin/TableOfProperties';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Main from './pages/Main';
 import TableOfTransactions from './pages/admin/TableOfTransactions';
+import AuthPage from './pages/Authentication';
 
 
 export default function App() {
@@ -21,7 +22,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={ <Main /> }>
             <Route index={ true } element={ <Home /> } />
-            
+            <Route path='/auth' element={ <AuthPage/>}/>
             <Route path="/properties" element={ <PropertiesPage /> } />
             <Route path="/property/:propertyId" element={ <PropertyDetails /> } />
           </Route>
