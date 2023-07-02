@@ -57,28 +57,6 @@ const PropertiesList = () => {
 
   return (
     <>
-      <div className="container ">
-        <div className="row">
-          <div className="col align-items-center">
-            <input
-              type="text"
-              value={postContent}
-              onClick={handleCreatePost}
-              className="form-control rounded-pill bg-transparent tex-center"
-              placeholder="What's on your mind?"
-            />
-          </div>
-          <div className=" text-end col ">
-            <button
-              onClick={handleCreatePost}
-              className="btn btn-primary mt-3 "
-              style={{ backgroundColor: 'blue' }}
-            >
-              Create Post
-            </button>
-          </div>
-        </div>
-      </div >
       <h1 style={{ margin: 'auto', marginTop: '90px', textTransform: 'uppercase' }} className="text-center d-block f-bold">
         <span style={{ fontFamily: 'Cursive', fontSize: '35px' }}>Welcome to <strong className="text-warning">your home</strong></span>
       </h1>
