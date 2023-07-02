@@ -27,17 +27,14 @@ function Graph() {
   };
     return (
       <Chart id="chart" dataSource={data}>
-        {data.map((d) => 
-          (
-              <Series
-                key={d.city}
-                valueField="count"
-                argumentField="city"
-                name={d.city}
-                type="bar"
-                color={randomColor()} />
-              )
-        )}
+        <Series
+          // key={d.city}
+          valueField="count"
+          argumentField="city"
+          // name={d.city}
+          type="bar"
+          color={randomColor()} 
+        />
       </Chart>
     );
 }
