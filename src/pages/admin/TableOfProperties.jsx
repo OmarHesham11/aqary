@@ -151,7 +151,7 @@ function TableOfProperties() {
                     <img src={property.photo[0]} alt="property" width="100" height="100" />
                   </Link>
                 </TableCell>
-                <TableCell>{property.userId}</TableCell>
+                <TableCell>{property.user?.email}</TableCell>
                 <TableCell>{property.address}</TableCell>
                 <TableCell>{property.city}</TableCell>
                 <TableCell>{property.title}</TableCell>
