@@ -17,18 +17,18 @@ export default function App() {
     <>
 
       <BrowserRouter>
+
         <Routes>
-          <Route path="/" element={<Main />}>
-            <Route index={true} element={<Home />} />
-            <Route path="/properties" element={<PropertiesPage />} />
-            <Route path="/property/:propertyId" element={<PropertyDetails />} />
+          <Route path="/" element={ <Main /> }>
+            <Route index={ true } element={ <Home /> } />
+            <Route path="/properties" element={ <PropertiesPage /> } />
+            <Route path="/property/:propertyId" element={ <PropertyDetails /> } />
           </Route>
 
-
-          <Route path="/admin" element={<Admin />}>
-            <Route index={true} element={<Dashboard />} />
-            <Route path="properties" element={<TableOfProperties />} />
-            <Route path="transactions" element={<TableOfTransactions />} />
+          <Route path="/admin" element={ <Admin /> }>
+            <Route index={ true } element={ <Dashboard /> } />
+            <Route path="properties" element={ <TableOfProperties /> } />
+            <Route path="transactions" element={ <TableOfTransactions /> } />
           </Route>
         </Routes>
       </BrowserRouter>
