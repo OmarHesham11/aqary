@@ -12,20 +12,22 @@ export const createProperty = createAsyncThunk(
     async (formData, thunkAPI) => {
         const { rejectWithValue } = thunkAPI;
         console.log(formData.get('image'));
-        console.log(typeof formData);
+
         try {
-            axios({
+            const response = await axios({
                 method: "post",
                 url: "http://localhost:4000/auth/property/",
                 data: formData,
                 headers: { "Content-Type": "multipart/form-data" },
-            }).then(function (res) {
-                const data = res.data;
-                return data;
-            }).catch(function (response) {
-                console.log(response);
             });
 
+            if (response.status === 200) {
+                const data = response.data;
+                return data;
+            } else {
+                console.log(response);
+                return rejectWithValue(response.statusText);
+            }
         } catch (error) {
             console.log(error);
             return rejectWithValue(error.message);
@@ -122,7 +124,7 @@ const propertiesSlice = createSlice({
             })
             .addCase(createProperty.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.payload;
+                state.error = action.error.messag;
             });
     },
 });
