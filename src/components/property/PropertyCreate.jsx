@@ -37,13 +37,6 @@ function PropertyCreate() {
 
     };
 
-    // const handleImageUpload = (e) => {
-    //     const files = e.target.files;
-    //     console.log(files);
-    //     console.log(files.length);
-    //     setImage(Array.from(files[0]))
-    //     console.log(image);
-    // };
 
 
     const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
@@ -68,29 +61,25 @@ function PropertyCreate() {
         }));
     };
 
-
-    const handelSubmit = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const formData = new FormData();
-            formData.append('address', propertyData.address);
-            formData.append('city', propertyData.city);
-            formData.append('title', propertyData.title);
-            formData.append('level', propertyData.level);
-            formData.append('rooms', propertyData.rooms);
-            formData.append('baths', propertyData.baths);
-            formData.append('area', propertyData.area);
-            formData.append('description', propertyData.description);
-            formData.append('price', propertyData.price);
-            formData.append('contractPhone', propertyData.contractPhone);
-            formData.append('paymentOption', propertyData.paymentOption);
-            formData.append('subscribe', propertyData.subscribe);
+            const formData = {
+                address: propertyData.address,
+                city: propertyData.city,
+                title: propertyData.title,
+                level: propertyData.level,
+                rooms: propertyData.rooms,
+                baths: propertyData.baths,
+                area: propertyData.area,
+                description: propertyData.description,
+                price: propertyData.price,
+                contractPhone: propertyData.contractPhone,
+                paymentOption: propertyData.paymentOption,
+                subscribe: propertyData.subscribe,
+            };
 
-            Array.from(image).forEach((image) => {
-                formData.append('file', image);
-            });
-            formData.get('image');
-            const response = await dispatch(createProperty(formData));
+            const response = await dispatch(createProperty({ propertyData: formData, images: image }));
             // Handle the response here if needed
             console.log(response);
         } catch (error) {
@@ -98,7 +87,6 @@ function PropertyCreate() {
             console.log(error);
         }
     };
-
 
 
     useEffect(() => {
@@ -113,7 +101,7 @@ function PropertyCreate() {
             <div className="row justify-content-center">
                 <div className="col-lg-6">
 
-                    <form className="property-form" onSubmit={handelSubmit}>
+                    <form className="property-form" onSubmit={handleSubmit}>
                         <h3 className="text-center">Create Property</h3>
                         <div className="text-center">
                             <button type="submit" className="btn btn-primary">Submit</button>

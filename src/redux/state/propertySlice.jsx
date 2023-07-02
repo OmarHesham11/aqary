@@ -33,30 +33,58 @@ const initialState = {
 //         }
 //     }
 // );
-export const createProperty = createAsyncThunk(
-    "properties/CreateProperty",
-    async (formData, thunkAPI) => {
-        const { rejectWithValue } = thunkAPI;
+// export const createProperty = createAsyncThunk(
+//     "properties/CreateProperty",
+//     async (formData, thunkAPI) => {
+//         const { rejectWithValue } = thunkAPI;
 
+//         try {
+//             axios({
+//                 method: "post",
+//                 url: "http://localhost:4000/auth/property/",
+//                 data: formData,
+//                 headers: { "Content-Type": "multipart/form-data" },
+//             }).then(function (res) {
+//                 const data = res.data;
+//                 return data;
+//             }).catch(function (response) {
+//                 console.log(response);
+//             });
+//         } catch (error) {
+//             console.log(error);
+//             return rejectWithValue(error.message);
+//         }
+//     }
+// );
+
+
+export const createProperty = createAsyncThunk(
+    "properties/createProperty",
+    async ({ propertyData, images }, thunkAPI) => {
+        const { rejectWithValue } = thunkAPI;
         try {
-            axios({
-                method: "post",
-                url: "http://localhost:4000/auth/property/",
-                data: formData,
-                headers: { "Content-Type": "multipart/form-data" },
-            }).then(function (res) {
-                const data = res.data;
-                return data;
-            }).catch(function (response) {
-                console.log(response);
+            const formData = new FormData();
+
+            Object.keys(propertyData).forEach((key) => {
+                formData.append(key, propertyData[key]);
             });
+
+            images.forEach((image, index) => {
+                formData.append(`photo-${index}`, image);
+            });
+
+            const response = await fetch("http://localhost:4000/auth/property/", {
+                method: "POST",
+                body: formData,
+            });
+
+            const data = await response.json();
+            return data;
         } catch (error) {
-            console.log(error);
             return rejectWithValue(error.message);
         }
     }
 );
-
 
 export const fetchProperties = createAsyncThunk(
     "properties/fetchProperties",
