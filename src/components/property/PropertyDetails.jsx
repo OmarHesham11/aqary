@@ -17,7 +17,7 @@ import ApartmentIcon from '@mui/icons-material/Apartment';
 import PersonIcon from '@mui/icons-material/Person';
 import EmailIcon from '@mui/icons-material/Email';
 import Carousel from 'react-bootstrap/Carousel';
-
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 const PropertyDetails = () => {
   const [open, setOpen] = React.useState(false);
   const handleClose = () => {
@@ -167,6 +167,10 @@ const PropertyDetails = () => {
   </Button>
 </div>
 
+
+<div onClick={()=>{window.scrollTo(0,0)}}  className="top-arrow" style={{borderRadius: "50%", position: "fixed", bottom: "30px", right: "30px" , backgroundColor: "black", padding: "10px", color: "white", cursor: "pointer"}}>
+    <ArrowUpwardIcon />
+</div>
 
 
 

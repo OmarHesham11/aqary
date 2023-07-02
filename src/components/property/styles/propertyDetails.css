@@ -32,3 +32,14 @@
     margin-right: 30px;
 }
 
+.top-arrow
+{
+    border-radius: 50%;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: black;
+    padding: 10px; 
+    color: white;
+    cursor: pointer;
+}
