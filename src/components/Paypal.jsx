@@ -4,20 +4,68 @@ import {
     PayPalButtons,
     usePayPalScriptReducer,
 } from "@paypal/react-paypal-js";
+import axios from "axios";
 
 const currency = "USD";
 const style = { layout: "vertical" };
 
-const ButtonWrapper = ({
+const createOrder = async (data, actions, userId, amount, description) => {
+    const orderID = await axios.post("http://localhost:4000/checkout/create-paypal-order", {
+      cart: [
+        {
+          sku: description,
+          quantity: 1,
+          amount: {
+            currency_code: "USD",
+            value: amount,
+          },
+        },
+      ],
+      userId: userId,
+    }).then((response) => {
+      return response.data.order.id;
+    }).catch((error) => {
+      console.error(error);
+    })
+    return orderID;
+  }
+  
+  const onApprove = ({orderID}, userId, amount, currency, description, setTransactionData, setIsSubmitting, setSubmitSuccess) => {
+    return axios.post("http://localhost:4000/checkout/capture-paypal-order", {
+      orderID,
+      userId,
+      description,
+      amount,
+      currency
+    }, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then((response) => {
+      const orderData = response.data;
+    //   console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+      const transaction = orderData.purchase_units[0].payments.captures[0];
+      setTransactionData(orderData);
+      setIsSubmitting(true);
+      setSubmitSuccess(true);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  }
+
+  const ButtonWrapper = ({
     currency,
     showSpinner,
     setIsSubmitting,
     setSubmitSuccess,
     setTransactionData,
+    userId,
+    amount,
+    description,
 }) => {
     const [{ options, isPending }, dispatch] = usePayPalScriptReducer();
-
-  
 
     useEffect(() => {
         dispatch({
@@ -38,35 +86,19 @@ const ButtonWrapper = ({
                 forceReRender={[25.2, "USD", style]}
                 fundingSource={undefined}
                 createOrder={(data, actions) => {
-                    return actions.order
-                        .create({
-                            purchase_units: [
-                                {
-                                    amount: {
-                                        currency_code: "USD",
-                                        value: 25.2,
-                                    },
-                                },
-                            ],
-                        })
-                        .then((orderId) => {
-                            return orderId;
-                        });
-                }}
-                onApprove={function (data, actions) {
-                    return actions.order.capture().then(function (details) {
-                        setTransactionData(details);
-                        setIsSubmitting(true);
-                        setSubmitSuccess(true);
-                    });
+                    return createOrder(data, actions, userId, amount, description)
+                      .then((orderId) => {
+                        return orderId;
+                      });
+                  }}
+                onApprove={(data, actions) => {
+                    return onApprove(data, userId, amount, currency, description, setTransactionData, setIsSubmitting, setSubmitSuccess);
                 }}
                 onCancel={() => {
                     console.log("cancelled");
                 }}
-                onError={function (data, actions) {
-                    return actions.order.capture().then(function () {
-                        console.log("An Error occured with your payment ");
-                    });
+                onError={(data, actions) => {
+                    console.log("An Error occured with your payment ");
                 }}
             />
         </>
@@ -74,6 +106,9 @@ const ButtonWrapper = ({
 };
 
 function Paypal({
+    userId,
+    amount,
+    description,
     isSubmitting,
     setIsSubmitting,
     submitSuccess,
@@ -99,6 +134,9 @@ function Paypal({
                     setIsSubmitting={setIsSubmitting}
                     setSubmitSuccess={setSubmitSuccess}
                     setTransactionData={setTransactionData}
+                    userId={userId}
+                    amount={amount}
+                    description={description}
                 />
             </PayPalScriptProvider>
         </div>

@@ -1,4 +1,4 @@
-import Link from 'react-router-dom';
+import Link, { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Box, ButtonBase } from '@mui/material';
 
@@ -75,7 +75,9 @@ export const SideNavItem = (props) => {
             })
           }}
         >
-          {title}
+          <NavLink to={path}>
+            {title}
+          </NavLink>
         </Box>
       </ButtonBase>
     </li>
