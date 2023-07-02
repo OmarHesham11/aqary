@@ -2,10 +2,12 @@ import { useMemo, useState } from 'react';
 import { Chart, Series } from 'devextreme-react/chart';
 import Loading from '../Loading';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Graph() {
   const [loading, setLoading] = useState(true);
   const [ data, setData ] = useState([]);
+  const navigate = useNavigate();
 
   useMemo (() => {
     const BACKEND_URL = 'http://localhost:4000';
@@ -15,6 +17,7 @@ function Graph() {
         setLoading(false);
       }).catch((err) => {
         console.error(err);
+        navigate('/');
       });
   }, []);
 
