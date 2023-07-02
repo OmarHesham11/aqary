@@ -79,7 +79,10 @@ function PropertyCreate() {
                 subscribe: propertyData.subscribe,
             };
 
-            const response = await dispatch(createProperty({ propertyData: formData, images: image }));
+            image.forEach((ig) => {
+                formData.append('image', ig);
+            });
+            const response = await dispatch(createProperty(formData));
             // Handle the response here if needed
             console.log(response);
         } catch (error) {
