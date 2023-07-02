@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchCities = createAsyncThunk('cities/fetchCities', async (_, thunkAPI) => {
     try {
-        const response = await fetch('http://localhost:4000/city/getCities');
+        const response = await fetch('https://aqary-eg.onrender.com/city/getCities');
         const data = await response.json();
         return data;
     } catch (error) {

@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+
+
 const initialState = {
     properties: [],
     loading: false,
@@ -7,33 +9,25 @@ const initialState = {
     searchResults: [],
 };
 
-export const createProperty = createAsyncThunk(
-    "properties/CreateProperty",
-    async (formData, thunkAPI) => {
-        const { rejectWithValue } = thunkAPI;
-        console.log(formData.get('image'));
-
-        try {
-            const response = await axios({
-                method: "post",
-                url: "http://localhost:4000/auth/property/",
-                data: formData,
-                headers: { "Content-Type": "multipart/form-data" },
-            });
-
-            if (response.status === 200) {
-                const data = response.data;
-                return data;
-            } else {
-                console.log(response);
-                return rejectWithValue(response.statusText);
-            }
-        } catch (error) {
-            console.log(error);
-            return rejectWithValue(error.message);
+export const createProperty = createAsyncThunk("properties/CreateProperty", async (formData, thunkAPI) => {
+    const { rejectWithValue } = thunkAPI;
+    try {
+        const response = await axios({
+            method: "post",
+            url: "https://aqary-eg.onrender.com/auth/property/",
+            data: formData,
+            headers: { "Content-Type": "multipart/form-data" },
+        });
+        if (response.status === 200) {
+            const data = response.data;
+            return data;
+        } else {
+            return rejectWithValue(response.statusText);
         }
+    } catch (error) {
+        return rejectWithValue(error.message);
     }
-);
+});
 
 export const fetchProperties = createAsyncThunk("properties/fetchProperties", async (currentPage, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
@@ -44,8 +38,7 @@ export const fetchProperties = createAsyncThunk("properties/fetchProperties", as
     } catch (error) {
         return rejectWithValue(error.message);
     }
-}
-);
+});
 
 export const fetchProperty = createAsyncThunk("properties/fetchProperty", async (propertyId, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
@@ -56,8 +49,7 @@ export const fetchProperty = createAsyncThunk("properties/fetchProperty", async 
     } catch (error) {
         return rejectWithValue(error.message);
     }
-}
-);
+});
 
 export const searchProperties = createAsyncThunk("properties/searchProperties", async (searchQuery, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
@@ -68,8 +60,7 @@ export const searchProperties = createAsyncThunk("properties/searchProperties", 
     } catch (error) {
         return rejectWithValue(error.message);
     }
-}
-);
+});
 
 const propertiesSlice = createSlice({
     name: "properties",
@@ -115,5 +106,7 @@ const propertiesSlice = createSlice({
             });
     },
 });
+
+
 
 export default propertiesSlice.reducer;
