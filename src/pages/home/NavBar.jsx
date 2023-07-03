@@ -55,14 +55,12 @@ function NavBar() {
 
                             {token &&
                                 <li className="nav-item">
-                                    <Form action='/postProperty' method='post'>
+                                    <Form action='/logout' method='post'>
                                         <button className='nav-link'>Logout</button>
                                     </Form>
                                 </li>
                             }
-
-
-
+                            
                             {userData && userData.firstName &&
                                 <li className="nav-item">
                                     <a className="nav-link disabled" style={{ color: 'orange' }}>{`Ahlan ${userData.firstName}!`}</a>
