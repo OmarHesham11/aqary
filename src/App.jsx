@@ -4,6 +4,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import Home from './pages/home/Home';
 import LoginPage, {action as loginAction} from './pages/authentication/LoginPage';
+import {action as logoutAction } from './pages/authentication/Logout';
 import RegisterPage from './pages/authentication/RegisterPage';
 import PropertiesPage from './pages/property/propertiesPage';
 import PropertyDetails from './pages/property/propertyDetailsPage';
@@ -28,6 +29,7 @@ const router = createBrowserRouter([
       { path: 'properties', element: <PropertiesPage /> },
       { path: 'property/:propertyId', element: <PropertyDetails /> },
       { path: 'postProperty', element: <PropertyCreate /> },
+      { path: 'logout', action: logoutAction }
     ],
   },
   {

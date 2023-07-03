@@ -1,7 +1,7 @@
 import '../style.css';
 import Searching from '../../components/property/Searching';
 
-import { NavLink } from 'react-router-dom';
+import { NavLink, Form } from 'react-router-dom';
 
 
 
@@ -38,6 +38,11 @@ function NavBar() {
                             </li>
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="/auth/register">Register</NavLink>
+                            </li>
+                            <li className="nav-item">
+                                <Form action='/logout' method='post'>
+                                    <button className='nav-link'>Logout</button>
+                                </Form>
                             </li>
 
                         </ul>
