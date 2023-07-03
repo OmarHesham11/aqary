@@ -4,7 +4,9 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import Home from './pages/home/Home';
 import LoginPage, {action as loginAction} from './pages/authentication/LoginPage';
-import RegisterPage from './pages/authentication/RegisterPage';
+import {action as logoutAction } from './pages/authentication/Logout';
+import { checkAuthLoader, tokenLoader } from './util/auth';
+import RegisterPage, {action as registerAction} from './pages/authentication/RegisterPage';
 import PropertiesPage from './pages/property/propertiesPage';
 import PropertyDetails from './pages/property/propertyDetailsPage';
 import Admin from './pages/Admin';
@@ -23,13 +25,15 @@ const router = createBrowserRouter([
     path: '/',
     element: <Main />,
     id: 'root',
+    loader: tokenLoader,
     children: [
       { index: true, element: <Home /> },
       { path: 'auth/login', element: <LoginPage />, action: loginAction },
-      { path: 'auth/register', element: <RegisterPage /> },
+      { path: 'auth/register', element: <RegisterPage />, action: registerAction },
       { path: 'properties', element: <PropertiesPage /> },
       { path: 'property/:propertyId', element: <PropertyDetails /> },
       { path: 'postProperty', element: <PropertyCreate /> },
+      { path: 'logout', action: logoutAction }
     ],
   },
   {
