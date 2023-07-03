@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Paypal from "./Paypal";
 import axios from "axios";
 
-function Cart({ amount, description }) {
+function Cart({ amount, formData }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [transactionsData, setTransactionData] = useState({});
@@ -10,16 +10,6 @@ function Cart({ amount, description }) {
     console.log("transactionsData: ", transactionsData);
   }, [transactionsData])
 
-  // const sendTransaction = () => {
-  //   console.log(("heelo world"))
-  //   axios.post('http://localhost:4000/checkout/create-paypal-order', {transactionsData})
-  //   .then ((res) => {
-  //     alert("Transaction successfully sent");
-  //   })
-  //   .catch (err => {
-  //     console.error(err.message);
-  //   });
-  // };
 
   useEffect(() => {
     if (submitSuccess) {
@@ -27,7 +17,7 @@ function Cart({ amount, description }) {
       // sendTransaction();
     }
   }, [submitSuccess]);
-
+  console.log(formData)
   return (
 
     <div className="cart container mx-auto">
@@ -39,7 +29,7 @@ function Cart({ amount, description }) {
               <Paypal
                 userId={"mohamedadel"}
                 amount={amount}
-                description={description}
+                formData={formData}
                 isSubmitting={isSubmitting}
                 setIsSubmitting={setIsSubmitting}
                 submitSuccess={submitSuccess}

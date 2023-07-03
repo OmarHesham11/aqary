@@ -35,24 +35,17 @@ const onApprove = (
   userId,
   amount,
   currency,
-  description,
+  formData,
   setTransactionData,
   setIsSubmitting,
   setSubmitSuccess,
   onSuccess
 ) => {
-  return axios.post("http://localhost:4000/checkout/capture-paypal-order", {
-    orderID,
-    userId,
-    description,
-    amount,
-    currency
-  }, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-
-  })
+  formData.set('userId', userId);
+  formData.set('orderID', orderID);
+  formData.set('amount', amount);
+  formData.set('currency', currency);
+  return axios.post("http://localhost:4000/auth/property/", formData)
     .then((response) => {
       const orderData = response.data;
       //   console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
@@ -75,7 +68,7 @@ const ButtonWrapper = ({
   setTransactionData,
   userId,
   amount,
-  description,
+  formData,
   onSuccess,
 }) => {
   const [{ options, isPending }, dispatch] = usePayPalScriptReducer();
@@ -99,13 +92,13 @@ const ButtonWrapper = ({
         forceReRender={[25.2, "USD", style]}
         fundingSource={undefined}
         createOrder={(data, actions) => {
-          return createOrder(data, actions, userId, amount, description)
+          return createOrder(data, actions, userId, amount, formData)
             .then((orderId) => {
               return orderId;
             });
         }}
         onApprove={(data, actions) => {
-          return onApprove(data, userId, amount, currency, description, setTransactionData, setIsSubmitting, setSubmitSuccess);
+          return onApprove(data, userId, amount, currency, formData, setTransactionData, setIsSubmitting, setSubmitSuccess);
         }}
         onCancel={() => {
           console.log("cancelled");
@@ -121,7 +114,7 @@ const ButtonWrapper = ({
 function Paypal({
   userId,
   amount,
-  description,
+  formData,
   isSubmitting,
   setIsSubmitting,
   submitSuccess,
@@ -150,7 +143,7 @@ function Paypal({
           setTransactionData={setTransactionData}
           userId={userId}
           amount={amount}
-          description={description}
+          formData={formData}
         />
       </PayPalScriptProvider>
     </div>
