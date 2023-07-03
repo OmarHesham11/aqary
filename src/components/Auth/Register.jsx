@@ -22,6 +22,7 @@ const RegisterForm = () => {
     const navigation = useNavigation();
     const isSubmitting = navigation.state === 'submitting';
 
+
     const togglePasswordVisibility = (event) => {
       event.preventDefault();
       setPasswordIsVisible((prevState) => !prevState);
@@ -36,7 +37,9 @@ const RegisterForm = () => {
   const { values, errors, touched, isValid, handleChange, handleBlur} = useFormik({
     initialValues: {
       firstName: '',
-      lastName: '',  
+      lastName: '',
+      phoneNumber: '',
+      birthdate: '',  
       email: '',
       password: '',
       passwordConfirm: '',
@@ -47,25 +50,46 @@ const RegisterForm = () => {
 
   return (
     <section className={classes.auth}>
-      <h1>Register</h1>
-      {data && data.error && <p className={classes.error}>{data.error.message}</p>}
+      <h1>Create an account</h1>
+      {data && data.error && (
+          <div>
+
+            {data.error.message.split('.').map((err) => (
+              <p className={classes.error} key={err}>{err}</p>
+            ))}
+          </div>
+          
+      )}
+
       <Form method='post'>
 
         <div className={classes.control}>
           <label htmlFor="firstName">First Name</label>
-          <input value={values.firstName} onChange={handleChange} onBlur={handleBlur}  id="firstName" name="firstName" required className={errors.firstName && touched.firstName ? classes['input-error'] : ''} />
+          <input value={values.firstName} onChange={handleChange} onBlur={handleBlur}  id="firstName" name="firstName" required className={errors.firstName && touched.firstName ? classes['input-error'] : ''} placeholder='Enter your first name'/>
           {errors.firstName && touched.firstName && <p className={classes.error}>{errors.firstName}</p>}
         </div>
 
         <div className={classes.control}>
           <label htmlFor="lastName">Last Name</label>
-          <input value={values.lastName} onChange={handleChange} onBlur={handleBlur}  id="lastName" name="lastName" required className={errors.lastName && touched.lastName ? classes['input-error'] : ''} />
+          <input value={values.lastName} onChange={handleChange} onBlur={handleBlur}  id="lastName" name="lastName" required className={errors.lastName && touched.lastName ? classes['input-error'] : ''} placeholder='Enter your last name'/>
           {errors.lastName && touched.lastName && <p className={classes.error}>{errors.lastName}</p>}
         </div>
 
         <div className={classes.control}>
+          <label htmlFor="phoneNumber">Phone number</label>
+          <input value={values.phoneNumber} onChange={handleChange} onBlur={handleBlur}  id="phoneNumber" name="phoneNumber" required className={errors.phoneNumber && touched.phoneNumber ? classes['input-error'] : ''} placeholder='Enter your phone number'/>
+          {errors.phoneNumber && touched.phoneNumber && <p className={classes.error}>{errors.phoneNumber}</p>}
+        </div>
+
+        <div className={classes.control}>
+          <label htmlFor="birthdate">Birthdate</label>
+          <input value={values.birthdate} onChange={handleChange} onBlur={handleBlur} type='date'  id="birthdate" name="birthdate" required className={errors.birthdate && touched.birthdate ? classes['input-error'] : ''} placeholder='Enter your birthdate'/>
+          {errors.birthdate && touched.birthdate && <p className={classes.error}>{errors.birthdate}</p>}
+        </div>
+
+        <div className={classes.control}>
           <label htmlFor="email">Email</label>
-          <input value={values.email} onChange={handleChange} onBlur={handleBlur} type="email" id="email" name="email" required className={errors.email && touched.email ? classes['input-error'] : ''} />
+          <input value={values.email} onChange={handleChange} onBlur={handleBlur} type="email" id="email" name="email" required className={errors.email && touched.email ? classes['input-error'] : ''} placeholder='Enter your email'/>
           {errors.email && touched.email && <p className={classes.error}>{errors.email}</p>}
         </div>
 
@@ -82,6 +106,7 @@ const RegisterForm = () => {
               name="password"
               required
               className={errors.password && touched.password ? classes['input-error'] : ''}
+              placeholder='Enter your password'
             />
             <button className={classes.showIcon} onClick={togglePasswordVisibility}>
               {passwordIsVisible ? <FontAwesomeIcon icon={faEye} /> : <FontAwesomeIcon icon={faEyeSlash} />}
@@ -105,6 +130,7 @@ const RegisterForm = () => {
               name="passwordConfirm"
               required
               className={errors.passwordConfirm && touched.passwordConfirm ? classes['input-error'] : ''}
+              placeholder='Enter your confirm password'
             />
             <button className={classes.showIcon} onClick={togglePasswordConfirmVisibility}>
               {passwordConfirmIsVisible ? <FontAwesomeIcon icon={faEye} /> : <FontAwesomeIcon icon={faEyeSlash} />}
@@ -117,7 +143,7 @@ const RegisterForm = () => {
 
         <div className={classes.actions}>
           <button disabled={isSubmitting || !isValid}>
-            {isSubmitting ? 'Loading...' : 'Register'}
+            {isSubmitting ? 'Loading...' : 'REGISTER'}
           </button>
         </div>
       </Form>

@@ -3,17 +3,17 @@ import './App.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import Home from './pages/home/Home';
-import LoginPage, {action as loginAction} from './pages/authentication/LoginPage';
-import {action as logoutAction } from './pages/authentication/Logout';
+import LoginPage, { action as loginAction } from './pages/authentication/LoginPage';
+import { action as logoutAction } from './pages/authentication/Logout';
 import { checkAuthLoader, tokenLoader } from './util/auth';
-import RegisterPage, {action as registerAction} from './pages/authentication/RegisterPage';
+import RegisterPage, { action as registerAction } from './pages/authentication/RegisterPage';
 import PropertiesPage from './pages/property/propertiesPage';
 import PropertyDetails from './pages/property/propertyDetailsPage';
 import Admin from './pages/Admin';
 import Dashboard from './pages/admin/Dashboard';
 import TableOfProperties from './pages/admin/TableOfProperties';
 import PropertyCreate from './components/property/PropertyCreate';
-
+import NotFound from './pages/NotFound/NotFound'
 import Main from './pages/Main';
 import TableOfTransactions from './pages/admin/TableOfTransactions';
 
@@ -33,7 +33,8 @@ const router = createBrowserRouter([
       { path: 'properties', element: <PropertiesPage /> },
       { path: 'property/:propertyId', element: <PropertyDetails /> },
       { path: 'postProperty', element: <PropertyCreate /> },
-      { path: 'logout', action: logoutAction }
+      { path: 'logout', action: logoutAction },
+      { path: '*', element: <NotFound /> }
     ],
   },
   {
@@ -43,7 +44,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Dashboard /> },
       { path: 'properties', element: <TableOfProperties /> },
-      { path: 'transactions', element: <TableOfTransactions />},
+      { path: 'transactions', element: <TableOfTransactions /> },
     ],
   },
 ]);
@@ -76,13 +77,13 @@ export default function App() {
 
     // </>
 
-//   )
-// };
+    //   )
+    // };
 
-//     //       </Route>
-//     //     </Routes>
-//       </BrowserRouter>
+    //     //       </Route>
+    //     //     </Routes>
+    //       </BrowserRouter>
 
-//     </>
+    //     </>
   );
 }
