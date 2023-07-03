@@ -17,7 +17,7 @@ const valueOfAdd = {
 
 function PropertyCreate() {
 
-    const [ myFormData, setMyFormData ] = useState({});
+    const [myFormData, setMyFormData] = useState({});
     const dispatch = useDispatch();
 
     const cities = useSelector((state) => state.cities.cities);
@@ -28,13 +28,16 @@ function PropertyCreate() {
 
     //Handling payment
     const [showPopup, setShowPopup] = useState(false);
+    const [propertyCreated, setPropertyCreated] = useState(false);
+    const [popupFinished, setPopupFinished] = useState(false);
+
 
 
     const [formErrors, setFormErrors] = useState({});
 
     const [image, setImage] = useState([])
     const [propertyData, setPropertyData] = useState({
-        userId: '649db4ae75fc1c6db6d97554',
+        userId: '',
         address: '',
         city: '',
         title: '',
@@ -129,6 +132,9 @@ function PropertyCreate() {
             const response = await dispatch(createProperty(formData));
             console.log('submitted', response);
             if (response.error) { setFormErrors(error) }
+            else {
+                setPropertyCreated(true); // Set the success state to true  
+            }
         } catch (error) {
             console.log(error);
         }
@@ -140,8 +146,13 @@ function PropertyCreate() {
         setImage([]);
     }, [dispatch]);
 
-    //handle payment 
 
+    useEffect(() => {
+        // Close the modal when propertyCreated becomes true
+        if (propertyCreated && popupFinished) {
+            handleClose();
+        }
+    }, [propertyCreated, popupFinished]);
 
 
 
@@ -155,6 +166,11 @@ function PropertyCreate() {
                 <form className="property-form" onSubmit={handelSubmit} encType="multipart/form-data">
 
                     {err && <p className="text-danger">{err}</p>}
+                    {propertyCreated && (
+                        <div className="success-message" style={{ color: 'green' }}>
+                            Property created successfully!
+                        </div>
+                    )}
 
                     <div className="row">
                         <div className='col'>
@@ -321,7 +337,7 @@ function PropertyCreate() {
             <Modal show={showPopup} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Create Popup</Modal.Title>
-                </Modal.Header>
+                </Modal.Header >
                 <Modal.Body>
                     <Cart amount={valueOfAdd[propertyData?.subscribe]} formData={myFormData} />
                 </Modal.Body>

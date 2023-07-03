@@ -45,6 +45,7 @@ const router = createBrowserRouter([
       { index: true, element: <Dashboard /> },
       { path: 'properties', element: <TableOfProperties /> },
       { path: 'transactions', element: <TableOfTransactions /> },
+      { path: '*', element: <NotFound /> }
     ],
   },
 ]);
