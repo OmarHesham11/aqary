@@ -29,23 +29,24 @@ function TableOfProperties() {
     // getProperties();
   };
 
-  const getProperties = useMemo(() => {
-    return () => {
-      axios.get('http://localhost:4000/backOffice/dashboard/properties', {
-        params: { ...pagination, ...filters }
-      })
-      .then(res => {
-        console.log(res.data.data.length)
-        setProperties(res.data.data);
-        setPagination(prevPagination => ({ ...prevPagination, total: res.data.pagination.total, totalPages: res.data.pagination.totalPages }));
-        setLoading(false);
-      })
-      .catch(error => {
-        console.log(error);
-        setLoading(false);
-      });
-    };
-    }, [pagination, filters]);
+  const getProperties = () => {
+    axios.get('https://aqary-eg.onrender.com/backOffice/dashboard/properties', {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      },
+      params: { ...pagination, ...filters },
+    })
+    .then(res => {
+      setProperties(res.data.data);
+      setPagination(prevPagination => ({ ...prevPagination, total: res.data.pagination.total, totalPages: res.data.pagination.totalPages }));
+      setLoading(false);
+    })
+    .catch(error => {
+      console.log(error);
+      Swal.fire('Error', error.message, 'error');
+      setLoading(false);
+    });
+  };
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -59,7 +60,11 @@ function TableOfProperties() {
   }, [filters, pagination.page, pagination.pageSize]);
 
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:4000/backOffice/property/${id}`)
+    axios.delete(`https://aqary-eg.onrender.com/backOffice/property/${id}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    })
       .then(res => {
         Swal.fire('Deleted Success', 'property deletect succusflly', 'success');
         setProperties(properties.filter(property => property._id !== id));

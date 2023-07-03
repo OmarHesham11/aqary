@@ -12,8 +12,12 @@ function StatisticsBar() {
   const [statistics, setStatistics] = useState(null);
 
   const fetchStatistics = async () => {
-    const BACKEND_URL = 'http://localhost:4000';
-    const res = await axios.get(`${BACKEND_URL}/backOffice/dashboard/statistics`);
+    const BACKEND_URL = 'https://aqary-eg.onrender.com';
+    const res = await axios.get(`${BACKEND_URL}/backOffice/dashboard/statistics`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    });
     console.log(res.data)
     return res.data;
   };

@@ -17,7 +17,7 @@ const valueOfAdd = {
 
 function PropertyCreate() {
 
-
+    const [ myFormData, setMyFormData ] = useState({});
     const dispatch = useDispatch();
 
     const cities = useSelector((state) => state.cities.cities);
@@ -109,22 +109,23 @@ function PropertyCreate() {
             }
 
             const formData = new FormData();
-            formData.append('address', propertyData.address);
-            formData.append('city', propertyData.city);
-            formData.append('title', propertyData.title);
-            formData.append('level', propertyData.level);
-            formData.append('rooms', propertyData.rooms);
-            formData.append('baths', propertyData.baths);
-            formData.append('area', propertyData.area);
-            formData.append('description', propertyData.description);
-            formData.append('price', propertyData.price);
-            formData.append('contractPhone', propertyData.contractPhone);
-            formData.append('paymentOption', propertyData.paymentOption);
-            formData.append('subscribe', propertyData.subscribe);
+            formData.append('address', propertyData?.address);
+            formData.append('city', propertyData?.city);
+            formData.append('title', propertyData?.title);
+            formData.append('level', propertyData?.level);
+            formData.append('rooms', propertyData?.rooms);
+            formData.append('baths', propertyData?.baths);
+            formData.append('area', propertyData?.area);
+            formData.append('description', propertyData?.description);
+            formData.append('price', propertyData?.price);
+            formData.append('contractPhone', propertyData?.contractPhone);
+            formData.append('paymentOption', propertyData?.paymentOption);
+            formData.append('subscribe', propertyData?.subscribe);
 
             image.forEach((ig) => {
                 formData.append('image', ig);
             });
+            setMyFormData(formData);
             const response = await dispatch(createProperty(formData));
             console.log('submitted', response);
             if (response.error) { setFormErrors(error) }
@@ -169,9 +170,9 @@ function PropertyCreate() {
                         <label htmlFor="Title"> <h3>Title</h3> </label>
                         <select name="title" id="Title" className="form-control" onChange={handleInputChange}>
                             <option value="">Select a type</option>
-                            <option value="villa" selected={propertyData.title === 'villa'}>Villa</option>
-                            <option value="shale" selected={propertyData.title === 'shale'}>Shale</option>
-                            <option value="apartment" selected={propertyData.title === 'apartment'}>Apartment</option>
+                            <option value="villa" selected={propertyData?.title === 'villa'}>Villa</option>
+                            <option value="shale" selected={propertyData?.title === 'shale'}>Shale</option>
+                            <option value="apartment" selected={propertyData?.title === 'apartment'}>Apartment</option>
                         </select>
                         {formErrors?.title && <span className="text-danger">{formErrors?.title}</span>}
                     </div>
@@ -179,7 +180,7 @@ function PropertyCreate() {
                     <div className="form-group">
                         <label htmlFor="Address"> <h3>Address</h3> </label>
                         <input type="text" name="address" id="Address" className="form-control" onChange={handleInputChange} />
-                        {formErrors.address && <span className="text-danger">{formErrors.address}</span>}
+                        {formErrors?.address && <span className="text-danger">{formErrors?.address}</span>}
                     </div>
 
                     <div className="form-group">
@@ -190,14 +191,14 @@ function PropertyCreate() {
                         ) : error ? (
                             <p>Error loading cities: {error}</p>
                         ) : (
-                            <select name="city" id="city" className="form-control" onChange={handleCityChange} value={propertyData.city}>
+                            <select name="city" id="city" className="form-control" onChange={handleCityChange} value={propertyData?.city}>
                                 <option value="">Select a city</option>
                                 {cities.map((city) => (
                                     <option key={city._id} value={city.name}> {city.name} </option>
                                 ))}
                             </select>
                         )}
-                        {formErrors.city && <span className="text-danger">{formErrors.city}</span>}
+                        {formErrors?.city && <span className="text-danger">{formErrors?.city}</span>}
                     </div>
 
                     <div className="row">
@@ -205,53 +206,53 @@ function PropertyCreate() {
                             <label htmlFor="level"> <h3>Levels</h3> </label>
                             <input type="number" name="level" id="level" className="form-control" onChange={handleInputChange} />
                         </div>
-                        {formErrors.level && <span className="text-danger">{formErrors.level}</span>}
+                        {formErrors?.level && <span className="text-danger">{formErrors?.level}</span>}
 
                         <div className="form-group col">
                             <label htmlFor="area"> <h3>area</h3> </label>
                             <input type="number" name="area" id="area" className="form-control" onChange={handleInputChange} />
                         </div>
-                        {formErrors.area && <span className="text-danger">{formErrors.area}</span>}
+                        {formErrors?.area && <span className="text-danger">{formErrors?.area}</span>}
 
                         <div className="form-group col">
                             <label htmlFor="rooms"> <h3>Rooms</h3> </label>
                             <input type="number" name="rooms" id="rooms" className="form-control" onChange={handleInputChange} />
                         </div>
-                        {formErrors.rooms && <span className="text-danger">{formErrors.rooms}</span>}
+                        {formErrors?.rooms && <span className="text-danger">{formErrors?.rooms}</span>}
 
                         <div className="form-group col">
                             <label htmlFor="baths"> <h3>Baths</h3> </label>
                             <input type="number" name="baths" id="baths" className="form-control" onChange={handleInputChange} />
                         </div>
-                        {formErrors.baths && <span className="text-danger">{formErrors.baths}</span>}
+                        {formErrors?.baths && <span className="text-danger">{formErrors?.baths}</span>}
                     </div>
 
                     <div className="row">
                         <div className="form-group col">
                             <label htmlFor="price"> <h3>Price</h3> </label>
                             <input type="number" name="price" id="price" className="form-control" onChange={handleInputChange} />
-                            {formErrors.price && <span className="text-danger">{formErrors.price}</span>}
+                            {formErrors?.price && <span className="text-danger">{formErrors?.price}</span>}
                         </div>
 
                         <div className="form-group col">
                             <label htmlFor="contractPhone"> <h3>Contract Phone</h3> </label>
                             <input type="text" name="contractPhone" id="contractPhone" className="form-control" onChange={handleInputChange} />
-                            {formErrors.contractPhone && <span className="text-danger">{formErrors.contractPhone}</span>}
+                            {formErrors?.contractPhone && <span className="text-danger">{formErrors?.contractPhone}</span>}
                         </div>
                     </div>
                     <div className="form-group">
                         <h3>Payment Option:</h3>
                         <div className="radio-group">
                             <div className="form-check">
-                                <input type="radio" name="paymentOption" value="cash" checked={propertyData.paymentOption === 'cash'} onChange={handleInputChange} className="form-check-input" />
+                                <input type="radio" name="paymentOption" value="cash" checked={propertyData?.paymentOption === 'cash'} onChange={handleInputChange} className="form-check-input" />
                                 <label className="form-check-label">Cash</label>
                             </div>
                             <div className="form-check">
-                                <input type="radio" name="paymentOption" value="master-card" checked={propertyData.paymentOption === 'master-card'} onChange={handleInputChange} className="form-check-input" />
+                                <input type="radio" name="paymentOption" value="master-card" checked={propertyData?.paymentOption === 'master-card'} onChange={handleInputChange} className="form-check-input" />
                                 <label className="form-check-label">Master Card</label>
                             </div>
                         </div>
-                        {formErrors.paymentOption && <span className="text-danger">{formErrors.paymentOption}</span>}
+                        {formErrors?.paymentOption && <span className="text-danger">{formErrors?.paymentOption}</span>}
                     </div>
 
                     <div className="form-group">
@@ -259,23 +260,23 @@ function PropertyCreate() {
                         <div className="radio-group">
 
                             <div className="form-check">
-                                <input type="radio" name="subscribe" value="PROPERTY_HOUR" defaultChecked checked={propertyData.subscribe === 'PROPERTY_HOUR'} onChange={handleInputChange} className="form-check-input" />
+                                <input type="radio" name="subscribe" value="PROPERTY_HOUR" defaultChecked checked={propertyData?.subscribe === 'PROPERTY_HOUR'} onChange={handleInputChange} className="form-check-input" />
                                 <label className="form-check-label">Hour (1$)</label>
                             </div>
                             <div className="form-check">
-                                <input type="radio" name="subscribe" value="PROPERTY_DAY" checked={propertyData.subscribe === 'PROPERTY_DAY'} onChange={handleInputChange} className="form-check-input" />
+                                <input type="radio" name="subscribe" value="PROPERTY_DAY" checked={propertyData?.subscribe === 'PROPERTY_DAY'} onChange={handleInputChange} className="form-check-input" />
                                 <label className="form-check-label">Day (2$)</label>
                             </div>
                             <div className="form-check">
-                                <input type="radio" name="subscribe" value="PROPERTY_WEEK" checked={propertyData.subscribe === 'PROPERTY_WEEK'} onChange={handleInputChange} className="form-check-input" />
+                                <input type="radio" name="subscribe" value="PROPERTY_WEEK" checked={propertyData?.subscribe === 'PROPERTY_WEEK'} onChange={handleInputChange} className="form-check-input" />
                                 <label className="form-check-label">Week (5$)</label>
                             </div>
                             <div className="form-check">
-                                <input type="radio" name="subscribe" value="PROPERTY_MONTH" checked={propertyData.subscribe === 'PROPERTY_MONTH'} onChange={handleInputChange} className="form-check-input" />
+                                <input type="radio" name="subscribe" value="PROPERTY_MONTH" checked={propertyData?.subscribe === 'PROPERTY_MONTH'} onChange={handleInputChange} className="form-check-input" />
                                 <label className="form-check-label">Month (10$)</label>
                             </div>
                         </div>
-                        {formErrors.subscribe && <span className="text-danger">{formErrors.subscribe}</span>}
+                        {formErrors?.subscribe && <span className="text-danger">{formErrors?.subscribe}</span>}
                     </div>
 
                     <div className="form-group">
@@ -301,7 +302,7 @@ function PropertyCreate() {
                                 <p className="text-danger">Only PNG, JPEG, and JPG files are allowed.</p>
                             )}
                         </div>
-                        {formErrors.image && <span className="text-danger">{formErrors.image}</span>}
+                        {formErrors?.image && <span className="text-danger">{formErrors?.image}</span>}
                     </div>
 
 
@@ -310,7 +311,7 @@ function PropertyCreate() {
                             <h3>Description</h3>
                         </label>
                         <textarea name="description" id="description" className="form-control" rows="5" onChange={handleInputChange}></textarea>
-                        {formErrors.description && <span className="text-danger">{formErrors.description}</span>}
+                        {formErrors?.description && <span className="text-danger">{formErrors?.description}</span>}
                     </div>
 
                 </form>
@@ -322,7 +323,7 @@ function PropertyCreate() {
                     <Modal.Title>Create Popup</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Cart amount={valueOfAdd[propertyData.subscribe]} description={propertyData.subscribe} />
+                    <Cart amount={valueOfAdd[propertyData?.subscribe]} formData={myFormData} />
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>

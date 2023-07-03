@@ -1,5 +1,5 @@
 import { redirect } from "react-router-dom";
-import RegisterForm from "../../components/Auth/register";
+import RegisterForm from "../../components/Auth/Register";
 
 const RegisterPage = () => {
   return (
@@ -12,7 +12,7 @@ const RegisterPage = () => {
 export default RegisterPage;
 
 
-export async function action({request}) {
+export async function action({ request }) {
   const data = await request.formData();
   const authData = {
     firstName: data.get('firstName'),
@@ -25,17 +25,16 @@ export async function action({request}) {
   const response = await fetch('https://aqary-eg.onrender.com/auth/signup', {
     method: 'POST',
     headers: {
-      'Content-Type' : 'application/json'
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify(authData)
   });
 
-  if(response.status !== 201) {
+  if (response.status !== 201) {
     return response;
   }
 
   const resData = await response.json();
-  console.log(resData);
   const token = resData.token;
 
   localStorage.setItem('token', token);
