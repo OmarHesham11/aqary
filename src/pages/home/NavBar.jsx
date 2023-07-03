@@ -1,7 +1,7 @@
 import '../style.css';
 import Searching from '../../components/property/Searching';
 
-import { NavLink, Form, useRouteLoaderData } from 'react-router-dom';
+import { NavLink, Form, useRouteLoaderData} from 'react-router-dom';
 
 
 
@@ -9,6 +9,7 @@ import { NavLink, Form, useRouteLoaderData } from 'react-router-dom';
 
 function NavBar() {
     const token = useRouteLoaderData('root');
+    const userData = JSON.parse(localStorage.getItem('userData'));
 
     return (
         <>
@@ -52,6 +53,12 @@ function NavBar() {
                                     <Form action='/logout' method='post'>
                                         <button className='nav-link'>Logout</button>
                                     </Form>
+                                </li>
+                            }
+
+                            {userData && userData.firstName &&
+                                <li className="nav-item">
+                                    <a className="nav-link disabled" style={{ color: 'orange' }}>{`Ahlan ${userData.firstName}!`}</a>
                                 </li>
                             }
 

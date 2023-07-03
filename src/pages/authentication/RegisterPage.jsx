@@ -21,10 +21,8 @@ export async function action({request}) {
     password: data.get('password'),
     passwordConfirm: data.get('passwordConfirm')
   };
-  
-  console.log("ana weslt",authData);
-  
-  const response = await fetch('http://127.0.0.1:4000/auth/signup', {
+
+  const response = await fetch('https://aqary-eg.onrender.com/auth/signup', {
     method: 'POST',
     headers: {
       'Content-Type' : 'application/json'
@@ -44,6 +42,9 @@ export async function action({request}) {
   const expiration = new Date();
   expiration.setHours(expiration.getHours() + 24);
   localStorage.setItem('expiration', expiration.toISOString());
+
+  // Store the resData in local storage
+  localStorage.setItem('userData', JSON.stringify(resData.data.user));
 
   return redirect('/');
 }
