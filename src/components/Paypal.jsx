@@ -22,6 +22,10 @@ const createOrder = async (data, actions, userId, amount, description) => {
       },
     ],
     userId: userId,
+  }, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    }
   }).then((response) => {
     return response.data.order.id;
   }).catch((error) => {
@@ -45,11 +49,13 @@ const onApprove = (
   formData.set('orderID', orderID);
   formData.set('amount', amount);
   formData.set('currency', currency);
-  return axios.post("https://aqary-eg.onrender.com/auth/property/", formData)
+  return axios.post("https://aqary-eg.onrender.com/auth/property/", formData, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    }
+  })
     .then((response) => {
       const orderData = response.data;
-      //   console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-      const transaction = orderData.purchase_units[0].payments.captures[0];
       setTransactionData(orderData);
       setIsSubmitting(true);
       setSubmitSuccess(true);
@@ -60,57 +66,6 @@ const onApprove = (
     });
 }
 
-const ButtonWrapper = ({
-  currency,
-  showSpinner,
-  setIsSubmitting,
-  setSubmitSuccess,
-  setTransactionData,
-  userId,
-  amount,
-  formData,
-  onSuccess,
-}) => {
-  const [{ options, isPending }, dispatch] = usePayPalScriptReducer();
-
-  useEffect(() => {
-    dispatch({
-      type: "resetOptions",
-      value: {
-        ...options,
-        currency: currency,
-      },
-    });
-  }, [currency, showSpinner]);
-
-  return (
-    <>
-      {showSpinner && isPending && <div className="spinner" />}
-      <PayPalButtons
-        style={style}
-        disabled={false}
-        forceReRender={[25.2, "USD", style]}
-        fundingSource={undefined}
-        createOrder={(data, actions) => {
-          return createOrder(data, actions, userId, amount, formData)
-            .then((orderId) => {
-              return orderId;
-            });
-        }}
-        onApprove={(data, actions) => {
-          return onApprove(data, userId, amount, currency, formData, setTransactionData, setIsSubmitting, setSubmitSuccess);
-        }}
-        onCancel={() => {
-          console.log("cancelled");
-        }}
-        onError={(data, actions) => {
-          console.log("An Error occured with your payment ");
-        }}
-      />
-    </>
-  );
-};
-
 function Paypal({
   userId,
   amount,
@@ -120,7 +75,6 @@ function Paypal({
   submitSuccess,
   setSubmitSuccess,
   setTransactionData,
-  onSuccess
 }) {
 
   const PAYPAL_CLIENT_ID = "AQQkpnREaeh7NJI3jD_C6VZ6YxaoqNj167r-l_50LttN1Xa06MyMP0Eq_gJlmc5RjlG7fWuqdMihcfT4";
@@ -149,4 +103,56 @@ function Paypal({
     </div>
   );
 }
+
+const ButtonWrapper = ({
+  currency,
+  showSpinner,
+  setIsSubmitting,
+  setSubmitSuccess,
+  setTransactionData,
+  userId,
+  amount,
+  formData,
+}) => {
+  const [{ options, isPending }, dispatch] = usePayPalScriptReducer();
+
+  useEffect(() => {
+    dispatch({
+      type: "resetOptions",
+      value: {
+        ...options,
+        currency: currency,
+      },
+    });
+  }, [currency, showSpinner]);
+
+  return (
+    <>
+      {showSpinner && isPending && <div className="spinner" />}
+      <PayPalButtons
+        style={style}
+        disabled={false}
+        forceReRender={[25.2, "USD", style]}
+        fundingSource={undefined}
+        createOrder={(data, actions) => {
+          return createOrder(data, actions, userId, amount, formData)
+            .then((orderId) => {
+              console.log(orderId)
+              return orderId;
+            });
+        }}
+        onApprove={(data, actions) => {
+          return onApprove(data, userId, amount, currency, formData, setTransactionData, setIsSubmitting, setSubmitSuccess);
+        }}
+        onCancel={() => {
+          console.log("cancelled");
+        }}
+        onError={() => {
+          console.log("An Error occured with your payment ");
+        }}
+      />
+    </>
+  );
+};
+
 export default Paypal;
