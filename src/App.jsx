@@ -16,6 +16,8 @@ import PropertyCreate from './components/property/PropertyCreate';
 import Main from './pages/Main';
 import TableOfTransactions from './pages/admin/TableOfTransactions';
 
+// import { BrowserRouter, Routes, Route } from "react-router-dom";
+// import Cart from './components/Cart';
 
 const router = createBrowserRouter([
   {
