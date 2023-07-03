@@ -29,24 +29,24 @@ function TableOfProperties() {
     // getProperties();
   };
 
-  const getProperties = useMemo(() => {
-      axios.get('http://localhost:4000/backOffice/dashboard/properties', {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`
-        },
-        params: { ...pagination, ...filters },
-      })
-      .then(res => {
-        setProperties(res.data.data);
-        setPagination(prevPagination => ({ ...prevPagination, total: res.data.pagination.total, totalPages: res.data.pagination.totalPages }));
-        setLoading(false);
-      })
-      .catch(error => {
-        console.log(error);
-        Swal.fire('Error', error.message, 'error');
-        setLoading(false);
-      });
-    }, [pagination, filters]);
+  const getProperties = () => {
+    axios.get('http://localhost:4000/backOffice/dashboard/properties', {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      },
+      params: { ...pagination, ...filters },
+    })
+    .then(res => {
+      setProperties(res.data.data);
+      setPagination(prevPagination => ({ ...prevPagination, total: res.data.pagination.total, totalPages: res.data.pagination.totalPages }));
+      setLoading(false);
+    })
+    .catch(error => {
+      console.log(error);
+      Swal.fire('Error', error.message, 'error');
+      setLoading(false);
+    });
+  };
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -61,7 +61,9 @@ function TableOfProperties() {
 
   const handleDelete = (id) => {
     axios.delete(`http://localhost:4000/backOffice/property/${id}`, {
-      Authorization: `Bearer ${localStorage.getItem('token')}`
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
     })
       .then(res => {
         Swal.fire('Deleted Success', 'property deletect succusflly', 'success');

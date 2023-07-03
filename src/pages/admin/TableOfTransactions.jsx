@@ -21,7 +21,9 @@ export default function TableOfTransactions() {
 
   useEffect(() => {
     axios.get('http://localhost:4000/transaction/', {
-      Authorization: `Bearer ${localStorage.getItem('token')}`
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
     })
       .then(res => {
         setTransactions(res.data);
