@@ -2,16 +2,21 @@
   margin: 6rem auto;
   width: 95%;
   max-width: 25rem;
-  border-radius: 6px;
-  background-color: #38015c;
+  /* border-radius: 6px;
+  background-color: rgb(180, 122, 14);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-  padding: 1rem;
-  text-align: center;
+  padding: 1rem; */
+  /* text-align: center; */
+  background-color: white;
+  padding: 2rem;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 
 .auth h1 {
   text-align: center;
-  color: white;
+  color: orange;
+  margin-bottom: 2rem;
 }
 
 .control {
@@ -20,7 +25,7 @@
 
 .control label {
   display: block;
-  color: white;
+  color: orange;
   font-weight: bold;
   margin-bottom: 0.5rem;
 }
@@ -33,7 +38,8 @@
   border: 1px solid white;
   width: 100%;
   text-align: left;
-  padding: 0.25rem;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   -ms-border-radius: 6px;
@@ -51,15 +57,15 @@
   cursor: pointer;
   font: inherit;
   color: white;
-  background-color: #9f5ccc;
-  border: 1px solid #9f5ccc;
+  background-color: orange;
+  border: 1px solid orange;
   border-radius: 4px;
   padding: 0.5rem 2.5rem;
 }
 
 .actions button:hover {
-  background-color: #873abb;
-  border-color: #873abb;
+  background-color: rgb(164, 112, 17);
+  border-color: rgb(164, 112, 17);
 }
 
 .actions .toggle {
@@ -88,4 +94,19 @@ select.input-error {
 button:disabled {
   opacity: 0.35;
   cursor: not-allowed;
+}
+
+.showIcon {
+  background-color: transparent;
+  border: none;
+}
+
+.password {
+  position: relative;
+}
+
+.password button {
+  position: absolute;
+  top: 20%;
+  right: 1%;
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 import { searchProperties } from '../../redux/state/propertySlice';
 
@@ -10,30 +10,25 @@ const Searching = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const location = useLocation();
     const listContainerRef = useRef(null);
     const containerRef = useRef(null);
-
     const searchResults = useSelector((state) => state.properties.searchResults);
 
     const handleSearchChange = (event) => {
         const query = event.target.value;
         setSearchQuery(query);
-        setTimeout(() => {
-            if (query.trim() !== '') {
-                dispatch(searchProperties(query));
-            }
-        }, 2000);
+        if (query.trim() !== '') {
+            dispatch(searchProperties(query));
+        }
     };
 
     const handleResultClick = (property) => {
-        console.log('Clicked on property ID:', property);
         navigate(`/property/${property._id}`);
     };
 
     useEffect(() => {
         setSearchQuery('');
-    }, [location.pathname]);
+    }, []);
 
     const handleScroll = () => {
         const listContainer = listContainerRef.current;
@@ -71,7 +66,7 @@ const Searching = () => {
                             <Link to={ `/property/${property._id}` } className="list-group-item list-group-item-action" key={ property._id } onClick={ () => handleResultClick(property) } >
 
                                 <div className="d-flex justify-content-between align-items-center">
-                                    <span className="me-3">{ property.address.substring(0, 30) }...</span>
+                                    <span className="me-3">{ property.address.substring(0, 10) }...</span>
                                     <span className="badge bg-primary text-white">Price: EGP { property.price }</span>
                                 </div>
 

@@ -81,7 +81,6 @@ const propertiesSlice = createSlice({
                 state.error = action.payload;
             })
             .addCase(searchProperties.pending, (state) => {
-                state.loading = true;
                 state.error = null;
             })
             .addCase(searchProperties.fulfilled, (state, action) => {
@@ -92,7 +91,7 @@ const propertiesSlice = createSlice({
                 state.loading = false;
                 state.error = action.payload;
             })
-            .addCase(createProperty.pending, (state, action) => {
+            .addCase(createProperty.pending, (state) => {
                 state.loading = true;
                 state.error = null;
             })
@@ -102,7 +101,7 @@ const propertiesSlice = createSlice({
             })
             .addCase(createProperty.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.error.messag;
+                state.error = action.error.message;
             });
     },
 });

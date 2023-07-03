@@ -22,8 +22,6 @@ export async function action({ request }) {
     passwordConfirm: data.get('passwordConfirm')
   };
 
-  console.log("ana weslt", authData);
-
   const response = await fetch('https://aqary-eg.onrender.com/auth/signup', {
     method: 'POST',
     headers: {
@@ -37,13 +35,15 @@ export async function action({ request }) {
   }
 
   const resData = await response.json();
-  console.log(resData);
   const token = resData.token;
 
   localStorage.setItem('token', token);
   const expiration = new Date();
   expiration.setHours(expiration.getHours() + 24);
   localStorage.setItem('expiration', expiration.toISOString());
+
+  // Store the resData in local storage
+  localStorage.setItem('userData', JSON.stringify(resData.data.user));
 
   return redirect('/');
 }

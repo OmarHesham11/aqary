@@ -1,6 +1,7 @@
 import { redirect } from "react-router-dom";
 import LoginForm from "../../components/Auth/login";
 
+
 function LoginPage() {
   return (
     <section>
@@ -31,6 +32,7 @@ export async function action({request}) {
   }
 
   const resData = await response.json();
+  console.log(resData);
   const token = resData.token;
 
   console.log(resData)
@@ -39,6 +41,9 @@ export async function action({request}) {
   const expiration = new Date();
   expiration.setHours(expiration.getHours() + 24);
   localStorage.setItem('expiration', expiration.toISOString());
+
+  // Store the resData in local storage
+  localStorage.setItem('userData', JSON.stringify(resData.user));
 
   return redirect('/');
 }
