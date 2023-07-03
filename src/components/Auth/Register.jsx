@@ -22,6 +22,7 @@ const RegisterForm = () => {
     const navigation = useNavigation();
     const isSubmitting = navigation.state === 'submitting';
 
+
     const togglePasswordVisibility = (event) => {
       event.preventDefault();
       setPasswordIsVisible((prevState) => !prevState);
@@ -48,7 +49,16 @@ const RegisterForm = () => {
   return (
     <section className={classes.auth}>
       <h1>Create an account</h1>
-      {data && data.error && <p className={classes.error}>{data.error.message}</p>}
+      {data && data.error && (
+          <div>
+
+            {data.error.message.split('.').map((err) => (
+              <p className={classes.error} key={err}>{err}</p>
+            ))}
+          </div>
+          
+      )}
+
       <Form method='post'>
 
         <div className={classes.control}>
