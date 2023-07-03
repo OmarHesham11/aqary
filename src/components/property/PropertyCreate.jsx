@@ -6,6 +6,7 @@ import { useDropzone } from 'react-dropzone';
 import Cart from '../Cart';
 import './styles/createProperty.css';
 import Validation from '../Validation';
+import { Button, Modal } from "react-bootstrap";
 
 
 function PropertyCreate() {
@@ -20,7 +21,7 @@ function PropertyCreate() {
     const err = useSelector((state) => state.properties.error);
 
     //Handling payment
-
+    const [showPopup, setShowPopup] = useState(false);
 
 
     const [formErrors, setFormErrors] = useState({});
@@ -41,6 +42,14 @@ function PropertyCreate() {
         paymentOption: 'cash',
         subscribe: 'half',
     });
+
+    const handleClick = () => {
+        setShowPopup(true);
+    };
+
+    const handleClose = () => {
+        setShowPopup(false);
+    };
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -151,7 +160,7 @@ function PropertyCreate() {
                             <h3 className="text-center ">Create Property</h3>
                         </div>
                         <div className="text-end col">
-                            <button type="submit" className="btn btn-primary">Create</button>
+                            <button type="submit" className="btn btn-primary" onClick={handleClick}>Create</button>
                         </div>
                     </div>
 
@@ -308,15 +317,19 @@ function PropertyCreate() {
 
             </div>
 
-            {/* modal */}
-            {/* {showPaymentModal && (
-                <div className="modal">
-                    <div className="modal-content">
-                        <h2>Please complete your payment</h2>
-                        <Cart amount={10} description="Payment for property" onSuccess={handlePaymentSuccess} />
-                    </div>
-                </div>
-            )} */}
+            <Modal show={showPopup} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Create Popup</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Cart amount={102.23} description={"PROPERTY_MONTH"} />
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+            </Modal>
 
         </>
 
