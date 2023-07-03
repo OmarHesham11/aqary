@@ -35,17 +35,17 @@ const LoginForm = () => {
 
   return (
     <section className={classes.auth}>
-      <h1>Login</h1>
+      <h1>Welcome back!</h1>
       {data && data.error && <p className={classes.error}>{data.error.message}</p>}
       <Form method='post'>
         <div className={classes.control}>
-          <label htmlFor="email">Your Email</label>
-          <input value={values.email} onChange={handleChange} onBlur={handleBlur} type="email" id="email" name="email" required className={errors.email && touched.email ? classes['input-error'] : ''} />
+          <label htmlFor="email">Email</label>
+          <input value={values.email} onChange={handleChange} onBlur={handleBlur} type="email" id="email" name="email" required className={errors.email && touched.email ? classes['input-error'] : ''} placeholder='Enter your email'/>
           {errors.email && touched.email && <p className={classes.error}>{errors.email}</p>}
         </div>
 
         <div className={classes.control}>
-          <label htmlFor="password">Your Password</label>
+          <label htmlFor="password">Password</label>
           <div className={classes.password}>
             <input
               value={values.password}
@@ -56,6 +56,7 @@ const LoginForm = () => {
               name="password"
               required
               className={errors.password && touched.password ? classes['input-error'] : ''}
+              placeholder='Enter your password'
             />
 
             <button className={classes.showIcon} onClick={togglePasswordVisibility}>
@@ -67,7 +68,7 @@ const LoginForm = () => {
         </div>
         <div className={classes.actions}>
           <button disabled={isSubmitting || !isValid}>
-            {isSubmitting ? 'Loading...' : 'Login'}
+            {isSubmitting ? 'Loading...' : 'LOGIN'}
           </button>
         </div>
       </Form>

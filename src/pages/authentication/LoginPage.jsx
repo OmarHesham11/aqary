@@ -1,5 +1,6 @@
 import { redirect } from "react-router-dom";
 import LoginForm from "../../components/Auth/login";
+import Card from './../../components/UI/Card';
 
 function LoginPage() {
   return (
