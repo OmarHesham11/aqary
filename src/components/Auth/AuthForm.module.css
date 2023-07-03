@@ -89,3 +89,18 @@ button:disabled {
   opacity: 0.35;
   cursor: not-allowed;
 }
+
+.showIcon {
+  background-color: transparent;
+  border: none;
+}
+
+.password {
+  position: relative;
+}
+
+.password button {
+  position: absolute;
+  top: 20%;
+  right: 1%;
+}

@@ -1,5 +1,9 @@
 
+import { useState } from 'react';
 import { Form, useActionData, useNavigation } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { useFormik } from 'formik';
 import { registerSchema } from '../../schemas/index';
 import classes from './AuthForm.module.css';
@@ -11,9 +15,23 @@ const onSubmit = (values, actions) => {
 
 
 const RegisterForm = () => {
+    const [passwordIsVisible, setPasswordIsVisible] = useState(false);
+    const [passwordConfirmIsVisible, setPasswordConfirmIsVisible] = useState(false);
+
     const data = useActionData();
     const navigation = useNavigation();
     const isSubmitting = navigation.state === 'submitting';
+
+    const togglePasswordVisibility = (event) => {
+      event.preventDefault();
+      setPasswordIsVisible((prevState) => !prevState);
+    };
+
+    const togglePasswordConfirmVisibility = (event) => {
+      event.preventDefault();
+      setPasswordConfirmIsVisible((prevState) => !prevState);
+    };
+
 
   const { values, errors, touched, isValid, handleChange, handleBlur} = useFormik({
     initialValues: {
@@ -53,31 +71,47 @@ const RegisterForm = () => {
 
         <div className={classes.control}>
           <label htmlFor="password">Password</label>
-          <input
-            value={values.password}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            type="password"
-            id="password"
-            name="password"
-            required
-            className={errors.password && touched.password ? classes['input-error'] : ''}
-          />
+
+          <div className={classes.password}>
+            <input
+              value={values.password}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              type={passwordIsVisible ? 'text' : 'password'}
+              id="password"
+              name="password"
+              required
+              className={errors.password && touched.password ? classes['input-error'] : ''}
+            />
+            <button className={classes.showIcon} onClick={togglePasswordVisibility}>
+              {passwordIsVisible ? <FontAwesomeIcon icon={faEye} /> : <FontAwesomeIcon icon={faEyeSlash} />}
+            </button>
+
+          </div>
+
           {errors.password && touched.password && <p className={classes.error}>{errors.password}</p>}
         </div>
 
         <div className={classes.control}>
           <label htmlFor="passwordConfirm">Confirm password</label>
-          <input
-            value={values.passwordConfirm}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            type="password"
-            id="passwordConfirm"
-            name="passwordConfirm"
-            required
-            className={errors.passwordConfirm && touched.passwordConfirm ? classes['input-error'] : ''}
-          />
+
+          <div className={classes.password}>
+            <input
+              value={values.passwordConfirm}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              type={passwordConfirmIsVisible ? 'text' : 'password'}
+              id="passwordConfirm"
+              name="passwordConfirm"
+              required
+              className={errors.passwordConfirm && touched.passwordConfirm ? classes['input-error'] : ''}
+            />
+            <button className={classes.showIcon} onClick={togglePasswordConfirmVisibility}>
+              {passwordConfirmIsVisible ? <FontAwesomeIcon icon={faEye} /> : <FontAwesomeIcon icon={faEyeSlash} />}
+            </button>
+
+          </div>
+
           {errors.passwordConfirm && touched.passwordConfirm && <p className={classes.error}>{errors.passwordConfirm}</p>}
         </div>
 
