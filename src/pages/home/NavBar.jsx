@@ -10,9 +10,7 @@ import { NavLink } from 'react-router-dom';
 function NavBar() {
 
     return (
-
         <>
-
             <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top vh-150 mouse">
 
                 <div className="container">

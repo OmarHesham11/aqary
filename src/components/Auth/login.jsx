@@ -49,7 +49,7 @@ const LoginForm = () => {
           {errors.password && touched.password && <p className={classes.error}>{errors.password}</p>}
         </div>
         <div className={classes.actions}>
-          <button disabled={isSubmitting || !isValid} type="submit">
+          <button disabled={isSubmitting || !isValid}>
             {isSubmitting ? 'Loading...' : 'Login'}
           </button>
         </div>

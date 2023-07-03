@@ -7,9 +7,9 @@ function Main() {
   return (
     <>
       <NavBar />
-      <div className="content-container">
-        <Outlet />
-      </div>
+
+      <Outlet />
+
       <Footer />
     </>
   );
