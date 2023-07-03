@@ -1,7 +1,7 @@
 
 import { Form, useActionData, useNavigation } from 'react-router-dom';
 import { useFormik } from 'formik';
-import { loginSchema } from '../../schemas/index';
+import { registerSchema } from '../../schemas/index';
 import classes from './AuthForm.module.css';
 
 
@@ -17,10 +17,13 @@ const RegisterForm = () => {
 
   const { values, errors, touched, isValid, handleChange, handleBlur} = useFormik({
     initialValues: {
+      firstName: '',
+      lastName: '',  
       email: '',
       password: '',
+      passwordConfirm: '',
     },
-    validationSchema: loginSchema,
+    validationSchema: registerSchema,
     onSubmit,
   });
 
@@ -31,25 +34,25 @@ const RegisterForm = () => {
       <Form method='post'>
 
         <div className={classes.control}>
-          <label htmlFor="firstName">Your First Name</label>
-          <input value={values.firstName} onChange={handleChange} onBlur={handleBlur} type="text" id="firstName" name="firstName" required className={errors.firstName && touched.firstName ? classes['input-error'] : ''} />
+          <label htmlFor="firstName">First Name</label>
+          <input value={values.firstName} onChange={handleChange} onBlur={handleBlur}  id="firstName" name="firstName" required className={errors.firstName && touched.firstName ? classes['input-error'] : ''} />
           {errors.firstName && touched.firstName && <p className={classes.error}>{errors.firstName}</p>}
         </div>
 
         <div className={classes.control}>
-          <label htmlFor="lastName">Your Last Name</label>
-          <input value={values.lastName} onChange={handleChange} onBlur={handleBlur} type="text" id="lastName" name="lastName" required className={errors.lastName && touched.lastName ? classes['input-error'] : ''} />
+          <label htmlFor="lastName">Last Name</label>
+          <input value={values.lastName} onChange={handleChange} onBlur={handleBlur}  id="lastName" name="lastName" required className={errors.lastName && touched.lastName ? classes['input-error'] : ''} />
           {errors.lastName && touched.lastName && <p className={classes.error}>{errors.lastName}</p>}
         </div>
 
         <div className={classes.control}>
-          <label htmlFor="email">Your Email</label>
+          <label htmlFor="email">Email</label>
           <input value={values.email} onChange={handleChange} onBlur={handleBlur} type="email" id="email" name="email" required className={errors.email && touched.email ? classes['input-error'] : ''} />
           {errors.email && touched.email && <p className={classes.error}>{errors.email}</p>}
         </div>
 
         <div className={classes.control}>
-          <label htmlFor="password">Your Password</label>
+          <label htmlFor="password">Password</label>
           <input
             value={values.password}
             onChange={handleChange}
