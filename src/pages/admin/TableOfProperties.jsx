@@ -32,7 +32,8 @@ function TableOfProperties() {
   const getProperties = useMemo(() => {
     return () => {
       axios.get('http://localhost:4000/backOffice/dashboard/properties', {
-        params: { ...pagination, ...filters }
+        params: { ...pagination, ...filters },
+        Authorization: `Bearer ${localStorage.getItem('token')}`
       })
       .then(res => {
         console.log(res.data.data.length)
@@ -59,7 +60,9 @@ function TableOfProperties() {
   }, [filters, pagination.page, pagination.pageSize]);
 
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:4000/backOffice/property/${id}`)
+    axios.delete(`http://localhost:4000/backOffice/property/${id}`, {
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    })
       .then(res => {
         Swal.fire('Deleted Success', 'property deletect succusflly', 'success');
         setProperties(properties.filter(property => property._id !== id));

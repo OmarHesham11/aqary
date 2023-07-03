@@ -11,7 +11,11 @@ function Graph() {
 
   useMemo (() => {
     const BACKEND_URL = 'http://localhost:4000';
-      axios.get(`${BACKEND_URL}/backOffice/dashboard/main-graph`).then((res) => {
+      axios.get(`${BACKEND_URL}/backOffice/dashboard/main-graph`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      }).then((res) => {
         setData(res.data.countPropertiesForEachCity);
         console.log(res.data)
         setLoading(false);

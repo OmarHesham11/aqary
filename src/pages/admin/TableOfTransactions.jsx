@@ -20,7 +20,9 @@ export default function TableOfTransactions() {
   const [transactions, setTransactions] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:4000/transaction/')
+    axios.get('http://localhost:4000/transaction/', {
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    })
       .then(res => {
         setTransactions(res.data);
       })
