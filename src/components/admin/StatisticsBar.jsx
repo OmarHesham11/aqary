@@ -13,13 +13,18 @@ function StatisticsBar() {
 
   const fetchStatistics = async () => {
     const BACKEND_URL = 'https://aqary-eg.onrender.com';
-    const res = await axios.get(`${BACKEND_URL}/backOffice/dashboard/statistics`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`
-      }
-    });
-    console.log(res.data)
-    return res.data;
+    // const res = await axios.get(`${BACKEND_URL}/backOffice/dashboard/statistics`, {
+    try {
+      const res = await axios.get(`${BACKEND_URL}/backOffice/dashboard/statistics`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+      console.log(res.data)
+      return res.data;
+    } catch (err) {
+      console.log(err.message)
+    }
   };
 
   useMemo(async () => {

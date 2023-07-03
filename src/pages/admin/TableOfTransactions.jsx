@@ -46,8 +46,9 @@ export default function TableOfTransactions() {
         <TableBody>
           {transactions.map((property) => (
             <TableRow key={property._id}>
-              <TableCell>{property.userId.name}</TableCell>
-              <TableCell>{property.amount}</TableCell>
+              {console.log(property)}
+              <TableCell>{property?.userId?.firstName}</TableCell>
+              <TableCell>{property?.amount}</TableCell>
               <TableCell>{getDateTime(property.createdAt)}</TableCell>
             </TableRow>
           ))}
