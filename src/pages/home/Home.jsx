@@ -1,4 +1,4 @@
-import '../style.css'
+
 import main from '../../assets/main.png'
 import about from '../../assets/about.jpg'
 import home from '../../assets/home-1.jpg'
@@ -9,7 +9,7 @@ function Home() {
     return (
         <>
 
-            <div id="carouselExampleSlidesOnly" className="carousel slide" data-bs-ride="carousel">
+            <div id="carouselExampleSlidesOnly" className="carousel slide m-0 p-0" data-bs-ride="carousel">
                 <div className="carousel-inner">
                     <div className="carousel-item active ">
                         <img src={main} className="d-block w-100" alt="..." />
