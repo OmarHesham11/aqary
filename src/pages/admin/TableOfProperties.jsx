@@ -30,7 +30,7 @@ function TableOfProperties() {
   };
 
   const getProperties = () => {
-    axios.get('http://localhost:4000/backOffice/dashboard/properties', {
+    axios.get('https://aqary-eg.onrender.com/backOffice/dashboard/properties', {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`
       },
@@ -60,7 +60,7 @@ function TableOfProperties() {
   }, [filters, pagination.page, pagination.pageSize]);
 
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:4000/backOffice/property/${id}`, {
+    axios.delete(`https://aqary-eg.onrender.com/backOffice/property/${id}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`
       }

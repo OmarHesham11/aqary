@@ -10,7 +10,7 @@ const currency = "USD";
 const style = { layout: "vertical" };
 
 const createOrder = async (data, actions, userId, amount, description) => {
-  const orderID = await axios.post("http://localhost:4000/checkout/create-paypal-order", {
+  const orderID = await axios.post("https://aqary-eg.onrender.com/checkout/create-paypal-order", {
     cart: [
       {
         sku: description,
@@ -45,7 +45,7 @@ const onApprove = (
   formData.set('orderID', orderID);
   formData.set('amount', amount);
   formData.set('currency', currency);
-  return axios.post("http://localhost:4000/auth/property/", formData)
+  return axios.post("https://aqary-eg.onrender.com/auth/property/", formData)
     .then((response) => {
       const orderData = response.data;
       //   console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));

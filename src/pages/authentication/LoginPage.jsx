@@ -33,7 +33,9 @@ export async function action({request}) {
   const resData = await response.json();
   const token = resData.token;
 
+  console.log(resData)
   localStorage.setItem('token', token);
+  localStorage.setItem('user', JSON.stringify(resData.user));
   const expiration = new Date();
   expiration.setHours(expiration.getHours() + 24);
   localStorage.setItem('expiration', expiration.toISOString());
