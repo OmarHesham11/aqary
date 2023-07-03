@@ -8,6 +8,12 @@ import './styles/createProperty.css';
 import Validation from '../Validation';
 import { Button, Modal } from "react-bootstrap";
 
+const valueOfAdd = {
+    PROPERTY_HOUR: 1,
+    PROPERTY_DAY: 2,
+    PROPERTY_WEEK: 5,
+    PROPERTY_MONTH: 10,
+}
 
 function PropertyCreate() {
 
@@ -40,7 +46,7 @@ function PropertyCreate() {
         area: 0,
         contractPhone: '',
         paymentOption: 'cash',
-        subscribe: 'half',
+        subscribe: 'PROPERTY_HOUR',
     });
 
     const handleClick = () => {
@@ -119,7 +125,6 @@ function PropertyCreate() {
             image.forEach((ig) => {
                 formData.append('image', ig);
             });
-            console.log(formData.get('image'))
             const response = await dispatch(createProperty(formData));
             console.log('submitted', response);
             if (response.error) { setFormErrors(error) }
@@ -127,11 +132,6 @@ function PropertyCreate() {
             console.log(error);
         }
     };
-
-
-    useEffect(() => {
-        console.log(image);
-    }, [image]);
 
 
     useEffect(() => {
@@ -173,7 +173,7 @@ function PropertyCreate() {
                             <option value="shale" selected={propertyData.title === 'shale'}>Shale</option>
                             <option value="apartment" selected={propertyData.title === 'apartment'}>Apartment</option>
                         </select>
-                        {formErrors.title && <span className="text-danger">{formErrors.title}</span>}
+                        {formErrors?.title && <span className="text-danger">{formErrors?.title}</span>}
                     </div>
 
                     <div className="form-group">
@@ -259,20 +259,20 @@ function PropertyCreate() {
                         <div className="radio-group">
 
                             <div className="form-check">
-                                <input type="radio" name="subscribe" value="hour" checked={propertyData.subscribe === 'hour'} onChange={handleInputChange} className="form-check-input" />
-                                <label className="form-check-label">Hour</label>
+                                <input type="radio" name="subscribe" value="PROPERTY_HOUR" defaultChecked checked={propertyData.subscribe === 'PROPERTY_HOUR'} onChange={handleInputChange} className="form-check-input" />
+                                <label className="form-check-label">Hour (1$)</label>
                             </div>
                             <div className="form-check">
-                                <input type="radio" name="subscribe" value="day" checked={propertyData.subscribe === 'day'} onChange={handleInputChange} className="form-check-input" />
-                                <label className="form-check-label">Day</label>
+                                <input type="radio" name="subscribe" value="PROPERTY_DAY" checked={propertyData.subscribe === 'PROPERTY_DAY'} onChange={handleInputChange} className="form-check-input" />
+                                <label className="form-check-label">Day (2$)</label>
                             </div>
                             <div className="form-check">
-                                <input type="radio" name="subscribe" value="week" checked={propertyData.subscribe === 'week'} onChange={handleInputChange} className="form-check-input" />
-                                <label className="form-check-label">Week</label>
+                                <input type="radio" name="subscribe" value="PROPERTY_WEEK" checked={propertyData.subscribe === 'PROPERTY_WEEK'} onChange={handleInputChange} className="form-check-input" />
+                                <label className="form-check-label">Week (5$)</label>
                             </div>
                             <div className="form-check">
-                                <input type="radio" name="subscribe" value="month" checked={propertyData.subscribe === 'month'} onChange={handleInputChange} className="form-check-input" />
-                                <label className="form-check-label">Month</label>
+                                <input type="radio" name="subscribe" value="PROPERTY_MONTH" checked={propertyData.subscribe === 'PROPERTY_MONTH'} onChange={handleInputChange} className="form-check-input" />
+                                <label className="form-check-label">Month (10$)</label>
                             </div>
                         </div>
                         {formErrors.subscribe && <span className="text-danger">{formErrors.subscribe}</span>}
@@ -322,7 +322,7 @@ function PropertyCreate() {
                     <Modal.Title>Create Popup</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Cart amount={102.23} description={"PROPERTY_MONTH"} />
+                    <Cart amount={valueOfAdd[propertyData.subscribe]} description={propertyData.subscribe} />
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
