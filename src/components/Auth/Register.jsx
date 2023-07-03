@@ -72,7 +72,7 @@ const RegisterForm = () => {
             value={values.passwordConfirm}
             onChange={handleChange}
             onBlur={handleBlur}
-            type="passwordConfirm"
+            type="password"
             id="passwordConfirm"
             name="passwordConfirm"
             required
