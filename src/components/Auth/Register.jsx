@@ -37,7 +37,9 @@ const RegisterForm = () => {
   const { values, errors, touched, isValid, handleChange, handleBlur} = useFormik({
     initialValues: {
       firstName: '',
-      lastName: '',  
+      lastName: '',
+      phoneNumber: '',
+      birthdate: '',  
       email: '',
       password: '',
       passwordConfirm: '',
@@ -71,6 +73,18 @@ const RegisterForm = () => {
           <label htmlFor="lastName">Last Name</label>
           <input value={values.lastName} onChange={handleChange} onBlur={handleBlur}  id="lastName" name="lastName" required className={errors.lastName && touched.lastName ? classes['input-error'] : ''} placeholder='Enter your last name'/>
           {errors.lastName && touched.lastName && <p className={classes.error}>{errors.lastName}</p>}
+        </div>
+
+        <div className={classes.control}>
+          <label htmlFor="phoneNumber">Phone number</label>
+          <input value={values.phoneNumber} onChange={handleChange} onBlur={handleBlur}  id="phoneNumber" name="phoneNumber" required className={errors.phoneNumber && touched.phoneNumber ? classes['input-error'] : ''} placeholder='Enter your phone number'/>
+          {errors.phoneNumber && touched.phoneNumber && <p className={classes.error}>{errors.phoneNumber}</p>}
+        </div>
+
+        <div className={classes.control}>
+          <label htmlFor="birthdate">Birthdate</label>
+          <input value={values.birthdate} onChange={handleChange} onBlur={handleBlur} type='date'  id="birthdate" name="birthdate" required className={errors.birthdate && touched.birthdate ? classes['input-error'] : ''} placeholder='Enter your birthdate'/>
+          {errors.birthdate && touched.birthdate && <p className={classes.error}>{errors.birthdate}</p>}
         </div>
 
         <div className={classes.control}>
