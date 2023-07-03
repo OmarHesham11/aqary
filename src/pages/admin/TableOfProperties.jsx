@@ -30,22 +30,22 @@ function TableOfProperties() {
   };
 
   const getProperties = useMemo(() => {
-    return () => {
       axios.get('http://localhost:4000/backOffice/dashboard/properties', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        },
         params: { ...pagination, ...filters },
-        Authorization: `Bearer ${localStorage.getItem('token')}`
       })
       .then(res => {
-        console.log(res.data.data.length)
         setProperties(res.data.data);
         setPagination(prevPagination => ({ ...prevPagination, total: res.data.pagination.total, totalPages: res.data.pagination.totalPages }));
         setLoading(false);
       })
       .catch(error => {
         console.log(error);
+        Swal.fire('Error', error.message, 'error');
         setLoading(false);
       });
-    };
     }, [pagination, filters]);
 
   useEffect(() => {
