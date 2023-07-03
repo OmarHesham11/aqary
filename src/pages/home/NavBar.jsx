@@ -1,13 +1,14 @@
 import '../style.css';
 import Searching from '../../components/property/Searching';
 
-import { NavLink, Form } from 'react-router-dom';
+import { NavLink, Form, useRouteLoaderData } from 'react-router-dom';
 
 
 
 
 
 function NavBar() {
+    const token = useRouteLoaderData('root');
 
     return (
         <>
@@ -33,17 +34,26 @@ function NavBar() {
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="/properties">Property</NavLink>
                             </li>
-                            <li className="nav-item">
-                                <NavLink className="nav-link" to="/auth/login">Login</NavLink>
-                            </li>
-                            <li className="nav-item">
-                                <NavLink className="nav-link" to="/auth/register">Register</NavLink>
-                            </li>
-                            <li className="nav-item">
-                                <Form action='/logout' method='post'>
-                                    <button className='nav-link'>Logout</button>
-                                </Form>
-                            </li>
+                            {!token &&
+                                <li className="nav-item">
+                                    <NavLink className="nav-link" to="/auth/login">Login</NavLink>
+                                </li>
+                            }
+
+                            {!token && 
+                            
+                                <li className="nav-item">
+                                    <NavLink className="nav-link" to="/auth/register">Register</NavLink>
+                                </li>
+                            }
+
+                            {token && 
+                                <li className="nav-item">
+                                    <Form action='/logout' method='post'>
+                                        <button className='nav-link'>Logout</button>
+                                    </Form>
+                                </li>
+                            }
 
                         </ul>
 

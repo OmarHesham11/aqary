@@ -5,6 +5,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Home from './pages/home/Home';
 import LoginPage, {action as loginAction} from './pages/authentication/LoginPage';
 import {action as logoutAction } from './pages/authentication/Logout';
+import { tokenLoader } from './util/auth';
 import RegisterPage from './pages/authentication/RegisterPage';
 import PropertiesPage from './pages/property/propertiesPage';
 import PropertyDetails from './pages/property/propertyDetailsPage';
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
     path: '/',
     element: <Main />,
     id: 'root',
+    loader: tokenLoader,
     children: [
       { index: true, element: <Home /> },
       { path: 'auth/login', element: <LoginPage />, action: loginAction },
