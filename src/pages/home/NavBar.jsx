@@ -34,10 +34,10 @@ function NavBar() {
                                 <NavLink className="nav-link" to="/properties">Property</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link" to="/auth ">Login</NavLink>
+                                <NavLink className="nav-link" to="/auth/login">Login</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link" to="#">Register</NavLink>
+                                <NavLink className="nav-link" to="/auth/register">Register</NavLink>
                             </li>
 
                         </ul>
