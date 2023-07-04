@@ -1,5 +1,5 @@
 import { redirect } from "react-router-dom";
-import RegisterForm from "../../components/Auth/register";
+import RegisterForm from "../../components/Auth/Register";
 
 const RegisterPage = () => {
   return (
