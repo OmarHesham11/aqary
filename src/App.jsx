@@ -5,7 +5,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Home from './pages/home/Home';
 import LoginPage, { action as loginAction } from './pages/authentication/LoginPage';
 import { action as logoutAction } from './pages/authentication/Logout';
-import { tokenLoader } from './util/auth';
+import { checkAuthLoader, tokenLoader } from './util/auth';
 import RegisterPage, { action as registerAction } from './pages/authentication/RegisterPage';
 import PropertiesPage from './pages/property/propertiesPage';
 import PropertyDetails from './pages/property/propertyDetailsPage';
@@ -41,14 +41,14 @@ const router = createBrowserRouter([
       { path: 'auth/register', element: <RegisterPage />, action: registerAction },
       { path: 'properties', element: <PropertiesPage /> },
       { path: 'property/:propertyId', element: <PropertyDetails /> },
-      { path: 'postProperty', element: <PropertyCreate /> },
-      { path: "auth/profile", element: <ProfilePage /> },
+      { path: 'postProperty', element: <PropertyCreate />, loader:checkAuthLoader },
+      { path: "auth/profile", element: <ProfilePage />, loader:checkAuthLoader},
       { path: "aboutUs", element: <AboutUs /> },
       { path: "contactUs", element: <ContactUs /> },
-      { path: "auth/profileProperties", element: <ProfilePropertiesPage /> },
-      { path: "auth/edit-property/:id", element: <PropertyEdit /> },
-      { path: "/auth/UpdateUserPropery", element: <UpdateUserPropertyPage /> },
-      { path: "/auth/change-password", element: <ChangePasswordProfile /> },
+      { path: "auth/profileProperties", element: <ProfilePropertiesPage />, loader:checkAuthLoader },
+      { path: "auth/edit-property/:id", element: <PropertyEdit />, loader:checkAuthLoader },
+      { path: "/auth/UpdateUserPropery", element: <UpdateUserPropertyPage />, loader:checkAuthLoader},
+      { path: "/auth/change-password", element: <ChangePasswordProfile />, loader:checkAuthLoader },
       { path: 'logout', action: logoutAction },
       { path: '*', element: <NotFound /> }
     ],
