@@ -1,7 +1,13 @@
 import axios from 'axios';
+import Joi from 'joi';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+
+const schema = Joi.object({
+  firstName: Joi.string().min(4).max(25).required(),
+  lastName: Joi.string().min(4).max(25).required(),
+});
 
 const Profile = () => {
   const User = JSON.parse(localStorage.getItem('user'));
@@ -9,6 +15,7 @@ const Profile = () => {
   const [firstName, setFirstName] = useState(User.firstName);
   const [lastName, setLastName] = useState(User.lastName);
   const [email, setEmail] = useState(User.email);
+  const [errors, setErrors] = useState({});
 
   const handleEdit = () => {
     setDisableBtn(false);
@@ -20,6 +27,18 @@ const Profile = () => {
       lastName,
       birthdate: User?.birthdate?.slice(0, 10),
     };
+
+    const validationResult = schema.validate(updatedUser, { abortEarly: false });
+
+    if (validationResult.error) {
+      const newErrors = {};
+      validationResult.error.details.forEach((err) => {
+        newErrors[err.path[0]] = err.message;
+      });
+      setErrors(newErrors);
+      return;
+    }
+
     axios
       .patch('https://aqary-eg.onrender.com/auth/UpdateUserInfo', updatedUser, {
         headers: {
@@ -48,10 +67,12 @@ const Profile = () => {
 
   const handleFirstNameChange = (event) => {
     setFirstName(event.target.value);
+    setErrors({ ...errors, firstName: '' });
   };
   
   const handleLastNameChange = (event) => {
     setLastName(event.target.value);
+    setErrors({ ...errors, lastName: '' });
   };
   
   const handleEmailChange = (event) => {
@@ -94,21 +115,24 @@ const Profile = () => {
                         First name
                       </label>
                       <input
-                        className='form-control'
+                        className={`form-control ${errors.firstName ? 'is-invalid' : ''}`}
                         id='inputFirstName'
                         type='text'
                         disabled={disableBtn}
                         value={firstName}
                         onChange={handleFirstNameChange}
                       />
+                      {errors.firstName && (
+                        <div className='invalid-feedback'>{errors.firstName}</div>
+                      )}
                     </div>
                     {/* Form Group (last name) */}
                     <div className='col-md-6'>
-                      <label className='small mb-1' htmlFor='inputLastName'>
+                      <label className='small mb-1'htmlFor='inputLastName'>
                         Last name
                       </label>
                       <input
-                        className='form-control'
+                        className={`form-control ${errors.lastName ? 'is-invalid' : ''}`}
                         id='inputLastName'
                         type='text'
                         placeholder='Enter your last name'
@@ -116,6 +140,9 @@ const Profile = () => {
                         value={lastName}
                         onChange={handleLastNameChange}
                       />
+                      {errors.lastName && (
+                        <div className='invalid-feedback'>{errors.lastName}</div>
+                      )}
                     </div>
                   </div>
                   {/* Form Group (email address) */}
