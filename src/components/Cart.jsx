@@ -1,10 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Paypal from "./Paypal";
-
-function Cart({ amount, formData, setIsPaymentSuccess }) {
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { replace } from "formik";
+function Cart({ amount, formData }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [transactionsData, setTransactionData] = useState({});
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [transactionsData, setTransactionData] = useState({}); 0
 
+  const navigate = useNavigate();
+  useEffect(() => {
+    console.log("transactionsData: ", transactionsData);
+  }, [transactionsData])
+
+
+  useEffect(() => {
+    if (submitSuccess) {
+      setSubmitSuccess(false);
+      const propertyId = transactionsData._id;
+      navigate(`/property/${propertyId}`, { replace: true });
+      // sendTransaction();
+    }
+  }, [submitSuccess, transactionsData, navigate]);
+  console.log(formData)
   return (
 
     <div className="cart container mx-auto">
@@ -14,13 +32,13 @@ function Cart({ amount, formData, setIsPaymentSuccess }) {
           <>
             <div>
               <Paypal
-                userId={''}
+                userId={"mohamedadel"}
                 amount={amount}
                 formData={formData}
                 isSubmitting={isSubmitting}
                 setIsSubmitting={setIsSubmitting}
-                // submitSuccess={submitSuccess}
-                setSubmitSuccess={setIsPaymentSuccess}
+                submitSuccess={submitSuccess}
+                setSubmitSuccess={setSubmitSuccess}
                 setTransactionData={setTransactionData}
 
               />

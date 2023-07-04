@@ -7,6 +7,7 @@ import Cart from '../Cart';
 import './styles/createProperty.css';
 import Validation from '../Validation';
 import { Button, Modal } from "react-bootstrap";
+import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const valueOfAdd = {
@@ -35,7 +36,7 @@ const initPropertyData = {
 function PropertyCreate() {
 
     const dispatch = useDispatch();
-
+    const Navigate = useNavigate();
     const cities = useSelector((state) => state.cities.cities);
     const loading = useSelector((state) => state.cities.loading);
     const error = useSelector((state) => state.cities.error);
@@ -44,14 +45,14 @@ function PropertyCreate() {
 
     //Handling payment
     const [showPopup, setShowPopup] = useState(false);
-    const [ myFormData, setMyFormData ] = useState({});
-    const [ isPaymentSuccess, setIsPaymentSuccess ] = useState(false);
+    const [myFormData, setMyFormData] = useState({});
+    const [isPaymentSuccess, setIsPaymentSuccess] = useState(false);
     const [formErrors, setFormErrors] = useState({});
 
     const [image, setImage] = useState([])
 
     useEffect(() => {
-        if(showPopup) {
+        if (showPopup) {
             setShowPopup(false);
             setPropertyData(initPropertyData);
             Swal.fire('Success', 'Property created successfully', 'success');
@@ -67,6 +68,7 @@ function PropertyCreate() {
 
     const handleClose = () => {
         setShowPopup(false);
+
     };
 
     const handleInputChange = (e) => {
@@ -100,6 +102,15 @@ function PropertyCreate() {
         isDragActive,
 
     } = useDropzone({ onDrop });
+
+    const removeImage = (index) => {
+        setImage((currentImages) => {
+            const updatedImages = [...currentImages];
+            updatedImages.splice(index, 1);
+            return updatedImages;
+        });
+    };
+
 
     const handleCityChange = (e) => {
         const { value } = e.target;
@@ -149,9 +160,6 @@ function PropertyCreate() {
         setImage([]);
     }, [dispatch]);
 
-    //handle payment 
-
-
 
 
     const URL = window.URL;
@@ -170,7 +178,7 @@ function PropertyCreate() {
                             <h3 className="text-center ">Create Property</h3>
                         </div>
                         <div className="text-end col">
-                            <button type="submit" className="btn btn-primary" onClick={handleClick}>Create</button>
+                            <button type="submit" className="btn btn-warning" onClick={handleClick}>Create</button>
                         </div>
                     </div>
 
@@ -299,8 +307,14 @@ function PropertyCreate() {
                             {image.length > 0 && (
                                 <div>
                                     {image.map((image, index) => (
-                                        <img src={`${URL.createObjectURL(image)}`} key={index} alt="" />
+                                        <div key={index} className="image-container">
+                                            <img src={`${URL.createObjectURL(image)}`} alt="" />
+                                            <button className="remove-image" onClick={() => removeImage(index)}>
+                                                x
+                                            </button>
+                                        </div>
                                     ))}
+
                                 </div>
                             )}
 
@@ -330,7 +344,7 @@ function PropertyCreate() {
             <Modal show={showPopup} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Create Popup</Modal.Title>
-                </Modal.Header>
+                </Modal.Header >
                 <Modal.Body>
                     <Cart amount={valueOfAdd[propertyData?.subscribe]} formData={myFormData} setIsPaymentSuccess={setIsPaymentSuccess} />
                 </Modal.Body>

@@ -50,6 +50,7 @@ const router = createBrowserRouter([
       { path: 'properties', element: <TableOfProperties /> },
       { path: 'transactions', element: <TableOfTransactions /> },
       { path: 'subscriptions', element: <TableOfSubscriptions /> },
+      { path: '*', element: <NotFound /> }
     ],
   },
 ]);
