@@ -3,25 +3,26 @@ import Joi from 'joi';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import classes from './ChangePassword.module.css'
 
 const schema = Joi.object({
-  oldPassword: Joi.string().min(6).max(30).required(),
-  newPassword: Joi.string().min(6).max(30).required(),
-  confirmPassword: Joi.ref('newPassword')
+  passwordCurrent: Joi.string().min(8).max(30).required(),
+  password: Joi.string().min(8).max(30).required(),
+  passwordConfirm: Joi.ref('password')
 });
 
 const ChangePasswordProfile = () => {
   const [disableBtn, setDisableBtn] = useState(false);
-  const [oldPassword, setOldPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [passwordCurrent, setOldPassword] = useState('');
+  const [password, setNewPassword] = useState('');
+  const [passwordConfirm, setConfirmPassword] = useState('');
   const [errors, setErrors] = useState({});
 
   const handleSaveChanges = () => {
     const updatedUser = {
-      oldPassword,
-      newPassword,
-      confirmPassword,
+      passwordCurrent,
+      password,
+      passwordConfirm,
     };
 
     const validationResult = schema.validate(updatedUser, { abortEarly: false });
@@ -34,19 +35,23 @@ const ChangePasswordProfile = () => {
       setErrors(newErrors);
       return;
     }
-
+    setDisableBtn(true);
     axios
-      .patch('https://aqary-eg.onrender.com/auth/------------------------------', updatedUser, {
+      .patch('https://aqary-eg.onrender.com/auth/user/updatePassword', updatedUser, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }
       })
       .then((response) => {
+        console.log(response.data.token);
         Swal.fire({
           icon: 'success',
           title: 'Success',
           text: 'Password updated successfully'
-        })
+        });
+        localStorage.removeItem('token');
+        localStorage.setItem('token', response.data.token);
+        setDisableBtn(false)
       })
       .catch((error) => {
         Swal.fire({
@@ -54,22 +59,23 @@ const ChangePasswordProfile = () => {
           title: 'Error',
           text: 'An error occurred while updating your password'
         });
+        setDisableBtn(false)
       });
-  };
+    };
 
   const handleOldPasswordChange = (event) => {
     setOldPassword(event.target.value);
-    setErrors({ ...errors, oldPassword: '' });
+    setErrors({ ...errors, passwordCurrent: '' });
   };
 
   const handleNewPasswordChange = (event) => {
     setNewPassword(event.target.value);
-    setErrors({ ...errors, newPassword: '' });
+    setErrors({ ...errors, password: '' });
   };
 
   const handleConfirmPasswordChange = (event) => {
     setConfirmPassword(event.target.value);
-    setErrors({ ...errors, confirmPassword: '' });
+    setErrors({ ...errors, passwordConfirm: '' });
   };
 
   return (
@@ -99,15 +105,15 @@ const ChangePasswordProfile = () => {
                       Old Password
                     </label>
                     <input
-                      className={`form-control ${errors.oldPassword ? 'is-invalid' : ''}`}
+                      className={`form-control ${errors.passwordCurrent ? 'is-invalid' : ''}`}
                       id='inputOldPassword'
                       type='password'
                       disabled={disableBtn}
-                      value={oldPassword}
+                      value={passwordCurrent}
                       onChange={handleOldPasswordChange}
                     />
-                    {errors.oldPassword && (
-                      <div className='invalid-feedback'>{errors.oldPassword}</div>
+                    {errors.passwordCurrent && (
+                      <div className='invalid-feedback'>{errors.passwordCurrent}</div>
                     )}
                   </div>
                   {/* Form Group (new password) */}
@@ -116,15 +122,15 @@ const ChangePasswordProfile = () => {
                       New Password
                     </label>
                     <input
-                      className={`form-control ${errors.newPassword ? 'is-invalid' : ''}`}
+                      className={`form-control ${errors.password ? 'is-invalid' : ''}`}
                       id='inputNewPassword'
                       type='password'
                       disabled={disableBtn}
-                      value={newPassword}
+                      value={password}
                       onChange={handleNewPasswordChange}
                     />
-                    {errors.newPassword && (
-                      <div className='invalid-feedback'>{errors.newPassword}</div>
+                    {errors.password && (
+                      <div className='invalid-feedback'>{errors.password}</div>
                     )}
                   </div>
                   {/* Form Group (confirm new password) */}
@@ -133,15 +139,15 @@ const ChangePasswordProfile = () => {
                       Confirm New Password
                     </label>
                     <input
-                      className={`form-control ${errors.confirmPassword ? 'is-invalid' : ''}`}
+                      className={`form-control ${errors.passwordConfirm ? 'is-invalid' : ''}`}
                       id='inputConfirmPassword'
                       type='password'
                       disabled={disableBtn}
-                      value={confirmPassword}
+                      value={passwordConfirm}
                       onChange={handleConfirmPasswordChange}
                     />
-                    {errors.confirmPassword && (
-                      <div className='invalid-feedback'>{errors.confirmPassword}</div>
+                    {errors.passwordConfirm && (
+                      <div className='invalid-feedback'>{errors.passwordConfirm}</div>
                     )}
                   </div>
                   {/* Save changes button */}
@@ -150,9 +156,10 @@ const ChangePasswordProfile = () => {
                       <button
                         type='button'
                         className='btn btn-primary'
+                        disabled={disableBtn}
                         onClick={handleSaveChanges}
                       >
-                        Save Changes
+                        Save Change
                       </button>
                     </div>
                   )}
