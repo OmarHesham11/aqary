@@ -25,6 +25,11 @@ import AboutUs from './pages/AboutUs/AboutUs';
 import ContactUs from './pages/ContactUs/ContactUs';
 
 
+// import Cart from './components/Cart';
+import AboutUs from './pages/AboutUs/AboutUs'
+import ContactUs from './pages/ContactUs/contactUs';
+import ChangePasswordProfile from './components/ChangePasswordProfile';
+import PropertyEdit from './components/property/PropertyEdit';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -42,7 +47,9 @@ const router = createBrowserRouter([
       { path: "aboutUs", element: <AboutUs /> },
       { path: "contactUs", element: <ContactUs /> },
       { path: "auth/profileProperties", element: <ProfilePropertiesPage /> },
+      { path: "auth/edit-property/:id", element: <PropertyEdit /> },
       { path: "/auth/UpdateUserPropery", element: <UpdateUserPropertyPage /> },
+      { path: "/auth/change-password", element: <ChangePasswordProfile /> },
       { path: 'logout', action: logoutAction },
       { path: '*', element: <NotFound /> }
     ],

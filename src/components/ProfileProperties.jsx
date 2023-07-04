@@ -60,12 +60,18 @@ const ProfileProperties = () => {
 
   return (
     <>
-      <nav className="nav nav-borders" style={{marginTop: "80px",  marginLeft: "10px"}}>
-      <Link to="/auth/profile" className="nav-link active ms-0">Profile</Link>
-      <Link to="/auth/profileProperties" className="nav-link">Property</Link>
+    <nav className='nav nav-borders' style={{ marginTop: '80px' }}>
+      <Link to='/auth/profile' className='nav-link active ms-0'>
+        Profile
+      </Link>
+      <Link to='/auth/profileProperties' className='nav-link'>
+        Property
+      </Link>
+      <Link to='/auth/change-password' className='nav-link'>
+        change your password
+      </Link>
     </nav>
-    <hr className="mt-0 mb-4" />
-
+    <hr className='mt-0 mb-4' />
     <Row xs={1} s={1} md={2} lg={3} className="g-2 ms-2 margin-top-Row mt-3 me-2 mouse">
   {data.length > 0 ? (
     data.map((property, id) => (
@@ -76,7 +82,7 @@ const ProfileProperties = () => {
             <Card.Title>EGP {property.price.toLocaleString()}</Card.Title>
             <Card.Text>{property.address}</Card.Text>
             <Card.Text>Contact Phone : {property.contractPhone}</Card.Text>
-            <Link to="/auth/UpdateUserPropery">            <Button variant="warning" >Update</Button></Link>
+            <Link to={`/auth/edit-property/${property._id}`}>            <Button variant="warning" >Update</Button></Link>
           </Card.Body>
         </Card>
       </Col>
