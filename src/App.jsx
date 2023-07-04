@@ -20,6 +20,8 @@ import Profile from './components/Profile';
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ProfilePage from './pages/ProfilePage';
+import ProfileProperties from './components/ProfileProperties';
+import ProfilePropertiesPage from './pages/ProfilePropertiesPage';
 // import Cart from './components/Cart';
 
 const router = createBrowserRouter([
@@ -35,7 +37,8 @@ const router = createBrowserRouter([
       { path: 'properties', element: <PropertiesPage /> },
       { path: 'property/:propertyId', element: <PropertyDetails /> },
       { path: 'postProperty', element: <PropertyCreate /> },
-      {path: "profile", element: <ProfilePage />},
+      {path: "auth/profile", element: <ProfilePage />},
+      {path: "auth/profileproperties", element: <ProfilePropertiesPage/>},
       { path: 'logout', action: logoutAction },
       { path: '*', element: <NotFound /> }
     ],
