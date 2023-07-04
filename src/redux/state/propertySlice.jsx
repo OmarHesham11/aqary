@@ -62,6 +62,22 @@ export const searchProperties = createAsyncThunk("properties/searchProperties", 
     }
 });
 
+export const fetchUserProperties = createAsyncThunk("properties/userProperties", async (_, thunkAPI) => {
+    const { rejectWithValue } = thunkAPI;
+    try {
+        const response = await fetch(`https://aqary-eg.onrender.com/auth/property/`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            },
+        });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        return rejectWithValue(error.message);
+    }
+});
+
+
 const propertiesSlice = createSlice({
     name: "properties",
     initialState,
@@ -79,6 +95,18 @@ const propertiesSlice = createSlice({
             .addCase(fetchProperties.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
+            })
+            .addCase(fetchUserProperties.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(fetchUserProperties.fulfilled, (state, action) => {
+                state.loading = false;
+                state.properties = action.payload;
+            })
+            .addCase(fetchUserProperties.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message;
             })
             .addCase(searchProperties.pending, (state) => {
                 state.error = null;
