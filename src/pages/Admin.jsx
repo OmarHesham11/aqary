@@ -4,7 +4,6 @@ import useIsAdmin from "../hooks/useAdmin";
 
 const Admin = () => {
   const isAdmin = useIsAdmin();
-  console.log(isAdmin)
   if (!isAdmin) {
     return (
       <h1>404 Not Found</h1>

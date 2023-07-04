@@ -42,7 +42,6 @@ function TableOfProperties() {
       setLoading(false);
     })
     .catch(error => {
-      console.log(error);
       Swal.fire('Error', error.message, 'error');
       setLoading(false);
     });
@@ -70,7 +69,7 @@ function TableOfProperties() {
         setProperties(properties.filter(property => property._id !== id));
       })
       .catch(error => {
-        console.log(error);
+        Swal.fire('Error', error.message, 'error');
       });
   };
 

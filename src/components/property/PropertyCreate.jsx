@@ -7,6 +7,7 @@ import Cart from '../Cart';
 import './styles/createProperty.css';
 import Validation from '../Validation';
 import { Button, Modal } from "react-bootstrap";
+import Swal from 'sweetalert2';
 
 const valueOfAdd = {
     PROPERTY_HOUR: 1,
@@ -15,9 +16,24 @@ const valueOfAdd = {
     PROPERTY_MONTH: 10,
 }
 
+const initPropertyData = {
+    userId: '',
+    address: '',
+    city: '',
+    title: '',
+    level: 0,
+    rooms: 0,
+    baths: 0,
+    description: '',
+    price: 0,
+    area: 0,
+    contractPhone: '',
+    paymentOption: 'cash',
+    subscribe: 'PROPERTY_HOUR',
+};
+
 function PropertyCreate() {
 
-    const [ myFormData, setMyFormData ] = useState({});
     const dispatch = useDispatch();
 
     const cities = useSelector((state) => state.cities.cities);
@@ -28,26 +44,22 @@ function PropertyCreate() {
 
     //Handling payment
     const [showPopup, setShowPopup] = useState(false);
-
-
+    const [ myFormData, setMyFormData ] = useState({});
+    const [ isPaymentSuccess, setIsPaymentSuccess ] = useState(false);
     const [formErrors, setFormErrors] = useState({});
 
     const [image, setImage] = useState([])
-    const [propertyData, setPropertyData] = useState({
-        userId: '649db4ae75fc1c6db6d97554',
-        address: '',
-        city: '',
-        title: '',
-        level: 0,
-        rooms: 0,
-        baths: 0,
-        description: '',
-        price: 0,
-        area: 0,
-        contractPhone: '',
-        paymentOption: 'cash',
-        subscribe: 'PROPERTY_HOUR',
-    });
+
+    useEffect(() => {
+        if(showPopup) {
+            setShowPopup(false);
+            setPropertyData(initPropertyData);
+            Swal.fire('Success', 'Property created successfully', 'success');
+        }
+    }, [isPaymentSuccess]);
+
+
+    const [propertyData, setPropertyData] = useState(initPropertyData);
 
     const handleClick = () => {
         setShowPopup(true);
@@ -126,11 +138,8 @@ function PropertyCreate() {
                 formData.append('image', ig);
             });
             setMyFormData(formData);
-            const response = await dispatch(createProperty(formData));
-            console.log('submitted', response);
-            if (response.error) { setFormErrors(error) }
         } catch (error) {
-            console.log(error);
+            Swal.fire('Error', error, 'error');
         }
     };
 
@@ -323,7 +332,7 @@ function PropertyCreate() {
                     <Modal.Title>Create Popup</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Cart amount={valueOfAdd[propertyData?.subscribe]} formData={myFormData} />
+                    <Cart amount={valueOfAdd[propertyData?.subscribe]} formData={myFormData} setIsPaymentSuccess={setIsPaymentSuccess} />
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>

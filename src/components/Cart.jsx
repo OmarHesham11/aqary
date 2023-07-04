@@ -1,23 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Paypal from "./Paypal";
-import axios from "axios";
 
-function Cart({ amount, formData }) {
+function Cart({ amount, formData, setIsPaymentSuccess }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
   const [transactionsData, setTransactionData] = useState({});
-  useEffect(() => {
-    console.log("transactionsData: ", transactionsData);
-  }, [transactionsData])
 
-
-  useEffect(() => {
-    if (submitSuccess) {
-      setSubmitSuccess(false);
-      // sendTransaction();
-    }
-  }, [submitSuccess]);
-  console.log(formData)
   return (
 
     <div className="cart container mx-auto">
@@ -27,13 +14,13 @@ function Cart({ amount, formData }) {
           <>
             <div>
               <Paypal
-                userId={"mohamedadel"}
+                userId={''}
                 amount={amount}
                 formData={formData}
                 isSubmitting={isSubmitting}
                 setIsSubmitting={setIsSubmitting}
-                submitSuccess={submitSuccess}
-                setSubmitSuccess={setSubmitSuccess}
+                // submitSuccess={submitSuccess}
+                setSubmitSuccess={setIsPaymentSuccess}
                 setTransactionData={setTransactionData}
 
               />

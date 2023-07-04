@@ -6,6 +6,7 @@ import { OverviewCountPaidUser } from './cards/OverviewCountPaidUser';
 import { useMemo, useState, memo } from 'react';
 import axios from 'axios';
 import Loading from '../Loading';
+import Swal from 'sweetalert2';
 
 function StatisticsBar() {
   const [loading, setLoading] = useState(true);
@@ -20,10 +21,9 @@ function StatisticsBar() {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }
       });
-      console.log(res.data)
       return res.data;
     } catch (err) {
-      console.log(err.message)
+      Swal.fire('Error', err.message, 'error');
     }
   };
 
