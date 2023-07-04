@@ -26,9 +26,7 @@ function NavBar() {
                         <NavLink className="navbar-brand" to="/"><span className="text-warning">House</span>Hunters</NavLink>
 
                         <Searching />
-
-                        <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-
+                        <ul className="navbar-nav ms-auto mb-2 mb-lg-0 text-center">
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="/">Home</NavLink>
                             </li>
@@ -40,9 +38,7 @@ function NavBar() {
                                     <NavLink className="nav-link" to="/auth/login">Login</NavLink>
                                 </li>
                             }
-
                             {!token &&
-
                                 <li className="nav-item">
                                     <NavLink className="nav-link" to="/auth/register">Register</NavLink>
                                 </li>
@@ -52,22 +48,20 @@ function NavBar() {
                                     <NavLink className="nav-link" to="/postProperty">create Property</NavLink>
                                 </li>
                             }
-
                             {token &&
-                                <li className="nav-item">
+                                <li className="nav-item d-flex align-items-center">
                                     <Form action='/logout' method='post'>
                                         <button className='nav-link'>Logout</button>
                                     </Form>
                                 </li>
                             }
-                            
                             {userData && userData.firstName &&
                                 <li className="nav-item">
                                     <a className="nav-link disabled" style={{ color: 'orange' }}>{`Ahlan ${userData.firstName}!`}</a>
                                 </li>
                             }
-
                         </ul>
+
 
                     </div>
 

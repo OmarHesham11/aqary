@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import Paypal from "./Paypal";
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
+import { replace } from "formik";
 function Cart({ amount, formData }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [transactionsData, setTransactionData] = useState({});
+
+  const navigate = useNavigate();
   useEffect(() => {
     console.log("transactionsData: ", transactionsData);
   }, [transactionsData])
@@ -14,9 +17,11 @@ function Cart({ amount, formData }) {
   useEffect(() => {
     if (submitSuccess) {
       setSubmitSuccess(false);
+      const propertyId = transactionsData._id;
+      navigate(`/property/${propertyId}`, { replace: true });
       // sendTransaction();
     }
-  }, [submitSuccess]);
+  }, [submitSuccess, transactionsData, navigate]);
   console.log(formData)
   return (
 

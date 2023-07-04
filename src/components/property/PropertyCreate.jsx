@@ -7,6 +7,7 @@ import Cart from '../Cart';
 import './styles/createProperty.css';
 import Validation from '../Validation';
 import { Button, Modal } from "react-bootstrap";
+import { useNavigate } from 'react-router-dom';
 
 const valueOfAdd = {
     PROPERTY_HOUR: 1,
@@ -19,7 +20,7 @@ function PropertyCreate() {
 
     const [myFormData, setMyFormData] = useState({});
     const dispatch = useDispatch();
-
+    const Navigate = useNavigate();
     const cities = useSelector((state) => state.cities.cities);
     const loading = useSelector((state) => state.cities.loading);
     const error = useSelector((state) => state.cities.error);
@@ -29,8 +30,6 @@ function PropertyCreate() {
     //Handling payment
     const [showPopup, setShowPopup] = useState(false);
     const [propertyCreated, setPropertyCreated] = useState(false);
-    const [popupFinished, setPopupFinished] = useState(false);
-
 
 
     const [formErrors, setFormErrors] = useState({});
@@ -58,6 +57,7 @@ function PropertyCreate() {
 
     const handleClose = () => {
         setShowPopup(false);
+
     };
 
     const handleInputChange = (e) => {
@@ -91,6 +91,15 @@ function PropertyCreate() {
         isDragActive,
 
     } = useDropzone({ onDrop });
+
+    const removeImage = (index) => {
+        setImage((currentImages) => {
+            const updatedImages = [...currentImages];
+            updatedImages.splice(index, 1);
+            return updatedImages;
+        });
+    };
+
 
     const handleCityChange = (e) => {
         const { value } = e.target;
@@ -132,9 +141,7 @@ function PropertyCreate() {
             const response = await dispatch(createProperty(formData));
             console.log('submitted', response);
             if (response.error) { setFormErrors(error) }
-            else {
-                setPropertyCreated(true); // Set the success state to true  
-            }
+            console.log('1');
         } catch (error) {
             console.log(error);
         }
@@ -145,14 +152,6 @@ function PropertyCreate() {
         dispatch(fetchCities());
         setImage([]);
     }, [dispatch]);
-
-
-    useEffect(() => {
-        // Close the modal when propertyCreated becomes true
-        if (propertyCreated && popupFinished) {
-            handleClose();
-        }
-    }, [propertyCreated, popupFinished]);
 
 
 
@@ -177,7 +176,7 @@ function PropertyCreate() {
                             <h3 className="text-center ">Create Property</h3>
                         </div>
                         <div className="text-end col">
-                            <button type="submit" className="btn btn-primary" onClick={handleClick}>Create</button>
+                            <button type="submit" className="btn btn-warning" onClick={handleClick}>Create</button>
                         </div>
                     </div>
 
@@ -306,8 +305,14 @@ function PropertyCreate() {
                             {image.length > 0 && (
                                 <div>
                                     {image.map((image, index) => (
-                                        <img src={`${URL.createObjectURL(image)}`} key={index} alt="" />
+                                        <div key={index} className="image-container">
+                                            <img src={`${URL.createObjectURL(image)}`} alt="" />
+                                            <button className="remove-image" onClick={() => removeImage(index)}>
+                                                x
+                                            </button>
+                                        </div>
                                     ))}
+
                                 </div>
                             )}
 

@@ -2,7 +2,10 @@
     background-repeat: no-repeat;
     background-size: cover;
     margin-top: 60px;
-    margin-bottom: 30px;
+    background-color: #edecf0;
+    padding-top: 45px;
+    box-shadow: rgba(0, 0, 0, 0.1);
+
 }
 
 
@@ -36,6 +39,7 @@
 .deneb_footer .widget_wrapper .widegt_about .social li {
     display: inline-block;
     margin-right: 10px;
+
 }
 
 .deneb_footer .widget_wrapper .widegt_about .social li a {
@@ -45,7 +49,7 @@
     line-height: 30px;
     text-align: center;
     border-radius: 50%;
-    background-color: #f9e6d4;
+    background-color: #edecf0;
     color: #fba543;
     font-size: 14px;
     -webkit-transition: all all 0.5s ease-out 0s;
@@ -66,11 +70,25 @@
 
 .deneb_footer .widget_wrapper .widget_link ul li {
     margin-bottom: 5px;
+    list-style: none;
+}
+
+.widget_link ul {
+    margin-left: 0;
+    padding-left: 0;
+
+}
+
+.widget_link ul li {
+    margin-bottom: 5px;
+    list-style: none;
+    padding-left: 0;
+
 }
 
 .deneb_footer .widget_wrapper .widget_link ul li a {
     text-transform: capitalize;
-    color: #7a808d;
+    color: black;
 }
 
 .deneb_footer .widget_wrapper .widget_link ul li a:hover,
@@ -92,7 +110,11 @@
 }
 
 .deneb_footer .widget_wrapper .widget_contact .contact_info .single_info .info p a {
-    color: #7a808d;
+    color: black;
+}
+
+.deneb_footer .widget_wrapper .widget_contact .contact_info .single_info .info p a:hover {
+    color: #feb000;
 }
 
 .deneb_footer .widget_wrapper .widget_contact .contact_info .single_info .info p span {
@@ -100,12 +122,19 @@
 }
 
 .deneb_footer .copyright_area {
+
     background: #edecf0;
     padding: 10px 0;
 }
 
+.deneb_footer .copyright_area .container {
+    border-top: 1px solid #a9a9ac;
+
+}
+
 .deneb_footer .copyright_area .copyright_text {
     text-align: center;
+    padding-top: 14px;
 }
 
 .deneb_footer .copyright_area .copyright_text p {
