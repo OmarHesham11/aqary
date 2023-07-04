@@ -63,7 +63,7 @@ function NavBar() {
                                 // </li>
 
                                 <li className="nav-item">
-                                    <NavLink className="nav-link" style={{ color: 'orange' }} to="/profile">{`Ahlan ${userData.firstName}!`}</NavLink>
+                                    <NavLink className="nav-link" style={{ color: 'orange' }} to="/auth/profile">{`Ahlan ${userData.firstName}!`}</NavLink>
                                 </li>
                             }
                         </ul>
