@@ -13,8 +13,8 @@ export default function TableOfSubscriptions() {
       }
     })
       .then(res => {
-        console.log(res.data)
-        setSubscriptions(res.data);
+        const newData = Array.isArray(res.data) ? res.data : [];
+        setSubscriptions(newData);
       })
       .catch(error => {
         Swal.fire('Error', error.message, 'error');
@@ -23,7 +23,7 @@ export default function TableOfSubscriptions() {
 
   return (
     <TableContainer component={Paper}>
-      <Table className={{minWidth: 650}} aria-label="properties table">
+      <Table>
         <TableHead>
           <TableRow>
             <TableCell>user</TableCell>
