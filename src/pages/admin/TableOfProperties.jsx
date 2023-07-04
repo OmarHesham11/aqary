@@ -59,7 +59,7 @@ function TableOfProperties() {
   }, [filters, pagination.page, pagination.pageSize]);
 
   const handleDelete = (id) => {
-    axios.delete(`https://aqary-eg.onrender.com/backOffice/property/${id}`, {
+    axios.delete(`https://aqary-eg.onrender.com/backOffice/properties/${id}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`
       }
