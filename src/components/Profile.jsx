@@ -75,9 +75,7 @@ const Profile = () => {
     setErrors({ ...errors, lastName: '' });
   };
   
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
+
 
   return (
     <div className='main-class'>
