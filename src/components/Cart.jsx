@@ -6,13 +6,9 @@ import { replace } from "formik";
 function Cart({ amount, formData }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
-  const [transactionsData, setTransactionData] = useState({}); 0
+  const [transactionsData, setTransactionData] = useState({});
 
   const navigate = useNavigate();
-  useEffect(() => {
-    console.log("transactionsData: ", transactionsData);
-  }, [transactionsData])
-
 
   useEffect(() => {
     if (submitSuccess) {
@@ -22,7 +18,6 @@ function Cart({ amount, formData }) {
       // sendTransaction();
     }
   }, [submitSuccess, transactionsData, navigate]);
-  console.log(formData)
   return (
 
     <div className="cart container mx-auto">
