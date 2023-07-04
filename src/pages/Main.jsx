@@ -4,6 +4,7 @@ import { getTokenDuration } from '../util/auth';
 import Footer from './home/Footer';
 import NavBar from './home/NavBar';
 import './style.css';
+import GotoDashboard from '../components/GotoDashboard';
 
 function Main() {
 
@@ -33,7 +34,7 @@ function Main() {
       <NavBar />
 
       <Outlet />
-
+      <GotoDashboard />
       <Footer />
     </>
   );

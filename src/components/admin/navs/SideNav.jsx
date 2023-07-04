@@ -11,6 +11,8 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
 
 // icons
 import DashboardIcon from '@mui/icons-material/Dashboard';
@@ -18,90 +20,72 @@ import HouseIcon from '@mui/icons-material/House';
 import GroupIcon from '@mui/icons-material/Group';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import PublicIcon from '@mui/icons-material/Public';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import SideNavItem from './SideNavItem';
 
 const drawerWidth = 240;
 
 export default function SideNav() {
+  const navigate = useNavigate();
+  const to = (link) => {
+    return () => navigate(link);
+  }
   return (
-      <Drawer
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
-            width: drawerWidth,
-            boxSizing: 'border-box',
-          },
-        }}
-        variant="permanent"
-        anchor="left"
-      >
-        
-        <List>
-            <ListItem key={1} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <DashboardIcon />
-                </ListItemIcon>
-                <ListItemText primary={<NavLink to="/">Home</NavLink>} />
-              </ListItemButton>
-            </ListItem>
-        </List>
-        <Divider />
-        <List>
-            <ListItem key={1} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <DashboardIcon />
-                </ListItemIcon>
-                <ListItemText primary={<NavLink to="/admin">Dashboard</NavLink>} />
-              </ListItemButton>
-            </ListItem>
-        </List>
-        <List>
-            <ListItem key={2} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <HouseIcon />
-                </ListItemIcon>
-                <ListItemText primary={<NavLink to="/admin/properties">Properties</NavLink>} />
-                
-              </ListItemButton>
-            </ListItem>
-        </List>
-        <List>
-            <ListItem key={3} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <GroupIcon />
-                </ListItemIcon>
-                <ListItemText primary={<NavLink to="/admin/subscriptions">Subscriptions</NavLink>} />
-              </ListItemButton>
-            </ListItem>
-        </List>
-        <Divider />
-        <List>
-            <ListItem key={4} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <PublicIcon />
-                </ListItemIcon>
-                <ListItemText primary={<NavLink to="/admin/users">Users</NavLink>} />
-              </ListItemButton>
-            </ListItem>
-        </List>
-        
-        <List>
-            <ListItem key={4} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <AttachMoneyIcon />
-                </ListItemIcon>
-                <ListItemText primary={<NavLink to="/admin/transactions">Transactions</NavLink>} />
-              </ListItemButton>
-            </ListItem>
-        </List>
-      </Drawer>
+    <>
 
+      <List>
+        <ListItem key={1} disablePadding>
+          <ListItemButton onClick={to('/')}>
+            <ListItemIcon>
+              <DashboardIcon />
+            </ListItemIcon>
+            <ListItemText primary={"Home"} />
+          </ListItemButton>
+        </ListItem>
+      </List>
+      <Divider />
+      <List>
+        <ListItem key={1} disablePadding>
+          <ListItemButton onClick={to('/admin')}>
+            <ListItemIcon>
+              <DashboardIcon />
+            </ListItemIcon>
+            <ListItemText primary={"Dashboard"} />
+          </ListItemButton>
+        </ListItem>
+      </List><List>
+        <ListItem key={2} disablePadding>
+          <ListItemButton onClick={to('/admin/properties')}>
+            <ListItemIcon>
+              <HouseIcon />
+            </ListItemIcon>
+            <ListItemText primary={"Properties"} />
+
+          </ListItemButton>
+        </ListItem>
+      </List><List>
+        <ListItem key={3} disablePadding>
+          <ListItemButton onClick={to('/admin/subscriptions')}>
+            <ListItemIcon>
+              <GroupIcon />
+            </ListItemIcon>
+            <ListItemText primary={"Subscriptions"} />
+          </ListItemButton>
+        </ListItem>
+      </List>
+      <Divider />
+      <List>
+      </List>
+      <List>
+        <ListItem key={4} disablePadding>
+          <ListItemButton onClick={to('/admin/transactions')}>
+            <ListItemIcon>
+              <AttachMoneyIcon />
+            </ListItemIcon>
+            <ListItemText primary={"Transactions"} />
+          </ListItemButton>
+        </ListItem>
+      </List>
+    </>
   );
 }
