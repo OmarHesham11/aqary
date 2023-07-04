@@ -1,5 +1,5 @@
 import { redirect } from "react-router-dom";
-import RegisterForm from "../../components/Auth/Register";
+import RegisterForm from "../../components/Auth/register";
 
 const RegisterPage = () => {
   return (
@@ -49,5 +49,5 @@ export async function action({ request }) {
   localStorage.setItem('userData', JSON.stringify(resData.data.user));
 
   return redirect('/');
-}
+};
 

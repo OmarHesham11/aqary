@@ -47,6 +47,7 @@ function NavBar() {
                                     <NavLink className="nav-link" to="/auth/register">Register</NavLink>
                                 </li>
                             }
+                            
                             {token &&
                                 <li className="nav-item">
                                     <NavLink className="nav-link" to="/postProperty">create Property</NavLink>
@@ -60,7 +61,7 @@ function NavBar() {
                                     </Form>
                                 </li>
                             }
-                            
+
                             {userData && userData.firstName &&
                                 <li className="nav-item">
                                     <a className="nav-link disabled" style={{ color: 'orange' }}>{`Ahlan ${userData.firstName}!`}</a>
