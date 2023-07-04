@@ -11,7 +11,6 @@ const Profile = () => {
 
   const [firstName, setFirstName] = useState(User.firstName);
 const [lastName, setLastName] = useState(User.lastName);
-const [email, setEmail] = useState(User.email);
 
   const handleFirstNameChange = (event) => {
     setFirstName(event.target.value);
@@ -21,9 +20,7 @@ const [email, setEmail] = useState(User.email);
     setLastName(event.target.value);
   };
   
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
+
 
   return (
     <div className='main-class'>
@@ -83,7 +80,7 @@ const [email, setEmail] = useState(User.email);
                   {/* Form Group (birthday) */}
                   <div className="col-md-6">
                     <label className="small mb-1" htmlFor="inputBirthday">Birthday</label>
-                    <input className="form-control" id="inputBirthday" type="text" name="birthday" disabled={disableBtn} defaultValue={User.birthdate.slice(0,10)} />
+                    <input className="form-control" id="inputBirthday" type="text" name="birthday" disabled={disableBtn} defaultValue={User.birthdate} />
                   </div>
                 </div>
                 {/* Save changes button */}

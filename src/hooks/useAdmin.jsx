@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useState, useEffect, useMemo } from 'react';
 
 function isJsonString(str) {
   try {
@@ -12,10 +13,19 @@ function isJsonString(str) {
 const useIsAdmin = () => {
   const [isAdmin, setIsAdmin] = useState(false);
 
-  useEffect(() => {
-    const isAdminUser = (localStorage.getItem('user') && isJsonString(localStorage.getItem('user')) && JSON.parse(localStorage.getItem('user'))?.roleId);
-    setIsAdmin(isAdminUser === '649dd04c59fa040061014390' ? true : false);
-  }, []);
+  useMemo(() => {
+    // const BACKEND_URL = 'https://aqary-eg.onrender.com';
+    const BACKEND_URL = 'http://localhost:4000';
+      axios.get(`${BACKEND_URL}/backOffice/isadmin`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      }).then((res) => {
+        setIsAdmin(true)
+      }).catch((err) => {
+        setIsAdmin(false);
+      });
+  }, [localStorage.getItem('user')]);
 
   return isAdmin;
 };

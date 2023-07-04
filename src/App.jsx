@@ -20,6 +20,9 @@ import Profile from './components/Profile';
 import ProfilePage from './pages/ProfilePage';
 import ProfilePropertiesPage from './pages/ProfilePropertiesPage';
 import TableOfSubscriptions from './pages/admin/TableOfSubscriptions';
+import UpdateUserPropertyPage from './pages/UpdateUserPropertyPage';
+import TableOfCategories from './pages/admin/TableOfCategories';
+// import Cart from './components/Cart';
 
 // import Cart from './components/Cart';
 import AboutUs from './pages/AboutUs/AboutUs'
@@ -41,6 +44,7 @@ const router = createBrowserRouter([
       { path: "aboutUs", element: <AboutUs /> },
       { path: "contactUs", element: <ContactUs /> },
       { path: "auth/profileProperties", element: <ProfilePropertiesPage /> },
+      { path: "/auth/UpdateUserPropery", element: <UpdateUserPropertyPage /> },
       { path: 'logout', action: logoutAction },
       { path: '*', element: <NotFound /> }
     ],
@@ -54,6 +58,7 @@ const router = createBrowserRouter([
       { path: 'properties', element: <TableOfProperties /> },
       { path: 'transactions', element: <TableOfTransactions /> },
       { path: 'subscriptions', element: <TableOfSubscriptions /> },
+      { path: 'categories', element: <TableOfCategories /> },
       { path: '*', element: <NotFound /> }
     ],
   },
