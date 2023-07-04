@@ -15,17 +15,20 @@ const PropertiesList = ({ filteredProperties }) => {
 
   const dispatch = useDispatch();
   const data = useSelector((state) => state.properties.properties);
-  console.log(data.page);
+  console.log(data);
   const loading = useSelector((state) => state.properties.loading);
   const error = useSelector((state) => state.properties.error);
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = data.totalPages;
-  const currentItems = filteredProperties ? filteredProperties : data.properties || [];
+  const currentItems = data.properties || [];
   console.log(currentItems)
 
   useEffect(() => {
     dispatch(fetchProperties(currentPage));
   }, [dispatch, currentPage]);
+
+  useEffect(() => {
+  }, []);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);

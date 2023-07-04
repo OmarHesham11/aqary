@@ -23,11 +23,6 @@ import UpdateUserPropertyPage from './pages/UpdateUserPropertyPage';
 import TableOfCategories from './pages/admin/TableOfCategories';
 import AboutUs from './pages/AboutUs/AboutUs';
 import ContactUs from './pages/ContactUs/ContactUs';
-
-
-// import Cart from './components/Cart';
-import AboutUs from './pages/AboutUs/AboutUs'
-import ContactUs from './pages/ContactUs/contactUs';
 import ChangePasswordProfile from './components/ChangePasswordProfile';
 import PropertyEdit from './components/property/PropertyEdit';
 const router = createBrowserRouter([
