@@ -80,9 +80,10 @@ export const fetchUserProperties = createAsyncThunk("properties/userProperties",
 
 export const filterPropertiesByPrice = createAsyncThunk("properties/filterPropertiesByPrice", async (priceRange, thunkAPI) => {
     const { rejectWithValue, getState } = thunkAPI;
-    const { currentPage } = getState().properties;
+    const { page } = getState().properties.page;
+    console.log(getState().properties)
     try {
-        const response = await fetch(`https://aqary-eg.onrender.com/property/filter/properties/${priceRange.min}/?page=${currentPage}`);
+        const response = await fetch(`http://aqary-eg.onrender.com/property/filter/properties/${priceRange.min}/?page=${page}`);
         const data = await response.json();
         return data;
     } catch (error) {

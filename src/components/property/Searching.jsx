@@ -24,6 +24,7 @@ const Searching = () => {
 
     const handleResultClick = (property) => {
         navigate(`/property/${property._id}`);
+        setSearchQuery('');
     };
 
     useEffect(() => {
