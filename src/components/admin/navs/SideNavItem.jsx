@@ -1,9 +1,9 @@
-import Link, { NavLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { Link, NavLink, useNavigation } from 'react-router-dom';
 import { Box, ButtonBase } from '@mui/material';
 
-export const SideNavItem = (props) => {
+function SideNavItem(props) {
   const { active = false, disabled, external, icon, path, title } = props;
+  const navigate = useNavigation();
 
   const linkProps = path
     ? external
@@ -75,20 +75,20 @@ export const SideNavItem = (props) => {
             })
           }}
         >
-          <NavLink to={path}>
+          <span >
             {title}
-          </NavLink>
+          </span>
         </Box>
       </ButtonBase>
     </li>
   );
 };
-
-SideNavItem.propTypes = {
-  active: PropTypes.bool,
-  disabled: PropTypes.bool,
-  external: PropTypes.bool,
-  icon: PropTypes.node,
-  path: PropTypes.string,
-  title: PropTypes.string.isRequired
-};
+export default SideNavItem;
+// SideNavItem.propTypes = {
+//   active: PropTypes.bool,
+//   disabled: PropTypes.bool,
+//   external: PropTypes.bool,
+//   icon: PropTypes.node,
+//   path: PropTypes.string,
+//   title: PropTypes.string.isRequired
+// };
