@@ -20,6 +20,7 @@ import Profile from './components/Profile';
 import ProfilePage from './pages/ProfilePage';
 import ProfilePropertiesPage from './pages/ProfilePropertiesPage';
 import TableOfSubscriptions from './pages/admin/TableOfSubscriptions';
+import TableOfCategories from './pages/admin/TableOfCategories';
 // import Cart from './components/Cart';
 
 const router = createBrowserRouter([
@@ -50,6 +51,7 @@ const router = createBrowserRouter([
       { path: 'properties', element: <TableOfProperties /> },
       { path: 'transactions', element: <TableOfTransactions /> },
       { path: 'subscriptions', element: <TableOfSubscriptions /> },
+      { path: 'categories', element: <TableOfCategories /> },
       { path: '*', element: <NotFound /> }
     ],
   },
