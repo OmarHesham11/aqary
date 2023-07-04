@@ -20,6 +20,7 @@ import Profile from './components/Profile';
 import ProfilePage from './pages/ProfilePage';
 import ProfilePropertiesPage from './pages/ProfilePropertiesPage';
 import TableOfSubscriptions from './pages/admin/TableOfSubscriptions';
+import UpdateUserPropertyPage from './pages/UpdateUserPropertyPage';
 // import Cart from './components/Cart';
 
 const router = createBrowserRouter([
@@ -37,6 +38,7 @@ const router = createBrowserRouter([
       { path: 'postProperty', element: <PropertyCreate /> },
       { path: "auth/profile", element: <ProfilePage /> },
       { path: "auth/profileProperties", element: <ProfilePropertiesPage /> },
+      {path: "/auth/UpdateUserPropery", element: <UpdateUserPropertyPage/>},
       { path: 'logout', action: logoutAction },
       { path: '*', element: <NotFound /> }
     ],
