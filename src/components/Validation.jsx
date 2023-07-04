@@ -4,10 +4,10 @@ import React from 'react'
 const Validation = (propertyData, image) => {
     let tempErrors = {};
 
-    // Validate title
-    if (!propertyData.title) {
-        tempErrors.title = "Title is required";
-    }
+    // // Validate title
+    // if (!propertyData.title) {
+    //     tempErrors.title = "Title is required";
+    // }
 
     // Validate address
     if (!propertyData.address) {

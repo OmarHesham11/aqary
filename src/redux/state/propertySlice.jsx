@@ -23,9 +23,11 @@ export const createProperty = createAsyncThunk("properties/CreateProperty", asyn
             const data = response.data;
             return data;
         } else {
+
             return rejectWithValue(response.statusText);
         }
     } catch (error) {
+        console.log(error);
         return rejectWithValue(error.message);
     }
 });
