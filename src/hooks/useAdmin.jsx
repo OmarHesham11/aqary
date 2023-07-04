@@ -15,7 +15,7 @@ const useIsAdmin = () => {
   useEffect(() => {
     const isAdminUser = (localStorage.getItem('user') && isJsonString(localStorage.getItem('user')) && JSON.parse(localStorage.getItem('user'))?.roleId);
     setIsAdmin(isAdminUser === '649dd04c59fa040061014390' ? true : false);
-  }, []);
+  }, [localStorage.getItem('user')]);
 
   return isAdmin;
 };
