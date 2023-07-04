@@ -27,6 +27,7 @@ import TableOfCategories from './pages/admin/TableOfCategories';
 // import Cart from './components/Cart';
 import AboutUs from './pages/AboutUs/AboutUs'
 import ContactUs from './pages/ContactUs/contactUs';
+import ChangePasswordProfile from './components/ChangePasswordProfile';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -45,6 +46,7 @@ const router = createBrowserRouter([
       { path: "contactUs", element: <ContactUs /> },
       { path: "auth/profileProperties", element: <ProfilePropertiesPage /> },
       { path: "/auth/UpdateUserPropery", element: <UpdateUserPropertyPage /> },
+      { path: "/auth/change-password", element: <ChangePasswordProfile /> },
       { path: 'logout', action: logoutAction },
       { path: '*', element: <NotFound /> }
     ],

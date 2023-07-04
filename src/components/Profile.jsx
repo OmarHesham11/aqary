@@ -80,17 +80,19 @@ const Profile = () => {
   return (
     <div className='main-class'>
       <div className='px-4 mt-4' style={{ marginTop: '100px' }}>
-        {/* Account page navigation */}
-        <nav className='nav nav-borders' style={{ marginTop: '80px' }}>
-          <Link to='/auth/profile' className='nav-link active ms-0'>
-            Profile
-          </Link>
-          <Link to='/auth/profileProperties' className='nav-link'>
-            Property
-          </Link>
-        </nav>
-        <hr className='mt-0 mb-4' />
-        <div className='row'>
+      <nav className='nav nav-borders' style={{ marginTop: '80px' }}>
+        <Link to='/auth/profile' className='nav-link active ms-0'>
+          Profile
+        </Link>
+        <Link to='/auth/profileProperties' className='nav-link'>
+          Property
+        </Link>
+        <Link to='/auth/change-password' className='nav-link'>
+          change your password
+        </Link>
+      </nav>
+      <hr className='mt-0 mb-4' />
+        <div className='row justify-content-center'>
           <div className='col-xl-8'>
             {/* Account details card */}
             <div className='card mb-4'>
