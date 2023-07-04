@@ -42,8 +42,6 @@ const ChangePasswordProfile = () => {
         }
       })
       .then((response) => {
-        console.log(response.data);
-        setDisableBtn(true);
         Swal.fire({
           icon: 'success',
           title: 'Success',

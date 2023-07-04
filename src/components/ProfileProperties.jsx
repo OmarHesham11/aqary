@@ -82,7 +82,7 @@ const ProfileProperties = () => {
             <Card.Title>EGP {property.price.toLocaleString()}</Card.Title>
             <Card.Text>{property.address}</Card.Text>
             <Card.Text>Contact Phone : {property.contractPhone}</Card.Text>
-            <Link to="/auth/UpdateUserPropery">            <Button variant="warning" >Update</Button></Link>
+            <Link to={`/auth/edit-property/${property._id}`}>            <Button variant="warning" >Update</Button></Link>
           </Card.Body>
         </Card>
       </Col>
