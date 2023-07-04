@@ -1,13 +1,26 @@
+import Joi from 'joi';
 import { useState } from 'react';
 import { Button, Form, Modal } from "react-bootstrap";
+import Swal from 'sweetalert2';
 
 export default function CreateCategoryModal({ open, onClose, onCreate }) {
   const [categoryName, setCategoryName] = useState('');
-
+  const schema = Joi.object({
+    categoryName: Joi.string().min(2).max(6).required(),
+  });
   const handleCreateCategory = () => {
-    console.log(categoryName);
-    onCreate(categoryName);
-    setCategoryName('');
+    const { error } = schema.validate({ categoryName });
+    if (error) {
+      Swal.fire({
+        title: "Error!",
+        text: 'category name is invalid',
+        type: "Error",
+        timer: 2000,
+        });
+    } else {
+      onCreate(categoryName);
+      setCategoryName('');
+    }
   };
 
   return (

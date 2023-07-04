@@ -1,12 +1,23 @@
 import { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
+import Swal from 'sweetalert2';
 
 export default function EditCategoryModal({ category, open, onClose, onUpdate }) {
   const [categoryName, setCategoryName] = useState(category.name);
 
   const handleUpdateCategory = () => {
-    onUpdate(category._id, categoryName);
-    onClose();
+    const { error } = schema.validate({ categoryName });
+    if (error) {
+      Swal.fire({
+        title: "Error!",
+        text: 'category name is invalid',
+        type: "Error",
+        timer: 3000
+        });
+    } else {
+      onUpdate(category._id, categoryName);
+      onClose();
+    }
   };
 
   return (
