@@ -31,7 +31,7 @@ function NavBar() {
                                 <NavLink className="nav-link" to="/">Home</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link" to="/properties">Property</NavLink>
+                                <NavLink className="nav-link" to="/properties">Find property</NavLink>
                             </li>
                             {!token &&
                                 <li className="nav-item">
@@ -43,12 +43,6 @@ function NavBar() {
                                     <NavLink className="nav-link" to="/auth/register">Register</NavLink>
                                 </li>
                             }
-
-                            {token &&
-                                <li className="nav-item">
-                                    <NavLink className="nav-link" to="/postProperty">create Property</NavLink>
-                                </li>
-                            }
                             {token &&
                                 <li className="nav-item d-flex justify-content-center">
                                     <Form action='/logout' method='post'>
@@ -56,14 +50,20 @@ function NavBar() {
                                     </Form>
                                 </li>
                             }
-
                             {userData && userData.firstName &&
-                                // <li className="nav-item">
-                                //     <a className="nav-link disabled"  style={{ color: 'orange' }}>{`Ahlan ${userData.firstName}!`}</a>
-                                // </li>
-
                                 <li className="nav-item">
                                     <NavLink className="nav-link" style={{ color: 'orange' }} to="/auth/profile">{`Ahlan ${userData.firstName}!`}</NavLink>
+                                </li>
+                            }
+
+                            {token &&
+                                <li className="nav-item">
+                                    <NavLink className="nav-link" to="/postProperty">Create Ad</NavLink>
+                                </li>
+                            }
+                            {!token &&
+                                <li className="nav-item btn btn-success p-0">
+                                    <NavLink className="nav-link" to="/auth/login">Create Ad</NavLink>
                                 </li>
                             }
                         </ul>
