@@ -5,6 +5,7 @@ import {
   usePayPalScriptReducer,
 } from "@paypal/react-paypal-js";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const currency = "USD";
 const style = { layout: "vertical" };
@@ -137,7 +138,6 @@ const ButtonWrapper = ({
         createOrder={(data, actions) => {
           return createOrder(data, actions, userId, amount, formData)
             .then((orderId) => {
-              console.log(orderId)
               return orderId;
             });
         }}
@@ -145,10 +145,10 @@ const ButtonWrapper = ({
           return onApprove(data, userId, amount, currency, formData, setTransactionData, setIsSubmitting, setSubmitSuccess);
         }}
         onCancel={() => {
-          console.log("cancelled");
+          Swal.fire('Warning', 'you have canceled the order', 'info');
         }}
         onError={() => {
-          console.log("An Error occured with your payment ");
+          Swal.fire('Error', "An Error occured with your payment", 'error');
         }}
       />
     </>

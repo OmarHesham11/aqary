@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 function getDateTime(date) {
   const options = {
@@ -29,7 +30,7 @@ export default function TableOfTransactions() {
         setTransactions(res.data);
       })
       .catch(error => {
-        console.log(error);
+        Swal.fire('Error', error.message, 'error');
       });
   }, []);
 
@@ -46,8 +47,8 @@ export default function TableOfTransactions() {
         <TableBody>
           {transactions.map((property) => (
             <TableRow key={property._id}>
-              <TableCell>{property.userId.name}</TableCell>
-              <TableCell>{property.amount}</TableCell>
+              <TableCell>{property?.userId?.firstName}</TableCell>
+              <TableCell>{property?.amount}</TableCell>
               <TableCell>{getDateTime(property.createdAt)}</TableCell>
             </TableRow>
           ))}

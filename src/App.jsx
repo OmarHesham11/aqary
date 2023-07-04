@@ -5,7 +5,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Home from './pages/home/Home';
 import LoginPage, { action as loginAction } from './pages/authentication/LoginPage';
 import { action as logoutAction } from './pages/authentication/Logout';
-import { checkAuthLoader, tokenLoader } from './util/auth';
+import { tokenLoader } from './util/auth';
 import RegisterPage, { action as registerAction } from './pages/authentication/RegisterPage';
 import PropertiesPage from './pages/property/propertiesPage';
 import PropertyDetails from './pages/property/propertyDetailsPage';
@@ -16,8 +16,9 @@ import PropertyCreate from './components/property/PropertyCreate';
 import NotFound from './pages/NotFound/NotFound'
 import Main from './pages/Main';
 import TableOfTransactions from './pages/admin/TableOfTransactions';
-
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Profile from './components/Profile';
+import ProfilePage from './pages/ProfilePage';
+import ProfilePropertiesPage from './pages/ProfilePropertiesPage';
 // import Cart from './components/Cart';
 
 const router = createBrowserRouter([
@@ -33,8 +34,10 @@ const router = createBrowserRouter([
       { path: 'properties', element: <PropertiesPage /> },
       { path: 'property/:propertyId', element: <PropertyDetails /> },
       { path: 'postProperty', element: <PropertyCreate /> },
+      { path: "auth/profile", element: <ProfilePage /> },
+      { path: "auth/profileProperties", element: <ProfilePropertiesPage /> },
       { path: 'logout', action: logoutAction },
-      // { path: '*', element: <NotFound /> }
+      { path: '*', element: <NotFound /> }
     ],
   },
   {
@@ -52,39 +55,6 @@ const router = createBrowserRouter([
 
 export default function App() {
   return (
-    <RouterProvider router={router} />
-    // <>
-
-    //   <BrowserRouter>
-
-    //     <Routes>
-    //       <Route path="/" element={ <Main /> }>
-    //         <Route index={ true } element={ <Home /> } />
-    //         <Route path="/properties" element={ <PropertiesPage /> } />
-    //         <Route path="/property/:propertyId" element={ <PropertyDetails /> } />
-    //         <Route path='/auth' element={ <LoginPage /> } />
-    //         <Route path="/postProperty" element={ <PropertyCreate /> } />
-    //       </Route>
-
-
-    //       <Route path="/admin" element={ <Admin /> }>
-    //         <Route index={ true } element={ <Dashboard /> } />
-    //         <Route path="properties" element={ <TableOfProperties /> } />
-    //         <Route path="hello" element={ <h1>Hello world</h1> } />
-    //         <Route path="transactions" element={ <TableOfTransactions /> } />
-    //       </Route>
-    //     </Routes>
-    //   </BrowserRouter>
-
-    // </>
-
-    //   )
-    // };
-
-    //     //       </Route>
-    //     //     </Routes>
-    //       </BrowserRouter>
-
-    //     </>
+    <RouterProvider router={ router } />
   );
 }

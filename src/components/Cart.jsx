@@ -6,7 +6,7 @@ import { replace } from "formik";
 function Cart({ amount, formData }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
-  const [transactionsData, setTransactionData] = useState({});
+  const [transactionsData, setTransactionData] = useState({}); 0
 
   const navigate = useNavigate();
   useEffect(() => {

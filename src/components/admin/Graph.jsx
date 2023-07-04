@@ -17,7 +17,6 @@ function Graph() {
         }
       }).then((res) => {
         setData(res.data.countPropertiesForEachCity);
-        console.log(res.data)
         setLoading(false);
       }).catch((err) => {
         console.error(err);
