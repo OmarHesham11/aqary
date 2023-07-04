@@ -50,7 +50,7 @@ function NavBar() {
                                 </li>
                             }
                             {token &&
-                                <li className="nav-item d-flex align-items-center">
+                                <li className="nav-item d-flex justify-content-center">
                                     <Form action='/logout' method='post'>
                                         <button className='nav-link'>Logout</button>
                                     </Form>
