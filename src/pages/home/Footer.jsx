@@ -56,7 +56,7 @@ function Footer() {
                                                 <i className="fas fa-envelope"></i>
                                             </div>
                                             <div className="info">
-                                                <p><a href="mailto:info@deneb.com">info@deneb.com</a></p>
+                                                <p><a href="/contactUs">contact Us</a></p>
                                             </div>
                                         </div>
 

@@ -15,7 +15,7 @@
 
 .auth h1 {
   text-align: center;
-  color: orange;
+  color: black;
   margin-bottom: 2rem;
 }
 
@@ -25,7 +25,7 @@
 
 .control label {
   display: block;
-  color: orange;
+  color: black;
   font-weight: bold;
   margin-bottom: 0.5rem;
 }
@@ -56,7 +56,7 @@
 .actions button {
   cursor: pointer;
   font: inherit;
-  color: white;
+  color: black;
   background-color: orange;
   border: 1px solid orange;
   border-radius: 4px;
