@@ -13,7 +13,7 @@ function NavBar() {
 
     return (
         <>
-            <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top vh-150 mouse">
+            <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top vh-150 mouse ">
 
                 <div className="container">
 
@@ -23,7 +23,7 @@ function NavBar() {
 
                     <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
 
-                        <NavLink className="navbar-brand" to="/"><span className="text-warning">House</span>Hunters</NavLink>
+                        <NavLink className="navbar-brand" to="/">Aqary<span className="MainTitle">EG</span></NavLink>
 
                         <Searching />
                         <ul className="navbar-nav ms-auto mb-2 mb-lg-0 text-center">
@@ -62,7 +62,7 @@ function NavBar() {
                                 </li>
                             }
                             {!token &&
-                                <li className="nav-item btn btn-success p-0">
+                                <li className="nav-item btn btn-warning p-0">
                                     <NavLink className="nav-link" to="/auth/login">Create Ad</NavLink>
                                 </li>
                             }

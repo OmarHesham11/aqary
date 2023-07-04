@@ -1,7 +1,7 @@
 /* eslint-disable no-extra-semi */
-import './App.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
+import './App.css';
 import Home from './pages/home/Home';
 import LoginPage, { action as loginAction } from './pages/authentication/LoginPage';
 import { action as logoutAction } from './pages/authentication/Logout';
@@ -16,17 +16,13 @@ import PropertyCreate from './components/property/PropertyCreate';
 import NotFound from './pages/NotFound/NotFound'
 import Main from './pages/Main';
 import TableOfTransactions from './pages/admin/TableOfTransactions';
-import Profile from './components/Profile';
 import ProfilePage from './pages/ProfilePage';
 import ProfilePropertiesPage from './pages/ProfilePropertiesPage';
 import TableOfSubscriptions from './pages/admin/TableOfSubscriptions';
 import UpdateUserPropertyPage from './pages/UpdateUserPropertyPage';
 import TableOfCategories from './pages/admin/TableOfCategories';
-// import Cart from './components/Cart';
-
-// import Cart from './components/Cart';
-import AboutUs from './pages/AboutUs/AboutUs'
-import ContactUs from './pages/ContactUs/contactUs';
+import AboutUs from './pages/AboutUs/AboutUs';
+import ContactUs from './pages/ContactUs/ContactUs';
 import ChangePasswordProfile from './components/ChangePasswordProfile';
 import PropertyEdit from './components/property/PropertyEdit';
 const router = createBrowserRouter([
@@ -68,8 +64,9 @@ const router = createBrowserRouter([
   },
 ]);
 
+
 export default function App() {
   return (
-    <RouterProvider router={router} />
+    <RouterProvider router={ router } />
   );
-}
+};

@@ -29,7 +29,8 @@ function Footer() {
                                         <h4>Links</h4>
                                     </div>
                                     <ul>
-                                        <li><a href="#">About Us</a></li>
+                                        <li><a href="/aboutUs">About Us</a></li>
+                                        <li><a href="/contactUs">Contact Us</a></li>
                                         <li><a href="#">Services</a></li>
                                     </ul>
                                 </div>
@@ -55,7 +56,7 @@ function Footer() {
                                                 <i className="fas fa-envelope"></i>
                                             </div>
                                             <div className="info">
-                                                <p><a href="mailto:info@deneb.com">info@deneb.com</a></p>
+                                                <p><a href="/contactUs">contact Us</a></p>
                                             </div>
                                         </div>
 
