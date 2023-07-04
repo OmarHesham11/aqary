@@ -34,7 +34,7 @@ const router = createBrowserRouter([
       { path: 'property/:propertyId', element: <PropertyDetails /> },
       { path: 'postProperty', element: <PropertyCreate /> },
       { path: 'logout', action: logoutAction },
-      // { path: '*', element: <NotFound /> }
+      { path: '*', element: <NotFound /> }
     ],
   },
   {

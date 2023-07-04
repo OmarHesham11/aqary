@@ -17,8 +17,8 @@ export async function action({ request }) {
   const authData = {
     firstName: data.get('firstName'),
     lastName: data.get('lastName'),
-    phoneNumber: date.get('phoneNumber'),
-    birthdate: date.get('birthdate'),
+    phoneNumber: data.get('phoneNumber'),
+    birthdate: data.get('birthdate'),
     email: data.get('email'),
     password: data.get('password'),
     passwordConfirm: data.get('passwordConfirm')
