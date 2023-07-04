@@ -31,7 +31,7 @@ function NavBar() {
                                 <NavLink className="nav-link" to="/">Home</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link" to="/properties">Property</NavLink>
+                                <NavLink className="nav-link" to="/properties">Find Property</NavLink>
                             </li>
                             {!token &&
                                 <li className="nav-item">
@@ -46,7 +46,7 @@ function NavBar() {
 
                             {token &&
                                 <li className="nav-item">
-                                    <NavLink className="nav-link" to="/postProperty">create Property</NavLink>
+                                    <NavLink className="nav-link" to="/postProperty">become Advertiser</NavLink>
                                 </li>
                             }
                             {token &&

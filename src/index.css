@@ -1,7 +1,12 @@
 * {
     font-family: cursive;
+
 }
 
 a {
     text-decoration: none;
+}
+
+body {
+    background-color: #f7f2ea;
 }

@@ -20,8 +20,10 @@ import Profile from './components/Profile';
 import ProfilePage from './pages/ProfilePage';
 import ProfilePropertiesPage from './pages/ProfilePropertiesPage';
 import TableOfSubscriptions from './pages/admin/TableOfSubscriptions';
-// import Cart from './components/Cart';
 
+// import Cart from './components/Cart';
+import AboutUs from './pages/AboutUs/AboutUs'
+import ContactUs from './pages/ContactUs/contactUs';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -36,6 +38,8 @@ const router = createBrowserRouter([
       { path: 'property/:propertyId', element: <PropertyDetails /> },
       { path: 'postProperty', element: <PropertyCreate /> },
       { path: "auth/profile", element: <ProfilePage /> },
+      { path: "aboutUs", element: <AboutUs /> },
+      { path: "contactUs", element: <ContactUs /> },
       { path: "auth/profileProperties", element: <ProfilePropertiesPage /> },
       { path: 'logout', action: logoutAction },
       { path: '*', element: <NotFound /> }
@@ -57,6 +61,6 @@ const router = createBrowserRouter([
 
 export default function App() {
   return (
-    <RouterProvider router={ router } />
+    <RouterProvider router={router} />
   );
 }
