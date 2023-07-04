@@ -64,8 +64,12 @@ function NavBar() {
 
 
                             {userData && userData.firstName &&
+                                // <li className="nav-item">
+                                //     <a className="nav-link disabled"  style={{ color: 'orange' }}>{`Ahlan ${userData.firstName}!`}</a>
+                                // </li>
+
                                 <li className="nav-item">
-                                    <a className="nav-link disabled" style={{ color: 'orange' }}>{`Ahlan ${userData.firstName}!`}</a>
+                                <NavLink className="nav-link" style={{ color: 'orange' }} to="/profile">{`Ahlan ${userData.firstName}!`}</NavLink>
                                 </li>
                             }
 

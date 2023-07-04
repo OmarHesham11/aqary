@@ -16,8 +16,10 @@ import PropertyCreate from './components/property/PropertyCreate';
 import NotFound from './pages/NotFound/NotFound'
 import Main from './pages/Main';
 import TableOfTransactions from './pages/admin/TableOfTransactions';
+import Profile from './components/Profile';
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ProfilePage from './pages/ProfilePage';
 // import Cart from './components/Cart';
 
 const router = createBrowserRouter([
@@ -33,6 +35,7 @@ const router = createBrowserRouter([
       { path: 'properties', element: <PropertiesPage /> },
       { path: 'property/:propertyId', element: <PropertyDetails /> },
       { path: 'postProperty', element: <PropertyCreate /> },
+      {path: "profile", element: <ProfilePage />},
       { path: 'logout', action: logoutAction },
       { path: '*', element: <NotFound /> }
     ],
