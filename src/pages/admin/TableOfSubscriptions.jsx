@@ -7,7 +7,7 @@ export default function TableOfSubscriptions() {
   const [subscriptions, setSubscriptions] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:4000/backOffice/dashboard/subscriptions/', {
+    axios.get('https://aqary-eg.onrender.com/backOffice/dashboard/subscriptions/', {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`
       }
