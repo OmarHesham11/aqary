@@ -1,3 +1,18 @@
+.deneb_footer {
+    display: flex;
+    flex-direction: column;
+    min-height: 50vh;
+}
+
+.widget_wrapper {
+    flex: 1;
+}
+
+.footer_content {
+    flex-shrink: 0;
+}
+
+
 .deneb_footer .widget_wrapper {
     background-repeat: no-repeat;
     background-size: cover;
