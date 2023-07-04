@@ -47,6 +47,7 @@ function NavBar() {
                                     <NavLink className="nav-link" to="/auth/register">Register</NavLink>
                                 </li>
                             }
+                            
                             {token &&
                                 <li className="nav-item">
                                     <NavLink className="nav-link" to="/postProperty">create Property</NavLink>
@@ -55,13 +56,11 @@ function NavBar() {
 
                             {token &&
                                 <li className="nav-item">
-                                    <Form action='/postProperty' method='post'>
+                                    <Form action='/logout' method='post'>
                                         <button className='nav-link'>Logout</button>
                                     </Form>
                                 </li>
                             }
-
-
 
                             {userData && userData.firstName &&
                                 // <li className="nav-item">
