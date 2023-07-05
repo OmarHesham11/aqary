@@ -10,11 +10,11 @@ const schema = Joi.object({
 });
 
 const Profile = () => {
-  const User = JSON.parse(localStorage.getItem('user'));
+  const User = JSON.parse(localStorage.getItem('userData'));
   const [disableBtn, setDisableBtn] = useState(true);
   const [firstName, setFirstName] = useState(User?.firstName);
   const [lastName, setLastName] = useState(User?.lastName);
-  const [email, setEmail] = useState(User.email);
+  const [email, setEmail] = useState(User?.email);
   const [errors, setErrors] = useState({});
 
   const handleEdit = () => {
@@ -187,7 +187,7 @@ const Profile = () => {
                         type='text'
                         name='birthday'
                         disabled={true}
-                        defaultValue={User.birthdate && new Date(User?.birthdate)}
+                        defaultValue={User?.birthdate && new Date(User?.birthdate).toLocaleDateString('en-UK')}
                       />
                     </div>
                   </div>
