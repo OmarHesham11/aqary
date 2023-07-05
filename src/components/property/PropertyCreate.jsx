@@ -72,7 +72,9 @@ function PropertyCreate() {
     const [propertyData, setPropertyData] = useState(initPropertyData);
 
     const handleClick = () => {
-        setShowPopup(true);
+        if (Object.keys(formErrors).length === 0) {
+            setShowPopup(true);
+        }
     };
 
     const handleClose = () => {
@@ -176,6 +178,7 @@ function PropertyCreate() {
             });
             console.log(formData);
             setMyFormData(formData);
+            handleClick();
         } catch (error) {
             Swal.fire('Error', error, 'error');
         }
@@ -206,7 +209,7 @@ function PropertyCreate() {
                             <h3 className="text-center ">Create Property</h3>
                         </div>
                         <div className="text-end col">
-                            <button type="submit" className="btn btn-warning" onClick={handleClick}>Create</button>
+                            <button type="submit" className="btn btn-warning" onClick={handelSubmit}>Create</button>
                         </div>
                     </div>
 
