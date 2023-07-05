@@ -47,7 +47,7 @@ function Home() {
                         </div>
                         <div className="col-lg col-md-12 col-12 d-flex align-items-center justify-content-center">
                             <div className="about-img">
-                                <img alt="" className="img-fluid" src={home} />
+                                <img alt="" src={home} />
                             </div>
                         </div>
                     </div>

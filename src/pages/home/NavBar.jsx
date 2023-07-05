@@ -58,7 +58,7 @@ function NavBar() {
 
                             {token &&
                                 <li className="nav-item">
-                                    <NavLink className="nav-link" to="/postProperty">Create Ad</NavLink>
+                                    <NavLink className="nav-item btn btn-warning " to="/postProperty">Create Ad</NavLink>
                                 </li>
                             }
                             {!token &&
