@@ -57,6 +57,7 @@ const Profile = () => {
         })
       })
       .catch((error) => {
+        console.log(error);
         Swal.fire({
           icon: 'error',
           title: 'Error',
@@ -69,29 +70,29 @@ const Profile = () => {
     setFirstName(event.target.value);
     setErrors({ ...errors, firstName: '' });
   };
-  
+
   const handleLastNameChange = (event) => {
     setLastName(event.target.value);
     setErrors({ ...errors, lastName: '' });
   };
-  
+
 
 
   return (
     <div className='main-class'>
       <div className='px-4 mt-4' style={{ marginTop: '100px' }}>
-      <nav className='nav nav-borders' style={{ marginTop: '80px' }}>
-        <Link to='/auth/profile' className='nav-link active ms-0'>
-          Profile
-        </Link>
-        <Link to='/auth/profileProperties' className='nav-link'>
-          Property
-        </Link>
-        <Link to='/auth/change-password' className='nav-link'>
-          change your password
-        </Link>
-      </nav>
-      <hr className='mt-0 mb-4' />
+        <nav className='nav nav-borders' style={{ marginTop: '80px' }}>
+          <Link to='/auth/profile' className='nav-link active ms-0'>
+            Profile
+          </Link>
+          <Link to='/auth/profileProperties' className='nav-link'>
+            Property
+          </Link>
+          <Link to='/auth/change-password' className='nav-link'>
+            change your password
+          </Link>
+        </nav>
+        <hr className='mt-0 mb-4' />
         <div className='row justify-content-center'>
           <div className='col-xl-8'>
             {/* Account details card */}
@@ -128,7 +129,7 @@ const Profile = () => {
                     </div>
                     {/* Form Group (last name) */}
                     <div className='col-md-6'>
-                      <label className='small mb-1'htmlFor='inputLastName'>
+                      <label className='small mb-1' htmlFor='inputLastName'>
                         Last name
                       </label>
                       <input
@@ -172,7 +173,7 @@ const Profile = () => {
                         className='form-control'
                         id='inputPhone'
                         type='tel'
-                       disabled={true}
+                        disabled={true}
                         defaultValue={User?.phoneNumber}
                       />
                     </div>

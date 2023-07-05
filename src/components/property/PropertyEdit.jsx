@@ -8,9 +8,9 @@ import Joi from 'joi';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import { fetchCategories } from '../../redux/categories/Category';
 
 const schema = Joi.object({
-  title: Joi.string().min(3).max(50).required(),
   address: Joi.string().min(3).max(100).required(),
   city: Joi.string().min(3).max(50).required(),
   level: Joi.number().min(1).required(),
@@ -19,6 +19,7 @@ const schema = Joi.object({
   price: Joi.number().min(1).required(),
   rooms: Joi.number().min(1).required(),
   baths: Joi.number().min(1).required(),
+  categoryId: Joi.string().required()
 });
 
 function PropertyEdit() {
@@ -29,6 +30,12 @@ function PropertyEdit() {
   const cities = useSelector((state) => state.cities.cities);
   const loading = useSelector((state) => state.cities.loading);
   const error = useSelector((state) => state.cities.error);
+
+  //fetch categories
+  const categories = useSelector((state) => state.categories.categories);
+
+  const loadingCategory = useSelector((state) => state.categories.loading);
+  const errorCategory = useSelector((state) => state.categories.error);
 
   const err = useSelector((state) => state.properties.error);
 
@@ -65,8 +72,9 @@ function PropertyEdit() {
       try {
         const response = await fetch(`https://aqary-eg.onrender.com/property/${id}`);
         const data = await response.json();
+        console.log(data);
         setPropertyData({
-          title: data.title,
+          categoryId: data.categoryId,
           address: data.address,
           city: data.city,
           level: data.level,
@@ -109,14 +117,16 @@ function PropertyEdit() {
         const errors = {};
         validationResult.error.details.forEach((error) => {
           errors[error.path[0]] = error.message;
+          console.log(error);
         });
         setFormErrors(errors);
         return;
       }
+      console.log(propertyData);
       const formData = new FormData();
       formData.append('address', propertyData?.address);
       formData.append('city', propertyData?.city);
-      formData.append('title', propertyData?.title);
+      formData.append('categoryId', propertyData?.categoryId);
       formData.append('level', propertyData?.level);
       formData.append('rooms', propertyData?.rooms);
       formData.append('baths', propertyData?.baths);
@@ -127,8 +137,8 @@ function PropertyEdit() {
       image.forEach((ig) => {
         formData.append('image', ig);
       });
-
-      axios.patch(`https://aqary-eg.onrender.com/auth/property/${id}`, formData, {
+      console.log(localStorage.getItem('token'));
+      axios.patch(`http://localhost:4000/auth/property/${id}`, formData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }
@@ -159,7 +169,14 @@ function PropertyEdit() {
     });
   };
 
-
+  const handleCategoryChange = (e) => {
+    const { value } = e.target;
+    console.log(value);
+    setPropertyData((prevData) => ({
+      ...prevData,
+      categoryId: value,
+    }));
+  };
   const handleCityChange = (e) => {
     const { value } = e.target;
     setPropertyData((prevData) => ({
@@ -170,6 +187,7 @@ function PropertyEdit() {
 
   useEffect(() => {
     dispatch(fetchCities());
+    dispatch(fetchCategories());
     setImage([]);
   }, [dispatch]);
 
@@ -194,13 +212,20 @@ function PropertyEdit() {
 
           <div className="form-group">
             <label htmlFor="Title"> <h3>Title</h3> </label>
-            <select name="title" id="Title" className="form-control" onChange={handleInputChange}>
-              <option value="">Select a type</option>
-              <option value="villa" selected={propertyData?.title === 'villa'}>Villa</option>
-              <option value="shale" selected={propertyData?.title === 'shale'}>Shale</option>
-              <option value="apartment" selected={propertyData?.title === 'apartment'}>Apartment</option>
-            </select>
-            {formErrors?.title && <span className="text-danger">{formErrors?.title}</span>}
+            {loadingCategory ? (
+              <p>Loading categories...</p>
+            ) : errorCategory ? (
+              <p>Error loading categories: {error}</p>
+            ) : (
+              <select name="categoryId" id="categoryId" className="form-control" onChange={handleCategoryChange} value={propertyData?.categoryId}>
+                <option value="">Select a category</option>
+                {categories.map((category) => (
+
+                  <option key={category._id} value={category._id}> {category.name} </option>
+                ))}
+              </select>
+            )}
+            {/* {formErrors?.title && <span className="text-danger">{formErrors?.title}</span>} */}
           </div>
 
           <div className="form-group">
@@ -301,7 +326,7 @@ function PropertyEdit() {
             <textarea name="description" id="description" value={propertyData.description} className="form-control" rows="5" onChange={handleInputChange}></textarea>
             {formErrors?.description && <span className="text-danger">{formErrors?.description}</span>}
           </div>
-          <button class="btn btn-success align-self-right" type='submit'>
+          <button className="btn btn-success align-self-right" type='submit'>
             save
           </button>
         </form>
