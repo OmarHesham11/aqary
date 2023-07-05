@@ -13,8 +13,8 @@ function StatisticsBar() {
   const [statistics, setStatistics] = useState(null);
 
   const fetchStatistics = async () => {
-    const BACKEND_URL = 'http://localhost:4000';
-    // const BACKEND_URL = 'https://aqary-eg.onrender.com';
+    // const BACKEND_URL = 'http://localhost:4000';
+    const BACKEND_URL = 'https://aqary-eg.onrender.com';
     // const res = await axios.get(`${BACKEND_URL}/backOffice/dashboard/statistics`, {
     try {
       const res = await axios.get(`${BACKEND_URL}/backOffice/dashboard/statistics`, {
