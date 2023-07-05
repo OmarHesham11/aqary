@@ -25,7 +25,7 @@ const useIsAdmin = () => {
       }).catch((err) => {
         setIsAdmin(false);
       });
-  }, [localStorage.getItem('user')]);
+  }, [localStorage.getItem('userData')]);
 
   return isAdmin;
 };
