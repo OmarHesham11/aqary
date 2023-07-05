@@ -10,11 +10,11 @@ const schema = Joi.object({
 });
 
 const Profile = () => {
-  const User = JSON.parse(localStorage.getItem('user'));
+  const User = JSON.parse(localStorage.getItem('userData'));
   const [disableBtn, setDisableBtn] = useState(true);
-  const [firstName, setFirstName] = useState(User.firstName);
-  const [lastName, setLastName] = useState(User.lastName);
-  const [email, setEmail] = useState(User.email);
+  const [firstName, setFirstName] = useState(User?.firstName);
+  const [lastName, setLastName] = useState(User?.lastName);
+  const [email, setEmail] = useState(User?.email);
   const [errors, setErrors] = useState({});
 
   const handleEdit = () => {
@@ -115,15 +115,15 @@ const Profile = () => {
                         First name
                       </label>
                       <input
-                        className={`form-control ${errors.firstName ? 'is-invalid' : ''}`}
+                        className={`form-control ${errors?.firstName ? 'is-invalid' : ''}`}
                         id='inputFirstName'
                         type='text'
                         disabled={disableBtn}
                         value={firstName}
                         onChange={handleFirstNameChange}
                       />
-                      {errors.firstName && (
-                        <div className='invalid-feedback'>{errors.firstName}</div>
+                      {errors?.firstName && (
+                        <div className='invalid-feedback'>{errors?.firstName}</div>
                       )}
                     </div>
                     {/* Form Group (last name) */}
@@ -132,7 +132,7 @@ const Profile = () => {
                         Last name
                       </label>
                       <input
-                        className={`form-control ${errors.lastName ? 'is-invalid' : ''}`}
+                        className={`form-control ${errors?.lastName ? 'is-invalid' : ''}`}
                         id='inputLastName'
                         type='text'
                         placeholder='Enter your last name'
@@ -140,8 +140,8 @@ const Profile = () => {
                         value={lastName}
                         onChange={handleLastNameChange}
                       />
-                      {errors.lastName && (
-                        <div className='invalid-feedback'>{errors.lastName}</div>
+                      {errors?.lastName && (
+                        <div className='invalid-feedback'>{errors?.lastName}</div>
                       )}
                     </div>
                   </div>
@@ -173,7 +173,7 @@ const Profile = () => {
                         id='inputPhone'
                         type='tel'
                        disabled={true}
-                        defaultValue={User.phoneNumber}
+                        defaultValue={User?.phoneNumber}
                       />
                     </div>
                     {/* Form Group (birthday) */}
@@ -187,7 +187,7 @@ const Profile = () => {
                         type='text'
                         name='birthday'
                         disabled={true}
-                        defaultValue={User?.birthdate?.slice(0,10)}
+                        defaultValue={User?.birthdate && new Date(User?.birthdate).toLocaleDateString('en-UK')}
                       />
                     </div>
                   </div>
