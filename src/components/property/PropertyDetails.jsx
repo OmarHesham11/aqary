@@ -119,6 +119,7 @@ const PropertyDetails = () => {
 
             <tr>
               <td><PersonIcon className="icon-style" /> <span> Owner</span> </td>
+              {console.log(property)}
               <td>{ `${property.user.firstName} ${property.user.lastName}` }</td>
             </tr>
 
