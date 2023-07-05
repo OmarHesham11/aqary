@@ -10,8 +10,11 @@ import Swal from "sweetalert2";
 const currency = "USD";
 const style = { layout: "vertical" };
 
+const BACKEND_URL = 'https://aqary-eg.onrender.com';
+// const BACKEND_URL = 'http://localhost:4000/';
+
 const createOrder = async (data, actions, userId, amount, description) => {
-  const orderID = await axios.post("https://aqary-eg.onrender.com/checkout/create-paypal-order", {
+  const orderID = await axios.post(BACKEND_URL + "/checkout/create-paypal-order", {
     cart: [
       {
         sku: description,
@@ -50,7 +53,7 @@ const onApprove = (
   formData.set('orderID', orderID);
   formData.set('amount', amount);
   formData.set('currency', currency);
-  return axios.post("https://aqary-eg.onrender.com/auth/property/", formData, {
+  return axios.post(BACKEND_URL + "/auth/property/", formData, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`
     }

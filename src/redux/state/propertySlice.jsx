@@ -12,10 +12,11 @@ const initialState = {
 export const createProperty = createAsyncThunk("properties/CreateProperty", async (formData, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
     try {
-        console.log(formData);
+        const url = 'https://aqary-eg.onrender.com/auth/property/';
+        // const url = 'http://localhost:4000/auth/property/';
         const response = await axios({
             method: "post",
-            url: "http://localhost:4000/auth/property/",
+            url,
             data: formData,
             headers: { "Content-Type": "multipart/form-data" },
         });
