@@ -140,7 +140,6 @@ function PropertyCreate() {
 
     const handleCategoryChange = (e) => {
         const { value } = e.target;
-        console.log(value);
         setPropertyData((prevData) => ({
             ...prevData,
             categoryId: value,
