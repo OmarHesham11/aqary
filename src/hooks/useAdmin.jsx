@@ -3,9 +3,9 @@ import { useState, useEffect, useMemo } from 'react';
 
 function isJsonString(str) {
   try {
-      JSON.parse(str);
+    JSON.parse(str);
   } catch (e) {
-      return false;
+    return false;
   }
   return true;
 }
@@ -16,15 +16,15 @@ const useIsAdmin = () => {
   useMemo(() => {
     const BACKEND_URL = 'https://aqary-eg.onrender.com';
     // const BACKEND_URL = 'http://localhost:4000';
-      axios.get(`${BACKEND_URL}/backOffice/isadmin`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`
-        }
-      }).then((res) => {
-        setIsAdmin(true)
-      }).catch((err) => {
-        setIsAdmin(false);
-      });
+    axios.get(`${BACKEND_URL}/backOffice/isadmin`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    }).then((res) => {
+      setIsAdmin(true)
+    }).catch((err) => {
+      setIsAdmin(false);
+    });
   }, [localStorage.getItem('userData')]);
 
   return isAdmin;

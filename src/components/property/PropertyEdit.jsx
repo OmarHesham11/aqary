@@ -74,7 +74,6 @@ function PropertyEdit() {
         const data = await response.json();
         console.log(data);
         setPropertyData({
-          categoryId: data.categoryId,
           address: data.address,
           city: data.city,
           level: data.level,
@@ -126,7 +125,6 @@ function PropertyEdit() {
       const formData = new FormData();
       formData.append('address', propertyData?.address);
       formData.append('city', propertyData?.city);
-      formData.append('categoryId', propertyData?.categoryId);
       formData.append('level', propertyData?.level);
       formData.append('rooms', propertyData?.rooms);
       formData.append('baths', propertyData?.baths);
