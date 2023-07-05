@@ -300,11 +300,21 @@ function PropertyCreate() {
                         <h3>Payment Option:</h3>
                         <div className="radio-group">
                             <div className="form-check">
-                                <input type="radio" name="paymentOption" value="cash" checked={propertyData?.paymentOption === 'cash'} onChange={handleInputChange} className="form-check-input" />
+                                <input type="radio"
+                                    name="paymentOption"
+                                    value="cash"
+                                    checked={propertyData?.paymentOption === 'cash'}
+                                    onChange={handleInputChange}
+                                    className="form-check-input" />
                                 <label className="form-check-label">Cash</label>
                             </div>
                             <div className="form-check">
-                                <input type="radio" name="paymentOption" value="master-card" checked={propertyData?.paymentOption === 'master-card'} onChange={handleInputChange} className="form-check-input" />
+                                <input type="radio"
+                                    name="paymentOption"
+                                    value="master-card"
+                                    checked={propertyData?.paymentOption === 'master-card'}
+                                    onChange={handleInputChange}
+                                    className="form-check-input" />
                                 <label className="form-check-label">Master Card</label>
                             </div>
                         </div>
@@ -316,19 +326,39 @@ function PropertyCreate() {
                         <div className="radio-group">
 
                             <div className="form-check">
-                                <input type="radio" name="subscribe" value="PROPERTY_HOUR" defaultChecked checked={propertyData?.subscribe === 'PROPERTY_HOUR'} onChange={handleInputChange} className="form-check-input" />
+                                <input type="radio"
+                                    name="subscribe"
+                                    value="PROPERTY_HOUR"
+                                    checked={propertyData?.subscribe === 'PROPERTY_HOUR'}
+                                    onChange={handleInputChange}
+                                    className="form-check-input" />
                                 <label className="form-check-label">Hour (1$)</label>
                             </div>
                             <div className="form-check">
-                                <input type="radio" name="subscribe" value="PROPERTY_DAY" checked={propertyData?.subscribe === 'PROPERTY_DAY'} onChange={handleInputChange} className="form-check-input" />
+                                <input type="radio"
+                                    name="subscribe"
+                                    value="PROPERTY_DAY"
+                                    checked={propertyData?.subscribe === 'PROPERTY_DAY'}
+                                    onChange={handleInputChange}
+                                    className="form-check-input" />
                                 <label className="form-check-label">Day (2$)</label>
                             </div>
                             <div className="form-check">
-                                <input type="radio" name="subscribe" value="PROPERTY_WEEK" checked={propertyData?.subscribe === 'PROPERTY_WEEK'} onChange={handleInputChange} className="form-check-input" />
+                                <input type="radio"
+                                    name="subscribe"
+                                    value="PROPERTY_WEEK"
+                                    checked={propertyData?.subscribe === 'PROPERTY_WEEK'}
+                                    onChange={handleInputChange}
+                                    className="form-check-input" />
                                 <label className="form-check-label">Week (5$)</label>
                             </div>
                             <div className="form-check">
-                                <input type="radio" name="subscribe" value="PROPERTY_MONTH" checked={propertyData?.subscribe === 'PROPERTY_MONTH'} onChange={handleInputChange} className="form-check-input" />
+                                <input type="radio"
+                                    name="subscribe"
+                                    value="PROPERTY_MONTH"
+                                    checked={propertyData?.subscribe === 'PROPERTY_MONTH'}
+                                    onChange={handleInputChange}
+                                    className="form-check-input" />
                                 <label className="form-check-label">Month (10$)</label>
                             </div>
                         </div>
