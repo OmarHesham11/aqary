@@ -44,16 +44,16 @@ function TableOfProperties() {
       },
       params: { ...pagination, ...filters },
     })
-    .then(res => {
-      console.log(res.data.data)
-      setProperties(res.data.data);
-      setPagination(prevPagination => ({ ...prevPagination, total: res.data.pagination.total, totalPages: res.data.pagination.totalPages }));
-      setLoading(false);
-    })
-    .catch(error => {
-      Swal.fire('Error', error.message, 'error');
-      setLoading(false);
-    });
+      .then(res => {
+        console.log(res.data.data)
+        setProperties(res.data.data);
+        setPagination(prevPagination => ({ ...prevPagination, total: res.data.pagination.total, totalPages: res.data.pagination.totalPages }));
+        setLoading(false);
+      })
+      .catch(error => {
+        Swal.fire('Error', error.message, 'error');
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
@@ -82,19 +82,19 @@ function TableOfProperties() {
       });
   };
 
-  
+
   useEffect(() => {
     dispatch(fetchCategories());
-}, [dispatch]);
+  }, [dispatch]);
 
   const handleCategoryChange = (e) => {
     const { value } = e.target;
     console.log(value);
     setFilters((prevData) => ({
-        ...prevData,
-        categoryId: value,
+      ...prevData,
+      categoryId: value,
     }));
-};
+  };
 
 
   return (
@@ -104,58 +104,42 @@ function TableOfProperties() {
         label="Address"
         variant="standard"
         size="small"
-        value={filters.address}
-        onChange={handleFiltersChange}
+        value={ filters.address }
+        onChange={ handleFiltersChange }
       />
       <TextField
         name="city"
         label="City"
         variant="standard"
         size="small"
-        value={filters.city}
-        onChange={handleFiltersChange}
+        value={ filters.city }
+        onChange={ handleFiltersChange }
       />
-      <div className="form-group d-inline">
-          {loadingCategory ? (
-              <p>Loading categories...</p>
-          ) : errorCategory ? (
-              <p>Error loading categories: {error}</p>
-          ) : (
-              <select name="categoryId" id="categoryId" className="form-control d-inline" onChange={handleCategoryChange} value={filters?.categoryId}>
-                  <option value="">categories</option>
-                  {categories.map((category) => (
-
-                      <option key={category._id} value={category._id}> {category.name} </option>
-                  ))}
-              </select>
-          )}
-          {/* {formErrors?.title && <span className="text-danger">{formErrors?.title}</span>} */}
-      </div>
       <TextField
         name="subscribe"
         label="Subscribe"
         variant="standard"
         size="small"
-        value={filters.subscribe}
-        onChange={handleFiltersChange}
+        value={ filters.subscribe }
+        onChange={ handleFiltersChange }
       />
       <TextField
         name="minPrice"
         label="Min Price"
         variant="standard"
         size="small"
-        value={filters.minPrice}
-        onChange={handleFiltersChange}
+        value={ filters.minPrice }
+        onChange={ handleFiltersChange }
       />
       <TextField
         name="maxPrice"
         label="Max Price"
         variant="standard"
         size="small"
-        value={filters.maxPrice}
-        onChange={handleFiltersChange}
+        value={ filters.maxPrice }
+        onChange={ handleFiltersChange }
       />
-      <TableContainer component={Paper}>
+      <TableContainer component={ Paper }>
         <Table aria-label="properties table">
           <TableHead>
             <TableRow>
@@ -170,49 +154,49 @@ function TableOfProperties() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {loading && (
+            { loading && (
               <TableRow>
-                <TableCell colSpan={7}>Loading...</TableCell>
+                <TableCell colSpan={ 7 }>Loading...</TableCell>
               </TableRow>
-            )}
-            {!loading && properties.length === 0 && (
+            ) }
+            { !loading && properties.length === 0 && (
               <TableRow>
-                <TableCell colSpan={7}>No properties found.</TableCell>
+                <TableCell colSpan={ 7 }>No properties found.</TableCell>
               </TableRow>
-            )}
-            {!loading && properties.map((property) => (
-              <TableRow key={property._id}>
+            ) }
+            { !loading && properties.map((property) => (
+              <TableRow key={ property._id }>
                 <TableCell component="th" scope="row">
-                  <Link to={`/property/${property._id}`}>
-                    <img src={property.photo[0]} alt="property" width="100" height="100" />
+                  <Link to={ `/property/${property._id}` }>
+                    <img src={ property.photo[0] } alt="property" width="100" height="100" />
                   </Link>
                 </TableCell>
-                <TableCell>{property.user?.email}</TableCell>
-                <TableCell>{property.address}</TableCell>
-                <TableCell>{property.city}</TableCell>
-                <TableCell>{property?.categoryId?.name || property.title}</TableCell>
-                <TableCell>{property.subscribe}</TableCell>
-                <TableCell>{property.price}</TableCell>
+                <TableCell>{ property.user?.email }</TableCell>
+                <TableCell>{ property.address }</TableCell>
+                <TableCell>{ property.city }</TableCell>
+                <TableCell>{ property?.categoryId?.name || property.title }</TableCell>
+                <TableCell>{ property.subscribe }</TableCell>
+                <TableCell>{ property.price }</TableCell>
                 <TableCell>
-                  <Button variant="contained" color="secondary" onClick={() => handleDelete(property._id)}>
+                  <Button variant="contained" color="secondary" onClick={ () => handleDelete(property._id) }>
                     Delete
                   </Button>
                 </TableCell>
               </TableRow>
-            ))}
+            )) }
           </TableBody>
         </Table>
-        {!loading && properties.length > 0 && (
+        { !loading && properties.length > 0 && (
           <TablePagination
-            rowsPerPageOptions={[10, 25, 50]}
+            rowsPerPageOptions={ [10, 25, 50] }
             component="div"
-            count={pagination.total}
-            rowsPerPage={pagination.pageSize}
-            page={pagination.page - 1}
-            onPageChange={handlePageChange}
-            onRowsPerPageChange={handlePageSizeChange}
+            count={ pagination.total }
+            rowsPerPage={ pagination.pageSize }
+            page={ pagination.page - 1 }
+            onPageChange={ handlePageChange }
+            onRowsPerPageChange={ handlePageSizeChange }
           />
-        )}
+        ) }
       </TableContainer>
     </>
   );
