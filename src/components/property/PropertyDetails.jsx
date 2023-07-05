@@ -30,6 +30,7 @@ const PropertyDetails = () => {
   const [property, setProperty] = useState(null);
 
 
+  console.log(property);
   useEffect(() => {
     const fetchPropertyDetails = async () => {
       try {

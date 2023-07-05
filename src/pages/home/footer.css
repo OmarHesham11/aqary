@@ -23,6 +23,15 @@
 
 }
 
+.title-footer
+{
+    color: #000;
+    font-size: 25px;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
 
 
 @media (max-width: 767px) {

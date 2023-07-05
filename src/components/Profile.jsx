@@ -24,8 +24,7 @@ const Profile = () => {
   const handleSaveChanges = () => {
     const updatedUser = {
       firstName,
-      lastName,
-      birthdate: User?.birthdate?.slice(0, 10),
+      lastName
     };
 
     const validationResult = schema.validate(updatedUser, { abortEarly: false });
@@ -34,13 +33,14 @@ const Profile = () => {
       const newErrors = {};
       validationResult.error.details.forEach((err) => {
         newErrors[err.path[0]] = err.message;
+        console.log(err)
       });
       setErrors(newErrors);
       return;
     }
 
     axios
-      .patch('https://aqary-eg.onrender.com/auth/UpdateUserInfo', updatedUser, {
+      .patch('https://aqary-eg.onrender.com/auth/user/UpdateUserInfo', updatedUser, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }
@@ -101,7 +101,7 @@ const Profile = () => {
                 <div className='row'>
                   <div className='col-md-8'>Account Details</div>
                   <div className='col-md-4 text-md-end'>
-                    <button className='btn btn-primary' onClick={handleEdit}>
+                    <button className='btn btn-warning ' onClick={handleEdit}>
                       Edit
                     </button>
                   </div>
@@ -194,10 +194,11 @@ const Profile = () => {
                   </div>
                   {/* Save changes button */}
                   <button
-                    className='btn btn-primary'
+                    className='btn btn-dark'
                     type='button'
                     onClick={handleSaveChanges}
                     disabled={disableBtn}
+
                   >
                     Save changes
                   </button>
