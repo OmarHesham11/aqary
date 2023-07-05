@@ -140,7 +140,6 @@ function PropertyCreate() {
 
     const handleCategoryChange = (e) => {
         const { value } = e.target;
-        console.log(value);
         setPropertyData((prevData) => ({
             ...prevData,
             categoryId: value,
@@ -159,7 +158,6 @@ function PropertyCreate() {
             }
 
             const formData = new FormData();
-            console.log(propertyData);
             formData.append('address', propertyData?.address);
             formData.append('city', propertyData?.city);
             formData.append('categoryId', propertyData?.categoryId);

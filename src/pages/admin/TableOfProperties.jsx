@@ -1,15 +1,21 @@
-import { useState, useEffect, memo, useMemo } from 'react';
+import { useState, useEffect, memo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, TextField, TablePagination } from '@mui/material';
+import { fetchCategories } from '../../redux/categories/Category';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
 
 function TableOfProperties() {
+  const dispatch = useDispatch();
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(false);
   const [pagination, setPagination] = useState({ page: 1, pageSize: 10, total: 0, totalPages: 0 });
   const [filters, setFilters] = useState({ address: '', city: '', title: '', subscribe: '', minPrice: '', maxPrice: '' });
+  const categories = useSelector((state) => state.categories.categories);
+  const loadingCategory = useSelector((state) => state.categories.loading);
+  const errorCategory = useSelector((state) => state.categories.error);
 
   const handleFiltersChange = (event) => {
     const { name, value } = event.target;
@@ -30,13 +36,16 @@ function TableOfProperties() {
   };
 
   const getProperties = () => {
-    axios.get('https://aqary-eg.onrender.com/backOffice/dashboard/properties', {
+    const url = 'https://aqary-eg.onrender.com/backOffice/dashboard/properties';
+    // const url = 'http://localhost:4000/backOffice/dashboard/properties';
+    axios.get(url, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`
       },
       params: { ...pagination, ...filters },
     })
     .then(res => {
+      console.log(res.data.data)
       setProperties(res.data.data);
       setPagination(prevPagination => ({ ...prevPagination, total: res.data.pagination.total, totalPages: res.data.pagination.totalPages }));
       setLoading(false);
@@ -73,6 +82,21 @@ function TableOfProperties() {
       });
   };
 
+  
+  useEffect(() => {
+    dispatch(fetchCategories());
+}, [dispatch]);
+
+  const handleCategoryChange = (e) => {
+    const { value } = e.target;
+    console.log(value);
+    setFilters((prevData) => ({
+        ...prevData,
+        categoryId: value,
+    }));
+};
+
+
   return (
     <>
       <TextField
@@ -91,14 +115,22 @@ function TableOfProperties() {
         value={filters.city}
         onChange={handleFiltersChange}
       />
-      <TextField
-        name="title"
-        label="Title"
-        variant="standard"
-        size="small"
-        value={filters.title}
-        onChange={handleFiltersChange}
-      />
+      <div className="form-group d-inline">
+          {loadingCategory ? (
+              <p>Loading categories...</p>
+          ) : errorCategory ? (
+              <p>Error loading categories: {error}</p>
+          ) : (
+              <select name="categoryId" id="categoryId" className="form-control d-inline" onChange={handleCategoryChange} value={filters?.categoryId}>
+                  <option value="">categories</option>
+                  {categories.map((category) => (
+
+                      <option key={category._id} value={category._id}> {category.name} </option>
+                  ))}
+              </select>
+          )}
+          {/* {formErrors?.title && <span className="text-danger">{formErrors?.title}</span>} */}
+      </div>
       <TextField
         name="subscribe"
         label="Subscribe"
@@ -131,7 +163,7 @@ function TableOfProperties() {
               <TableCell>User</TableCell>
               <TableCell>Address</TableCell>
               <TableCell>City</TableCell>
-              <TableCell>Title</TableCell>
+              <TableCell>Category</TableCell>
               <TableCell>Subscribe</TableCell>
               <TableCell>Price</TableCell>
               <TableCell>Actions</TableCell>
@@ -158,7 +190,7 @@ function TableOfProperties() {
                 <TableCell>{property.user?.email}</TableCell>
                 <TableCell>{property.address}</TableCell>
                 <TableCell>{property.city}</TableCell>
-                <TableCell>{property.title}</TableCell>
+                <TableCell>{property?.categoryId?.name || property.title}</TableCell>
                 <TableCell>{property.subscribe}</TableCell>
                 <TableCell>{property.price}</TableCell>
                 <TableCell>

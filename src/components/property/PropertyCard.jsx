@@ -11,7 +11,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const PropertyCard = ({ property }) => {
 
     const navigate = useNavigate();
-    console.log(property);
 
     const handleButtonClick = () => {
         const propertyUrl = `/property/${property._id}`;
