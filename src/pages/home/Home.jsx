@@ -9,7 +9,7 @@ function Home() {
             <div id="carouselExampleSlidesOnly" className="carousel slide m-0 p-0" data-bs-ride="carousel">
                 <div className="carousel-inner">
                     <div className="carousel-item active">
-                        <img src={main} className="d-block w-100 img-fluid" alt="..." />
+                        <img src={main} className="d-block w-100 " alt="..." />
                         <div className="carousel-caption">
                             <h5>Find your home with the people you trust</h5>
                             <p>Sell your dated house for the best price in an auction</p>
