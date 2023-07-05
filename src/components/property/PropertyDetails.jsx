@@ -29,15 +29,13 @@ const PropertyDetails = () => {
   const { propertyId } = useParams();
   const [property, setProperty] = useState(null);
 
-  function capitalizeFirstLetter(word) {
-    return word.charAt(0).toUpperCase() + word.slice(1);
-  };
 
   useEffect(() => {
     const fetchPropertyDetails = async () => {
       try {
         const response = await fetch(`https://aqary-eg.onrender.com/property/${propertyId}`);
         const data = await response.json();
+        console.log(data.categoryId);
         setProperty(data);
       } catch (error) {
         console.error("Error fetching property details:", error);
@@ -53,6 +51,10 @@ const PropertyDetails = () => {
         <CircularProgress color="inherit" />
       </Backdrop>
     </div>;
+  }
+
+  function capitalizeFirstLetter(word) {
+    return word.charAt(0).toUpperCase() + word.slice(1);
   }
 
   function isArabicText(text) {
@@ -81,9 +83,9 @@ const PropertyDetails = () => {
         </div>
 
         <div className="sub-section">
-          <p className="text-secondary fs-7"> { capitalizeFirstLetter(property.title) } &nbsp; &nbsp;{ todayDate } </p>
+          <p className="text-secondary fs-7"> { property.categoryId && property.categoryId.name ? capitalizeFirstLetter(property.categoryId.name) : (property.title && capitalizeFirstLetter(property.title)) } &nbsp; &nbsp;{ todayDate } </p>
           <h3 className="fw-bold">{ property.price.toLocaleString() }  EGP</h3>
-          <p className="text-secondary fs-7">{ capitalizeFirstLetter(property.title) } For Sale in { property.city }</p>
+          <p className="text-secondary fs-7">{ property.categoryId && property.categoryId.name ? capitalizeFirstLetter(property.categoryId.name) : (property.title && capitalizeFirstLetter(property.title)) } { property.categoryId && property.categoryId.name && property.title ? ", " : "" } For Sale in { property.city }</p>
           <p className="text-secondary fs-7"> <LocationOnIcon />  { capitalizeFirstLetter(property.city) }</p>
         </div>
 
