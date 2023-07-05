@@ -301,7 +301,7 @@ function PropertyEdit() {
             <textarea name="description" id="description" value={propertyData.description} className="form-control" rows="5" onChange={handleInputChange}></textarea>
             {formErrors?.description && <span className="text-danger">{formErrors?.description}</span>}
           </div>
-          <button class="btn btn-success align-self-right" type='submit'>
+          <button className="btn btn-success align-self-right" type='submit'>
             save
           </button>
         </form>
