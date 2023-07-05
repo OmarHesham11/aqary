@@ -33,7 +33,7 @@ const PropertyCard = ({ property }) => {
             ) }
 
             <Card.Body>
-                <Card.Title>{ property.categoryId && property.categoryId.name ? property.categoryId.name : (property.title && property.title.charAt(0).toUpperCase() + property.title.slice(1)) }</Card.Title>
+                <Card.Title>{ property.categoryId && property.categoryId.name ? property.categoryId.name.charAt(0).toUpperCase() : (property.title && property.title.charAt(0).toUpperCase() + property.title.slice(1)) }</Card.Title>
                 <Card.Text>Address: { property.address }</Card.Text>
                 <Card.Text>City: { property.city }</Card.Text>
                 <div className="d-flex justify-content-center">
