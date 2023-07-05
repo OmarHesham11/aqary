@@ -138,7 +138,7 @@ function PropertyEdit() {
         formData.append('image', ig);
       });
       console.log(localStorage.getItem('token'));
-      axios.patch(`http://localhost:4000/auth/property/${id}`, formData, {
+      axios.patch(`https://aqary-eg.onrender.com/auth/property/${id}`, formData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }
@@ -198,9 +198,9 @@ function PropertyEdit() {
     <>
       <div className="container form-container" >
 
-        <form className="property-form" onSubmit={ handelSubmit } encType="multipart/form-data">
+        <form className="property-form" onSubmit={handelSubmit} encType="multipart/form-data">
 
-          { err && <p className="text-danger">{ err }</p> }
+          {err && <p className="text-danger">{err}</p>}
 
           <div className="row">
             <div className='col'>
@@ -210,64 +210,64 @@ function PropertyEdit() {
 
           <div className="form-group">
             <label htmlFor="category"> <h3>Category</h3> </label>
-            <input type="text" name="category" id="category" value={ gtID } className="form-control" disabled onChange={ handleInputChange } />
+            <input type="text" name="category" id="category" value={gtID} className="form-control" disabled onChange={handleInputChange} />
           </div>
 
           <div className="form-group">
             <label htmlFor="Address"> <h3>Address</h3> </label>
-            <input type="text" name="address" id="Address" value={ propertyData.address } className="form-control" onChange={ handleInputChange } />
-            { formErrors?.address && <span className="text-danger">{ formErrors?.address }</span> }
+            <input type="text" name="address" id="Address" value={propertyData.address} className="form-control" onChange={handleInputChange} />
+            {formErrors?.address && <span className="text-danger">{formErrors?.address}</span>}
           </div>
 
           <div className="form-group">
             <label htmlFor="city"> <h3>City</h3>
             </label>
-            { loading ? (
+            {loading ? (
               <p>Loading cities...</p>
             ) : error ? (
-              <p>Error loading cities: { error }</p>
+              <p>Error loading cities: {error}</p>
             ) : (
-              <select name="city" id="city" className="form-control" onChange={ handleCityChange } value={ propertyData?.city }>
+              <select name="city" id="city" className="form-control" onChange={handleCityChange} value={propertyData?.city}>
                 <option value="">Select a city</option>
-                { cities.map((city) => (
-                  <option key={ city._id } value={ city.name }> { city.name } </option>
-                )) }
+                {cities.map((city) => (
+                  <option key={city._id} value={city.name}> {city.name} </option>
+                ))}
               </select>
-            ) }
-            { formErrors?.city && <span className="text-danger">{ formErrors?.city }</span> }
+            )}
+            {formErrors?.city && <span className="text-danger">{formErrors?.city}</span>}
           </div>
 
           <div className="row">
             <div className="form-group col">
               <label htmlFor="level"> <h3>Levels</h3> </label>
-              <input type="number" value={ propertyData.level } name="level" id="level" className="form-control" onChange={ handleInputChange } />
+              <input type="number" value={propertyData.level} name="level" id="level" className="form-control" onChange={handleInputChange} />
             </div>
-            { formErrors?.level && <span className="text-danger">{ formErrors?.level }</span> }
+            {formErrors?.level && <span className="text-danger">{formErrors?.level}</span>}
 
             <div className="form-group col">
               <label htmlFor="area"> <h3>area</h3> </label>
-              <input type="number" value={ propertyData.area } name="area" id="area" className="form-control" onChange={ handleInputChange } />
+              <input type="number" value={propertyData.area} name="area" id="area" className="form-control" onChange={handleInputChange} />
             </div>
-            { formErrors?.area && <span className="text-danger">{ formErrors?.area }</span> }
+            {formErrors?.area && <span className="text-danger">{formErrors?.area}</span>}
 
             <div className="form-group col">
               <label htmlFor="rooms"> <h3>Rooms</h3> </label>
-              <input type="number" value={ propertyData.rooms } name="rooms" id="rooms" className="form-control" onChange={ handleInputChange } />
+              <input type="number" value={propertyData.rooms} name="rooms" id="rooms" className="form-control" onChange={handleInputChange} />
             </div>
-            { formErrors?.rooms && <span className="text-danger">{ formErrors?.rooms }</span> }
+            {formErrors?.rooms && <span className="text-danger">{formErrors?.rooms}</span>}
 
             <div className="form-group col">
               <label htmlFor="baths"> <h3>Baths</h3> </label>
-              <input type="number" value={ propertyData.baths } name="baths" id="baths" className="form-control" onChange={ handleInputChange } />
+              <input type="number" value={propertyData.baths} name="baths" id="baths" className="form-control" onChange={handleInputChange} />
             </div>
-            { formErrors?.baths && <span className="text-danger">{ formErrors?.baths }</span> }
+            {formErrors?.baths && <span className="text-danger">{formErrors?.baths}</span>}
           </div>
 
           <div className="row">
             <div className="form-group col">
               <label htmlFor="price"> <h3>Price</h3> </label>
-              <input type="number" value={ propertyData.price } name="price" id="price" min={ 0 } max={ 1_000_000_000 } className="form-control" onChange={ handleInputChange } />
-              { formErrors?.price && <span className="text-danger">{ formErrors?.price }</span> }
+              <input type="number" value={propertyData.price} name="price" id="price" min={0} max={1_000_000_000} className="form-control" onChange={handleInputChange} />
+              {formErrors?.price && <span className="text-danger">{formErrors?.price}</span>}
             </div>
           </div>
 
@@ -308,8 +308,8 @@ function PropertyEdit() {
             <label htmlFor="description">
               <h3>Description</h3>
             </label>
-            <textarea name="description" id="description" value={ propertyData.description } className="form-control" rows="5" onChange={ handleInputChange }></textarea>
-            { formErrors?.description && <span className="text-danger">{ formErrors?.description }</span> }
+            <textarea name="description" id="description" value={propertyData.description} className="form-control" rows="5" onChange={handleInputChange}></textarea>
+            {formErrors?.description && <span className="text-danger">{formErrors?.description}</span>}
           </div>
           <button className="btn btn-success align-self-right" type='submit'>
             save
