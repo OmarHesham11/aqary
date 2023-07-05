@@ -28,7 +28,7 @@ function Home() {
                         <div className="col-lg-8 col-md-12 col-12 ps-lg-5 mt-md-5">
                             <div className="about-text">
                                 <h2>We Provide the Best Quality<br />Services Ever</h2>
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Totam, labore reiciendis. Assumenda eos quod animi! Soluta nesciunt inventore dolores excepturi provident, culpa beatae tempora, explicabo corporis quibusdam corrupti. Autem, quaerat. Assumenda quo aliquam vel, nostrum explicabo ipsum dolor, ipsa perferendis porro doloribus obcaecati placeat natus iste odio est non earum?</p>
+                                <p>Discover the difference of working with a trusted real estate agency. Contact us today to learn more about our services and how we can assist you in achieving your real estate objectives. Your dream property awaits!</p>
                                 <a className="btn btn-warning" href="#">Learn More</a>
                             </div>
                         </div>
