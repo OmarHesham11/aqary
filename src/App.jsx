@@ -1,11 +1,11 @@
 /* eslint-disable no-extra-semi */
-import './App.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
+import './App.css';
 import Home from './pages/home/Home';
 import LoginPage, { action as loginAction } from './pages/authentication/LoginPage';
 import { action as logoutAction } from './pages/authentication/Logout';
-import { tokenLoader } from './util/auth';
+import { checkAuthLoader, tokenLoader } from './util/auth';
 import RegisterPage, { action as registerAction } from './pages/authentication/RegisterPage';
 import PropertiesPage from './pages/property/propertiesPage';
 import PropertyDetails from './pages/property/propertyDetailsPage';
@@ -16,17 +16,13 @@ import PropertyCreate from './components/property/PropertyCreate';
 import NotFound from './pages/NotFound/NotFound'
 import Main from './pages/Main';
 import TableOfTransactions from './pages/admin/TableOfTransactions';
-import Profile from './components/Profile';
 import ProfilePage from './pages/ProfilePage';
 import ProfilePropertiesPage from './pages/ProfilePropertiesPage';
 import TableOfSubscriptions from './pages/admin/TableOfSubscriptions';
 import UpdateUserPropertyPage from './pages/UpdateUserPropertyPage';
 import TableOfCategories from './pages/admin/TableOfCategories';
-// import Cart from './components/Cart';
-
-// import Cart from './components/Cart';
-import AboutUs from './pages/AboutUs/AboutUs'
-import ContactUs from './pages/ContactUs/contactUs';
+import AboutUs from './pages/AboutUs/AboutUs';
+import ContactUs from './pages/ContactUs/ContactUs';
 import ChangePasswordProfile from './components/ChangePasswordProfile';
 import PropertyEdit from './components/property/PropertyEdit';
 const router = createBrowserRouter([
@@ -41,14 +37,14 @@ const router = createBrowserRouter([
       { path: 'auth/register', element: <RegisterPage />, action: registerAction },
       { path: 'properties', element: <PropertiesPage /> },
       { path: 'property/:propertyId', element: <PropertyDetails /> },
-      { path: 'postProperty', element: <PropertyCreate /> },
-      { path: "auth/profile", element: <ProfilePage /> },
+      { path: 'postProperty', element: <PropertyCreate />, loader:checkAuthLoader },
+      { path: "auth/profile", element: <ProfilePage />, loader:checkAuthLoader},
       { path: "aboutUs", element: <AboutUs /> },
       { path: "contactUs", element: <ContactUs /> },
-      { path: "auth/profileProperties", element: <ProfilePropertiesPage /> },
-      { path: "auth/edit-property/:id", element: <PropertyEdit /> },
-      { path: "/auth/UpdateUserPropery", element: <UpdateUserPropertyPage /> },
-      { path: "/auth/change-password", element: <ChangePasswordProfile /> },
+      { path: "auth/profileProperties", element: <ProfilePropertiesPage />, loader:checkAuthLoader },
+      { path: "auth/edit-property/:id", element: <PropertyEdit />, loader:checkAuthLoader },
+      { path: "/auth/UpdateUserPropery", element: <UpdateUserPropertyPage />, loader:checkAuthLoader},
+      { path: "/auth/change-password", element: <ChangePasswordProfile />, loader:checkAuthLoader },
       { path: 'logout', action: logoutAction },
       { path: '*', element: <NotFound /> }
     ],
@@ -68,8 +64,9 @@ const router = createBrowserRouter([
   },
 ]);
 
+
 export default function App() {
   return (
-    <RouterProvider router={router} />
+    <RouterProvider router={ router } />
   );
-}
+};

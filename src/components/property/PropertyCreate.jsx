@@ -2,6 +2,8 @@ import { createProperty } from '../../redux/state/propertySlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect, useCallback } from 'react';
 import { fetchCities } from '../../redux/cities/citySlice';
+import { fetchCategories } from '../../redux/categories/Category';
+
 import { useDropzone } from 'react-dropzone';
 import Cart from '../Cart';
 import './styles/createProperty.css';
@@ -21,7 +23,7 @@ const initPropertyData = {
     userId: '',
     address: '',
     city: '',
-    title: '',
+    categoryId: '',
     level: 0,
     rooms: 0,
     baths: 0,
@@ -37,9 +39,16 @@ function PropertyCreate() {
 
     const dispatch = useDispatch();
     const Navigate = useNavigate();
+    //fetch cities
     const cities = useSelector((state) => state.cities.cities);
+
     const loading = useSelector((state) => state.cities.loading);
     const error = useSelector((state) => state.cities.error);
+    //fetch categories
+    const categories = useSelector((state) => state.categories.categories);
+
+    const loadingCategory = useSelector((state) => state.categories.loading);
+    const errorCategory = useSelector((state) => state.categories.error);
 
     const err = useSelector((state) => state.properties.error);
 
@@ -121,12 +130,20 @@ function PropertyCreate() {
         });
     };
 
-
     const handleCityChange = (e) => {
         const { value } = e.target;
         setPropertyData((prevData) => ({
             ...prevData,
             city: value,
+        }));
+    };
+
+    const handleCategoryChange = (e) => {
+        const { value } = e.target;
+        console.log(value);
+        setPropertyData((prevData) => ({
+            ...prevData,
+            categoryId: value,
         }));
     };
 
@@ -142,9 +159,10 @@ function PropertyCreate() {
             }
 
             const formData = new FormData();
+            console.log(propertyData);
             formData.append('address', propertyData?.address);
             formData.append('city', propertyData?.city);
-            formData.append('title', propertyData?.title);
+            formData.append('categoryId', propertyData?.categoryId);
             formData.append('level', propertyData?.level);
             formData.append('rooms', propertyData?.rooms);
             formData.append('baths', propertyData?.baths);
@@ -158,6 +176,7 @@ function PropertyCreate() {
             image.forEach((ig) => {
                 formData.append('image', ig);
             });
+            console.log(formData);
             setMyFormData(formData);
         } catch (error) {
             Swal.fire('Error', error, 'error');
@@ -167,6 +186,7 @@ function PropertyCreate() {
 
     useEffect(() => {
         dispatch(fetchCities());
+        dispatch(fetchCategories());
         setImage([]);
     }, [dispatch]);
 
@@ -195,19 +215,20 @@ function PropertyCreate() {
 
                     <div className="form-group">
                         <label htmlFor="Title"> <h3>Title</h3> </label>
-                        <select name="title" id="Title" className="form-control" onChange={handleInputChange}>
-                            <option value="">Select a type</option>
-                            <option value="villa" selected={propertyData?.title === 'villa'}>Villa</option>
-                            <option value="shale" selected={propertyData?.title === 'shale'}>Shale</option>
-                            <option value="apartment" selected={propertyData?.title === 'apartment'}>Apartment</option>
-                        </select>
-                        {formErrors?.title && <span className="text-danger">{formErrors?.title}</span>}
-                    </div>
+                        {loadingCategory ? (
+                            <p>Loading categories...</p>
+                        ) : errorCategory ? (
+                            <p>Error loading categories: {error}</p>
+                        ) : (
+                            <select name="title" id="title" className="form-control" onChange={handleCategoryChange} value={propertyData?.categoryId}>
+                                <option value="">Select a category</option>
+                                {categories.map((category) => (
 
-                    <div className="form-group">
-                        <label htmlFor="Address"> <h3>Address</h3> </label>
-                        <input type="text" name="address" id="Address" className="form-control" onChange={handleInputChange} />
-                        {formErrors?.address && <span className="text-danger">{formErrors?.address}</span>}
+                                    <option key={category._id} value={category._id}> {category.name} </option>
+                                ))}
+                            </select>
+                        )}
+                        {formErrors?.title && <span className="text-danger">{formErrors?.title}</span>}
                     </div>
 
                     <div className="form-group">
@@ -227,6 +248,14 @@ function PropertyCreate() {
                         )}
                         {formErrors?.city && <span className="text-danger">{formErrors?.city}</span>}
                     </div>
+
+                    <div className="form-group">
+                        <label htmlFor="Address"> <h3>Address</h3> </label>
+                        <input type="text" name="address" id="Address" className="form-control" onChange={handleInputChange} />
+                        {formErrors?.address && <span className="text-danger">{formErrors?.address}</span>}
+                    </div>
+
+
 
                     <div className="row">
                         <div className="form-group col">

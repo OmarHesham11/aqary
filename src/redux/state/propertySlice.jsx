@@ -12,9 +12,10 @@ const initialState = {
 export const createProperty = createAsyncThunk("properties/CreateProperty", async (formData, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
     try {
+        console.log(formData);
         const response = await axios({
             method: "post",
-            url: "https://aqary-eg.onrender.com/auth/property/",
+            url: "http://localhost:4000/auth/property/",
             data: formData,
             headers: { "Content-Type": "multipart/form-data" },
         });
@@ -77,6 +78,19 @@ export const fetchUserProperties = createAsyncThunk("properties/userProperties",
     }
 });
 
+export const filterPropertiesByPrice = createAsyncThunk("properties/filterPropertiesByPrice", async (priceRange, thunkAPI) => {
+    const { rejectWithValue, getState } = thunkAPI;
+    const { page } = getState().properties.page;
+    console.log(getState().properties)
+    try {
+        const response = await fetch(`http://aqary-eg.onrender.com/property/filter/properties/${priceRange.min}/?page=${page}`);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        return rejectWithValue(error.message);
+    };
+});
+
 
 const propertiesSlice = createSlice({
     name: "properties",
@@ -130,7 +144,10 @@ const propertiesSlice = createSlice({
             .addCase(createProperty.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message;
-            });
+            })
+            .addCase(filterPropertiesByPrice.fulfilled, (state, action) => {
+                state.properties = action.payload;
+            })
     },
 });
 
