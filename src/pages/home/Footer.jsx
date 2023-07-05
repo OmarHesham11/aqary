@@ -12,7 +12,7 @@ function Footer() {
                             <div className="col-lg-4 col-md-6 col-12">
                                 <div className="widget widegt_about">
                                     <div className="widget_title">
-                                        <h4>House<span className='text-warning'>Hunters</span></h4>
+                                        <h4 className='title-footer'>AQARY<span style={{color : "#8d6408"}}>EG</span></h4>
                                     </div>
 
                                     <ul className="social">

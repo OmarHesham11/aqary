@@ -100,7 +100,7 @@ const Profile = () => {
                 <div className='row'>
                   <div className='col-md-8'>Account Details</div>
                   <div className='col-md-4 text-md-end'>
-                    <button className='btn btn-primary' onClick={handleEdit}>
+                    <button className='btn btn-warning ' onClick={handleEdit}>
                       Edit
                     </button>
                   </div>
@@ -193,10 +193,11 @@ const Profile = () => {
                   </div>
                   {/* Save changes button */}
                   <button
-                    className='btn btn-primary'
+                    className='btn btn-dark'
                     type='button'
                     onClick={handleSaveChanges}
                     disabled={disableBtn}
+
                   >
                     Save changes
                   </button>
