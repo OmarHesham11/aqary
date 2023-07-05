@@ -37,14 +37,14 @@ const router = createBrowserRouter([
       { path: 'auth/register', element: <RegisterPage />, action: registerAction },
       { path: 'properties', element: <PropertiesPage /> },
       { path: 'property/:propertyId', element: <PropertyDetails /> },
-      { path: 'postProperty', element: <PropertyCreate />, loader:checkAuthLoader },
-      { path: "auth/profile", element: <ProfilePage />, loader:checkAuthLoader},
+      { path: 'postProperty', element: <PropertyCreate />, loader: checkAuthLoader },
+      { path: "auth/profile", element: <ProfilePage />, loader: checkAuthLoader },
       { path: "aboutUs", element: <AboutUs /> },
       { path: "contactUs", element: <ContactUs /> },
-      { path: "auth/profileProperties", element: <ProfilePropertiesPage />, loader:checkAuthLoader },
-      { path: "auth/edit-property/:id", element: <PropertyEdit />, loader:checkAuthLoader },
-      { path: "/auth/UpdateUserPropery", element: <UpdateUserPropertyPage />, loader:checkAuthLoader},
-      { path: "/auth/change-password", element: <ChangePasswordProfile />, loader:checkAuthLoader },
+      { path: "auth/profileProperties", element: <ProfilePropertiesPage />, loader: checkAuthLoader },
+      { path: "auth/edit-property/:id", element: <PropertyEdit />, loader: checkAuthLoader },
+      { path: "/auth/UpdateUserPropery", element: <UpdateUserPropertyPage />, loader: checkAuthLoader },
+      { path: "/auth/change-password", element: <ChangePasswordProfile />, loader: checkAuthLoader },
       { path: 'logout', action: logoutAction },
       { path: '*', element: <NotFound /> }
     ],
@@ -67,6 +67,6 @@ const router = createBrowserRouter([
 
 export default function App() {
   return (
-    <RouterProvider router={ router } />
+    <RouterProvider router={router} />
   );
 };

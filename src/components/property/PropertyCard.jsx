@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const PropertyCard = ({ property }) => {
 
     const navigate = useNavigate();
+    console.log(property);
 
     const handleButtonClick = () => {
         const propertyUrl = `/property/${property._id}`;
@@ -32,10 +33,10 @@ const PropertyCard = ({ property }) => {
             ) }
 
             <Card.Body>
-                <Card.Title>{ property.title.charAt(0).toUpperCase() + property.title.slice(1) }</Card.Title>
+                <Card.Title>{ property.categoryId && property.categoryId.name ? property.categoryId.name.charAt(0).toUpperCase() : (property.title && property.title.charAt(0).toUpperCase() + property.title.slice(1)) }</Card.Title>
                 <Card.Text>Address: { property.address }</Card.Text>
                 <Card.Text>City: { property.city }</Card.Text>
-                <div className="d-flex justify-content-center"> {/* Move the div outside the p element */ }
+                <div className="d-flex justify-content-center">
                     <div className="ms-4 me-2">
                         <FontAwesomeIcon icon={ faBed } /> &nbsp; { property.rooms }
                     </div>
