@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import axios from 'axios';
 import { useState, useEffect, useMemo } from 'react';
 
@@ -21,7 +22,7 @@ const useIsAdmin = () => {
         Authorization: `Bearer ${localStorage.getItem('token')}`
       }
     }).then((res) => {
-      setIsAdmin(true)
+      setIsAdmin(true);
     }).catch((err) => {
       setIsAdmin(false);
     });

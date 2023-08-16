@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { createProperty } from '../../redux/state/propertySlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect, useCallback } from 'react';
@@ -17,7 +18,7 @@ const valueOfAdd = {
     PROPERTY_DAY: 2,
     PROPERTY_WEEK: 5,
     PROPERTY_MONTH: 10,
-}
+};
 
 const initPropertyData = {
     userId: '',
@@ -58,7 +59,7 @@ function PropertyCreate() {
     const [isPaymentSuccess, setIsPaymentSuccess] = useState(false);
     const [formErrors, setFormErrors] = useState({});
 
-    const [image, setImage] = useState([])
+    const [image, setImage] = useState([]);
 
     useEffect(() => {
         if (showPopup) {
@@ -84,16 +85,6 @@ function PropertyCreate() {
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         let newValue = value;
-
-        if (e.target.name == 'price' && value < e.target.min) {
-            newValue = e.target.min;
-        }
-
-        // Check if the value is greater than the maximum value
-        if (e.target.name == 'price' && value > e.target.max) {
-            newValue = e.target.max;
-        }
-
         setPropertyData((prevData) => ({
             ...prevData,
             [name]: newValue,
@@ -287,7 +278,7 @@ function PropertyCreate() {
                     <div className="row">
                         <div className="form-group col">
                             <label htmlFor="price"> <h3>Price</h3> </label>
-                            <input type="number" name="price" id="price" min={0} max={1_000_000_000} className="form-control" onChange={handleInputChange} />
+                            <input type="string" name="price" id="price" className="form-control" onChange={handleInputChange} />
                             {formErrors?.price && <span className="text-danger">{formErrors?.price}</span>}
                         </div>
 
@@ -429,7 +420,7 @@ function PropertyCreate() {
 
 
     );
-};
+}
 
 
 

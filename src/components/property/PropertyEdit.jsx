@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect, useCallback } from 'react';
@@ -11,15 +12,14 @@ import axios from 'axios';
 import { fetchCategories } from '../../redux/categories/Category';
 
 const schema = Joi.object({
-  address: Joi.string().min(3).max(100).required(),
-  city: Joi.string().min(3).max(50).required(),
-  level: Joi.number().min(1).required(),
-  area: Joi.number().min(1).required(),
-  description: Joi.string().min(10).max(100000).required(),
-  price: Joi.number().min(1).required(),
-  rooms: Joi.number().min(1).required(),
-  baths: Joi.number().min(1).required(),
-  // categoryId: Joi.string().required()
+  address: Joi.string(),
+  city: Joi.string().min(3).max(50),
+  level: Joi.number().min(1),
+  area: Joi.number().min(1),
+  description: Joi.string(),
+  price: Joi.number().min(1),
+  rooms: Joi.number().min(1),
+  baths: Joi.number().min(1),
 });
 
 function PropertyEdit() {
@@ -42,23 +42,13 @@ function PropertyEdit() {
   //Handling payment
   const [formErrors, setFormErrors] = useState({});
 
-  const [image, setImage] = useState([])
+  const [image, setImage] = useState([]);
 
   const [propertyData, setPropertyData] = useState({});
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     let newValue = value;
-
-    if (e.target.name == 'price' && value < e.target.min) {
-      newValue = e.target.min;
-    }
-
-    // Check if the value is greater than the maximum value
-    if (e.target.name == 'price' && value > e.target.max) {
-      newValue = e.target.max;
-    }
-
     setPropertyData((prevData) => ({
       ...prevData,
       [name]: newValue,
@@ -190,7 +180,7 @@ function PropertyEdit() {
   }, [dispatch]);
 
   const URL = window.URL;
-  const gtID = propertyData.categoryId?.name
+  const gtID = propertyData.categoryId?.name;
 
   return (
     <>
@@ -264,7 +254,7 @@ function PropertyEdit() {
           <div className="row">
             <div className="form-group col">
               <label htmlFor="price"> <h3>Price</h3> </label>
-              <input type="number" value={propertyData.price} name="price" id="price" min={0} max={1_000_000_000} className="form-control" onChange={handleInputChange} />
+              <input type="text" value={propertyData.price} name="price" id="price" className="form-control" onChange={handleInputChange} />
               {formErrors?.price && <span className="text-danger">{formErrors?.price}</span>}
             </div>
           </div>
@@ -317,7 +307,7 @@ function PropertyEdit() {
       </div>
     </>
   );
-};
+}
 
 
 
